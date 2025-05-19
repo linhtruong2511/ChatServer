@@ -1,19 +1,8 @@
 ﻿using chatapp.managelist;
-using chatapp.repository;
-using chatapp.service.managelist;
-using chatapp.service;
-using chatapp.gui.event_;
-using chatapp.util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 using chatapp.context;
-using System.Runtime.InteropServices.ComTypes;
-using System.Windows.Forms;
 
 namespace chatapp
 {
@@ -22,7 +11,7 @@ namespace chatapp
         public TcpListener TcpListener { get; set; }
         public ManageSessionUser ManageSessionUser { get; set; } 
         public ManageTaskList TaskList{ get; set; }
-        public event EventHandler serverEvent;
+        public event EventHandler ServerEvent;
         public MainForm gui;
 
         public App(MainForm gui) 
@@ -55,9 +44,9 @@ namespace chatapp
                 TcpClient tcpClient = TcpListener.AcceptTcpClient();
                 Task client = new Task(async() =>
                 {
-                    //Controller controller = new Controller(tcpClient, gui);
+                    //Controller controller = new Controller(TcpClient, gui);
                     Controller controller = new Controller(tcpClient, gui);
-                    await controller.HandleClient(this,serverEvent);
+                    await controller.HandleClient(this,ServerEvent);
                 });
                 //TaskList.AddTask(client);
                 client.Start();

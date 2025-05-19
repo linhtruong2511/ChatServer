@@ -30,7 +30,7 @@ namespace chatapp.service.userservice
         {
             //Console.WriteLine($"{packet.From} disconnect");
             //Packet notificationpacket = new Packet(PacketTypeEnum.NOTIFICATION, "disconnect success", ", packet.From);
-            //userRepository.SetState(packet.From, false);
+            //UserRepository.SetState(packet.From, false);
             //await NetworkUtils.WriteStreamAsync(writer, notificationpacket);
             //serverevent?.Invoke(app, new DisconnectEvent(packet.From));
             return -1;

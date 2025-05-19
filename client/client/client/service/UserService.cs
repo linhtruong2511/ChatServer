@@ -17,22 +17,15 @@ namespace client.server
         public static string Login(StreamReader reader,StreamWriter writer,UserRequest ur)
         {
             string notification;
-            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.LOGIN, ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur),ur.username,"Server"));
+            Console.WriteLine(ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur));
+            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.LOGIN, ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur),0,0));
             notification = NetworkUtils.ReadStream(reader).Data;
             Console.WriteLine(notification);
             return notification;
         }
-        public static string SignUp(StreamReader reader,StreamWriter writer,UserRequest ur)
-        {
-            string nofitication;
-            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.SIGNUP, ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur), "default", "Server"));
-            nofitication = NetworkUtils.ReadStream(reader).Data;
-            Console.WriteLine(nofitication);
-            return nofitication;
-        }
         public static void Disconnect(StreamReader reader,StreamWriter writer)
         {
-            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.DISCONNECT, "", "default", "Server"));
+            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.DISCONNECT, "",0,0));
             string nofitication = NetworkUtils.ReadStream(reader).Data;
             if(nofitication == "disconnect success")
             {

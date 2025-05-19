@@ -30,7 +30,7 @@ namespace client.gui
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (UserService.Login(mainapp.reader, mainapp.writer, GetInformation()) == "success login")
+            if (UserService.Login(mainapp.reader, mainapp.writer, GetInformation()) == "login success")
             {
                 this.Hide();
                 this.maingui.Show();
@@ -43,16 +43,16 @@ namespace client.gui
         }
         private void btn_signup_Click(object sender, EventArgs e)
         {
-            if (UserService.SignUp(mainapp.reader, mainapp.writer, GetInformation()) == "success sign up")
-            {
-                this.Hide();
-                this.maingui.Show();
-                this.maingui.Run();
-            }
-            else
-            {
-                MessageBox.Show("Sign up fail", "Notification");
-            }
+            //if (UserService.SignUp(mainapp.reader, mainapp.writer, GetInformation()) == "success sign up")
+            //{
+            //    this.Hide();
+            //    this.maingui.Show();
+            //    this.maingui.Run();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Sign up fail", "Notification");
+            //}
         }
     }
 }

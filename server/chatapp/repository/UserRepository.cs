@@ -113,12 +113,10 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserStateToFalse()
         {
-            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set state=0"))
-            //{
-            //    return cmd.ExecuteNonQuery();
-            //}
-
-            return 1;
+            using (SqlCommand cmd = new SqlCommand($"update users set state=0"))
+            {
+                return cmd.ExecuteNonQuery();
+            }
         }
         /// <summary>
         /// chuyển ip của tất cả user thành empty ->reset ip
@@ -126,12 +124,10 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserIPToEmpty()
         {
-                //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set realtimeIP='empty'"))
-                //{
-                //    return cmd.ExecuteNonQuery();
-                //}
-
-            return 1;
+            using (SqlCommand cmd = new SqlCommand($"update user set realtimeIP='empty'"))
+            {
+                return cmd.ExecuteNonQuery();
+            }
         }
         /// <summary>
         /// chuyển realtimeIP của username sang giá trị ip

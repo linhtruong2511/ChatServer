@@ -1,9 +1,11 @@
-﻿using System;
+﻿using client.service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,12 +34,33 @@ namespace client.gui
            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
-            //Label mymessage = new Label();
-            //mymessage.Text = textBox1.Text;
-            //mymessage.TextAlign = ContentAlignment.MiddleRight;
             
+            SendMessageRequest message = new SendMessageRequest();
+            message.Contents = textBox1.Text;
+            MessageService.SendMessage(mainapp.writer, message);
+            Label lbl = new Label();
+            lbl.Text = textBox1.Text;
+            lbl.AutoSize = true;
+            lbl.MaximumSize = new Size(flp_messagescreen.Width - 50, 0);
+
+            flp_messagescreen.FlowDirection = FlowDirection.TopDown;
+            flp_messagescreen.WrapContents = false;
+            flp_messagescreen.AutoScroll = true;
+
+            flp_messagescreen.Controls.Add(lbl);
+            flp_messagescreen.ScrollControlIntoView(lbl);
+
+        }
+        public void ReceiveMessage()
+        {
+
+        } 
+
+        private void flp_messagescreen_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

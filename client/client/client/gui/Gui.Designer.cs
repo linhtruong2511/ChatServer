@@ -28,19 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flp_messagescreen = new System.Windows.Forms.FlowLayoutPanel();
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.flp_messagescreen = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // flp_messagescreen
-            // 
-            this.flp_messagescreen.AutoScroll = true;
-            this.flp_messagescreen.Location = new System.Drawing.Point(221, 12);
-            this.flp_messagescreen.Name = "flp_messagescreen";
-            this.flp_messagescreen.Size = new System.Drawing.Size(567, 367);
-            this.flp_messagescreen.TabIndex = 0;
             // 
             // textBox1
             // 
@@ -67,6 +61,21 @@
             this.panel1.Size = new System.Drawing.Size(200, 414);
             this.panel1.TabIndex = 3;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // flp_messagescreen
+            // 
+            this.flp_messagescreen.AutoScroll = true;
+            this.flp_messagescreen.Location = new System.Drawing.Point(221, 12);
+            this.flp_messagescreen.Name = "flp_messagescreen";
+            this.flp_messagescreen.Size = new System.Drawing.Size(567, 367);
+            this.flp_messagescreen.TabIndex = 0;
+            this.flp_messagescreen.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_messagescreen_Paint);
+            // 
             // Gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -85,10 +94,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flp_messagescreen;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.FlowLayoutPanel flp_messagescreen;
     }
 }

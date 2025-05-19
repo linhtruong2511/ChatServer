@@ -9,7 +9,7 @@ namespace chatapp.context
 {
     internal class Database
     {
-        string connectionString = "Server=192.168.208.78,1433;Database=ChatApp;User Id=linhtruong4;Password=Linhtruong@;Encrypt=True;TrustServerCertificate=True;";
+        string connectionString = "Server=VUONGQUAN;Database=ChatApp;Trusted_Connection=True;TrustServerCertificate=True;";
         private static SqlConnection conn;
 
         public Database()

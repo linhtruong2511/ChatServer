@@ -24,10 +24,5 @@ namespace chatapp.model
             this.state = state;
         }
         public User() { }
-
-        public User(SqlDataReader reader) 
-        {
-            
-        }
     }
 }

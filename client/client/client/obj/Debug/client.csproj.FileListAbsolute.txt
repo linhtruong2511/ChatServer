@@ -42,3 +42,16 @@ D:\Chat-App\chatapp-server\client\client\client\obj\Debug\client.csproj.CoreComp
 D:\Chat-App\chatapp-server\client\client\client\obj\Debug\client.csproj.Up2Date
 D:\Chat-App\chatapp-server\client\client\client\obj\Debug\client.exe
 D:\Chat-App\chatapp-server\client\client\client\obj\Debug\client.pdb
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\bin\Debug\client.exe.config
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\bin\Debug\client.exe
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\bin\Debug\client.pdb
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.csproj.AssemblyReference.cache
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.gui.AuthenticationPortal.resources
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.gui.Gui.resources
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.csproj.GenerateResource.cache
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.csproj.CoreCompileInputs.cache
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.csproj.Up2Date
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.exe
+C:\Users\DELL11032023\Desktop\ChatServer\client\client\client\obj\Debug\client.pdb

@@ -11,10 +11,10 @@ namespace chatapp.dto
     {
         public PacketTypeEnum Type {  get; set; }
         public string Data { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
+        public int From { get; set; }
+        public int To { get; set; }
         public int Status { get; set; } = 200;
-        public Packet(PacketTypeEnum type, string data, string from, string to, int status=200)
+        public Packet(PacketTypeEnum type, string data, int from, int to, int status=200)
         {
             Type = type;
             Data = data;

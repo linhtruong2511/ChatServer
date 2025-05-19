@@ -26,7 +26,7 @@ namespace chatapp
 {
     internal class Controller
     {
-        private TcpClient tcpClient;
+        private TcpClient TcpClient;
         private event EventHandler ServiceEvent;
         private ManageSessionUser manageSessionUser; //danh sách các lưu thông tin cần thiết các user trong phiên
         public UserService userService;
@@ -40,10 +40,11 @@ namespace chatapp
         {
             userService = new UserService();
             messageService = new MessageService();
-            this.tcpClient = tcpClient;
+            this.TcpClient = tcpClient;
             this.gui = gui;
             reader = new StreamReader(tcpClient.GetStream());
             writer = new StreamWriter(tcpClient.GetStream());
+            writer.AutoFlush = true;
         }
 
         /// <summary>
@@ -52,12 +53,12 @@ namespace chatapp
         /// <returns></returns>
         public async Task HandleClient(App app,EventHandler eventServer)
         {
-            writer.AutoFlush = true;
             try
             {
                 while (true) 
                 {
                     Packet packet = await NetworkUtils.ReadStreamAsync(reader);
+                    gui.ShowAction(packet.Data);
                     int value = await HandleTask(packet, writer);
                     if (value < 0) break;
                 }// nếu giá trị trả về sau xử lý > 0 thì vẫn tiếp tục đọc còn nếu không thì kết thúc
@@ -65,6 +66,7 @@ namespace chatapp
             catch (Exception ex)
             {
                 Console.WriteLine("is close");
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -102,15 +104,15 @@ namespace chatapp
 
 
                         string data = notification.Data;
-                        gui.AddMessage(data); // hiện thị thông báo trên giao 
-                        
+                        gui.AddMessage(data); // hiện thị thông báo trên giao
 
+                        gui.ShowAction($"{requestLogin.username} success to login");
+                        
                         UserSession userSession = new UserSession();
                         userSession.id = packet.From;
                         userSession.writer = writer;
                         userSession.reader = reader;
                         userSession.username = requestLogin.username;
-
 
                         ManageSessionUser.AddUserSession(userSession);
                         return 1;
@@ -122,7 +124,9 @@ namespace chatapp
                         await NetworkUtils.WriteStreamAsync(writer, notification);
                         string data = notification.Data;
                         gui.AddMessage(notification.Data);
-                        return -1;
+
+                        gui.ShowAction($"someone with ip is {TcpClient.Client.RemoteEndPoint} fail to login");
+                        return 1;// không close vội cho client nhập lại 
                     }
                 case PacketTypeEnum.SENDMESSAGE:
                     //chuyển đổi dữ liệu nhận được thành đối tượng Message

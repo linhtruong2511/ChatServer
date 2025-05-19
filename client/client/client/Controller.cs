@@ -17,8 +17,6 @@ namespace client
         public string username { get; set; }
         public StreamReader reader { get; set; }
         public StreamWriter writer { get; set; }
-        public CancellationTokenSource cts { get; set; }
-        public CancellationToken ct { get; set; }
         public Controller() 
         {
         
@@ -37,10 +35,10 @@ namespace client
         }
         public async Task HandleWritingTask(StreamWriter writer)
         {
-            while (true)// dừng khi disconnect
-            {
-                await MessageService.SendMessage(writer, username);
-            }
+            while (true) { }// dừng khi disconnect
+            //{
+            //    await MessageService.SendMessage(writer,new SendMessageRequest());
+            //}
         }
         public async Task HandleDisconnect()
         {

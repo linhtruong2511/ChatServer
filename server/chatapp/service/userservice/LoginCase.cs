@@ -46,15 +46,15 @@ namespace chatapp.service.userservice
         //    ManageUserSessionList manageusersessionlist,
         //    App app,
         //    EventHandler serverevent,
-        //    UserRepository userRepository)
+        //    UserRepository UserRepository)
         //{
         //    Console.WriteLine($"{packet.From} login");// thông báo cho server
         //    Packet notificationpacket = new Packet(PacketTypeEnum.NOTIFICATION, "success login", "Server", packet.From);//tạo 1 packet thông báo
         //    manageusersessionlist.SetWriterAndReader(user.username, writer, reader);//thêm luồng đọc và ghi 
         //    manageusersessionlist.SetState(user.username, true);//bật trạng thái người dùng
         //    manageusersessionlist.SetIP(user.username,tcpclient.Client.RemoteEndPoint.ToString());//thêm địa chỉ ip đang sử dụng
-        //    userRepository.SetState(user.username, true);
-        //    userRepository.SetRealTimeIP(user.username, tcpclient.Client.RemoteEndPoint.ToString());//thay đổi ip sang ip đang online
+        //    UserRepository.SetState(user.username, true);
+        //    UserRepository.SetRealTimeIP(user.username, tcpclient.Client.RemoteEndPoint.ToString());//thay đổi ip sang ip đang online
         //    await NetworkUtils.WriteStreamAsync(writer, notificationpacket);// gửi thông điệp về cho client đã đăng nhập thành công
         //    List<Message> messagelist = MessageRepository.GetMessWhenUserOffline(user.username);//lấy ra danh sách các tin nhắn khi client offline
         //    foreach (Message mess in messagelist)//gửi tin nhắn chưa được gửi đến user
