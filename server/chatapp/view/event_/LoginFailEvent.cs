@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace chatapp.gui.event_
+{
+    internal class LoginFailEvent : EventArgs,IEvent
+    {
+        public string source { get; set; }
+        public LoginFailEvent(string source)
+        {
+            this.source = source;
+        }
+
+        public string HandleEvent()
+        {
+            return source + " fail to login";
+        }
+    }
+}
