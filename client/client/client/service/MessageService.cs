@@ -1,6 +1,7 @@
 ﻿using chatapp.common;
 using chatapp.dto;
 using chatapp.util;
+using client.gui;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,22 +14,11 @@ namespace client.service
 {
     internal class MessageService
     {
+        private ManageUserInfos manageUserInfos;
         private MessageService() { }
         public static async Task SendMessage(StreamWriter writer,SendMessageRequest message,int destinationid=2)
         {
             await NetworkUtils.WriteStreamAsync(writer, new Packet(PacketTypeEnum.SENDMESSAGE,JsonConvert.SerializeObject(message),1,destinationid));
-        }
-        public static async Task ReceiveMessage(StreamReader reader)
-        {
-            Packet packet = await NetworkUtils.ReadStreamAsync(reader);
-            if (packet.Type == PacketTypeEnum.SENDMESSAGE)
-            {
-                Console.WriteLine($"\n{packet.From} : {JsonConvert.DeserializeObject<SendMessageRequest>(packet.Data).Contents}");
-            }
-            else
-            {
-                Console.WriteLine(JsonConvert.DeserializeObject<SendMessageRequest>(packet.Data).Contents);
-            }
         }
     }
 }

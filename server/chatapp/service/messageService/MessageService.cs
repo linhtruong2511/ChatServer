@@ -34,6 +34,10 @@ namespace chatapp.service
         public void SaveMessage(int source, string content, int toUserId)
         {
             messageRepository.SaveMessage(source, toUserId, content); 
-        }   
+        }
+        public List<Message> GetAllMessage(int source,int destination = 2)
+        {
+            return messageRepository.GetAllMessages(source,destination);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace chatapp.util
         /// <summary>
         /// chuyển dữ liệu đọc được sang dạng Packet
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param Name="stream"></param>
         /// <returns>gói tin Packet</returns>
         public static async Task<Packet> ReadStreamAsync(StreamReader stream)
         {
@@ -29,8 +29,8 @@ namespace chatapp.util
         /// <summary>
         /// chuyển packet thành chuỗi gửi đi
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="packet"></param>
+        /// <param Name="stream"></param>
+        /// <param Name="packet"></param>
         /// <returns>void</returns>
         public static async Task WriteStreamAsync(StreamWriter stream, Packet packet)
         {

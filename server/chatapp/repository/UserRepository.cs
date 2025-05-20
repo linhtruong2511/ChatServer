@@ -42,7 +42,7 @@ namespace chatapp.repository
         /// <summary>
         /// thêm 1 user -> database
         /// </summary>
-        /// <param name="User"></param>
+        /// <param Name="User"></param>
         /// <returns>số lượng user được thêm</returns>
         public int Insert(User User)
         {
@@ -59,7 +59,7 @@ namespace chatapp.repository
         /// <summary>
         /// xoá 1 user sử dụng username
         /// </summary>
-        /// <param name="username">tên user cần xoá</param>
+        /// <param Name="username">tên user cần xoá</param>
         /// <returns>số lượng user được xoá</returns>
         public int Delete(string username)
         {
@@ -74,8 +74,8 @@ namespace chatapp.repository
         /// <summary>
         /// đổi trạng thái 1 user
         /// </summary>
-        /// <param name="username">tên</param>
-        /// <param name="state">trạng thái muốn đổi sang</param>
+        /// <param Name="username">tên</param>
+        /// <param Name="state">trạng thái muốn đổi sang</param>
         /// <returns>số lượng user được đổi</returns>
         public int SetState(string username, bool state)
         {
@@ -132,8 +132,8 @@ namespace chatapp.repository
         /// <summary>
         /// chuyển IP của username sang giá trị ip
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="ip"></param>
+        /// <param Name="username"></param>
+        /// <param Name="ip"></param>
         /// <returns>số user bị chuyển</returns>
         public int SetRealTimeIP(string username,string ip)
         {

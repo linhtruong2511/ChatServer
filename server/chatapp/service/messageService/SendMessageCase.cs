@@ -21,8 +21,8 @@
 //        /// <summary>
 //        /// trả thông báo không tìm thấy người nhận
 //        /// </summary>
-//        /// <param name="packet">gói tin</param>
-//        /// <param name="writer">luồng ghi của người gửi</param>
+//        /// <param Name="packet">gói tin</param>
+//        /// <param Name="writer">luồng ghi của người gửi</param>
 //        /// <returns>1</returns>
 //        public static async Task<int> NotFoundRecipient(Packet packet,StreamWriter writer)
 //        {
@@ -34,7 +34,7 @@
 //        /// <summary>
 //        /// lưu tin nhắn vào database với trạng thái = 0 
 //        /// </summary>
-//        /// <param name="packet">gói tin</param>
+//        /// <param Name="packet">gói tin</param>
 //        /// <returns>1 (số lượng tin nhắn được lưu)</returns>
 //        public static int RecipientOffline(Packet packet)
 //        {
@@ -45,9 +45,9 @@
 //        /// lưu tin nhắn vào database với trạng thái = 1
 //        /// rồi gửi tin nhắn tới người nhận
 //        /// </summary>
-//        /// <param name="packet"></param>
-//        /// <param name="writer"></param>
-//        /// <param name="recipient"></param>
+//        /// <param Name="packet"></param>
+//        /// <param Name="writer"></param>
+//        /// <param Name="recipient"></param>
 //        /// <returns></returns>
 //        public static async Task<int> RecipientFound(Packet packet,UserSession recipient)
 //        {

@@ -9,7 +9,7 @@ namespace chatapp
     internal class App
     {
         public TcpListener TcpListener { get; set; }
-        public ManageSessionUser ManageSessionUser { get; set; } 
+        public ManageUser ManageSessionUser { get; set; } 
         public ManageTaskList TaskList{ get; set; }
         public event EventHandler ServerEvent;
         public MainForm gui;
@@ -22,7 +22,7 @@ namespace chatapp
 
             // quản lý user connect tới là việc của toàn bộ app nên để context cho nó bao bọc app lại => ở nơi đâu cũng có thể sử dụng để danh sách các user connect này
             // như vậy sẽ đỡ mất công truyền xuống
-            ManageSessionUser = new ManageSessionUser();
+            ManageSessionUser = new ManageUser();
             TcpListener = new TcpListener(System.Net.IPAddress.Loopback, 5000);
             this.gui = gui;
         }

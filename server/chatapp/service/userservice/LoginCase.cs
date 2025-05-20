@@ -31,11 +31,11 @@ namespace chatapp.service.userservice
         /// thay đổi trạng thái cơ sở dữ liệu
         /// thay đổi ip thực tế
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="user"></param>
-        /// <param name="writer"></param>
-        /// <param name="reader"></param>
-        /// <param name="tcpclient"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="user"></param>
+        /// <param Name="writer"></param>
+        /// <param Name="reader"></param>
+        /// <param Name="tcpclient"></param>
         /// <returns></returns>
         //public static async Task<int> SuccessLogin()
         //    Packet packet,
@@ -67,8 +67,8 @@ namespace chatapp.service.userservice
         /// <summary>
         /// gửi thông báo sai mật khẩu
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="writer"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="writer"></param>
         /// <returns>1</returns>
         //public static async Task<int> IncorrectPassword(Packet packet,StreamWriter writer,App app,EventHandler serverevent)
         //{
@@ -81,7 +81,7 @@ namespace chatapp.service.userservice
         /// <summary>
         /// gửi thông báo không tồn tại tên người dùng
         /// </summary>
-        /// <param name="writer"></param>
+        /// <param Name="writer"></param>
         /// <returns>1</returns>
         //public static async Task<int> NotExistUsername(Packet packet, StreamWriter writer, App app, EventHandler serverevent)
         //{

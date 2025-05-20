@@ -21,5 +21,8 @@ namespace chatapp.common
         SIGNUP,
         DISCONNECT,
         SENDMESSAGE,
+        HISTORYMESSAGES,
+        USERINFO,
+        ADDUSERINFO,
     }
 }

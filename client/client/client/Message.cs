@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace chatapp.model
+namespace client
 {
-    /// <summary>
-    /// lớp đại diện cho thực thể messdatabase trong cơ sở dữ liệu
-    /// </summary>
     public class Message
     {
         public int Id { get; set; }

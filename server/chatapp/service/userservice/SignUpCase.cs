@@ -30,8 +30,8 @@ namespace chatapp.service.userservice
         /// <summary>
         /// tên người dùng đã tồn tại , gửi thông báo về cho người gửi
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="writer"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="writer"></param>
         /// <returns>1</returns>
         public static async Task<int> UsernameUsed(Packet packet,StreamWriter writer,App app,EventHandler server)
         {
@@ -45,12 +45,12 @@ namespace chatapp.service.userservice
         /// gửi thông báo đăng ký thành công
         /// thao tác lưu người dùng vào cơ sở dữ liệu
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="user">lớp lưu username và password</param>
-        /// <param name="writer">luồng ghi</param>
-        /// <param name="reader">luồng đọc</param>
-        /// <param name="manageusersessionlist">danh sách các user trong phiên</param>
-        /// <param name="tcpclient">socket kết nối client với server</param>
+        /// <param Name="packet"></param>
+        /// <param Name="user">lớp lưu username và password</param>
+        /// <param Name="writer">luồng ghi</param>
+        /// <param Name="reader">luồng đọc</param>
+        /// <param Name="manageusersessionlist">danh sách các user trong phiên</param>
+        /// <param Name="tcpclient">socket kết nối client với server</param>
         /// <returns>1</returns>
         public static async Task<int> SuccessSignUp(Packet packet,LoginRequest user,StreamWriter writer,StreamReader reader,ManageUserSessionList manageusersessionlist,TcpClient tcpclient,App app,EventHandler serverevent)
         {

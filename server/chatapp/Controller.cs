@@ -3,6 +3,7 @@ using chatapp.common.Class;
 using chatapp.context;
 using chatapp.dto;
 using chatapp.dto.request;
+using chatapp.dto.response;
 using chatapp.gui.event_;
 using chatapp.repository;
 using chatapp.service;
@@ -20,7 +21,7 @@ namespace chatapp
     {
         private TcpClient TcpClient;
         private event EventHandler ServiceEvent;
-        private ManageSessionUser manageSessionUser;
+        private ManageUser manageSessionUser;
         public UserService userService;
         public MessageService messageService;
         StreamReader reader;
@@ -69,9 +70,9 @@ namespace chatapp
         /// <summary>
         /// sử lý thông điệp nhận được 
         /// </summary>
-        /// <param name="packet">thông điệp nhận</param>
-        /// <param name="writer">luồng ghi</param>
-        /// <param name="reader">luồng đọc</param>
+        /// <param Name="packet">thông điệp nhận</param>
+        /// <param Name="writer">luồng ghi</param>
+        /// <param Name="reader">luồng đọc</param>
         /// <returns>giá trị xác định xem có đọc tiếp hay không:
         /// nếu <0 thì không đọc nữa <=> disconnect
         /// nếu >0 thì đọc tiếp
@@ -91,21 +92,24 @@ namespace chatapp
                         // thong bao dang nhap thanh cong
                         Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "login success", 0, packet.From);
                         await NetworkUtils.WriteStreamAsync(writer, notification);
-
+                        string data = notification.Data;
                         // dự kiến viết tiếp ở đây
                         // trả về lịch sử các tin nhắn ,
-                        // trả về các danh sách các user,ground đã kết nối (đã từng nhắn tin)
-                        // và danh sách các user,group của toàn bộ server
+                        Packet historyMessages = new Packet(PacketTypeEnum.HISTORYMESSAGES, JsonConvert.SerializeObject(messageService.GetAllMessage(packet.From,2)),0, packet.From); 
+                        await NetworkUtils.WriteStreamAsync(writer, historyMessages);
 
-                        string data = notification.Data;
+                        // và danh sách các user,group của toàn bộ server
+                        Packet userInfo = new Packet(PacketTypeEnum.USERINFO, JsonConvert.SerializeObject(ManageUser.UserResponses), 0, packet.From);
+                        await NetworkUtils.WriteStreamAsync(writer, userInfo);
+                        
                         gui.AddMessage(data); // hiện thị thông báo trên giao
 
                         gui.ShowAction($"{requestLogin.username} success to login");
                         
                         // cập nhật userSession trong list 
-                        for(int i=0;i<ManageSessionUser.UserSessions.Count;i++)
+                        for(int i=0;i<ManageUser.UserSessions.Count;i++)
                         {
-                            UserSession userSession = ManageSessionUser.UserSessions[i];
+                            UserSession userSession = ManageUser.UserSessions[i];
                             if (userSession.username == requestLogin.username)
                             {
                                 userSession.reader = reader;
@@ -115,7 +119,6 @@ namespace chatapp
                                 break;
                             }
                         }
-                        
                         return 1;
                     }
                     else
@@ -134,7 +137,7 @@ namespace chatapp
 
                     SendMessageRequest requestMessage = ConvertUtils.PacketDataToDTO<SendMessageRequest>(packet);
                     Console.WriteLine(requestMessage.Contents);
-                    foreach (UserSession userSession in ManageSessionUser.UserSessions)
+                    foreach (UserSession userSession in ManageUser.UserSessions)
                     {
                         if (userSession.ID == packet.To && userSession.isOnline)
                         {

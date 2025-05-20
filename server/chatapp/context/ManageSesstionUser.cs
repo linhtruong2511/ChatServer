@@ -1,41 +1,60 @@
-﻿using chatapp.common.Class;
+﻿using chatapp.common;
+using chatapp.common.Class;
+using chatapp.dto;
+using chatapp.dto.response;
 using chatapp.model;
 using chatapp.repository;
 using chatapp.service;
 using chatapp.util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace chatapp.context
 {
-    internal class ManageSessionUser
+    public class ManageUser
     {
         public static List<UserSession> UserSessions { get; set; }
+        public static List<UserResponse> UserResponses { get; set; }
         public UserService UserService { get; set; }
 
-        public ManageSessionUser() {
-            UserSessions = new List<UserSession>();
+        public ManageUser() {
             UserService = new UserService();
-            UserSessions = ConvertUtils.UserListToUserSessionList(UserService.GetAllUser());
+            List<User> users = UserService.GetAllUser();
+            UserSessions = ConvertUtils.UserListToUserSessionList(users);
+            UserResponses = ConvertUtils.UserListToUserResponseList(users);
         }
-        public static void AddUserSession(UserSession userSession) {
+        public static async Task AddUser(UserSession userSession) {
             UserSessions.Add(userSession);
+            UserResponses.Add(new UserResponse(userSession));
+            await ChangeClientUserInfos(userSession);
         }
 
-        public static void RemoveUserSession(UserSession userSession) {
+        public static void RemoveUser(UserSession userSession) {
             UserSessions.Remove(userSession);
+            UserResponses.Remove(new UserResponse(userSession));
         }
-
+        public static async Task ChangeClientUserInfos(UserSession userSession)
+        {
+            for (int i = 0; i < UserSessions.Count; i++)
+            {
+                if (UserSessions[i].isOnline)
+                {
+                    await NetworkUtils.WriteStreamAsync(UserSessions[i].writer, new Packet(PacketTypeEnum.ADDUSERINFO, JsonConvert.SerializeObject(new UserResponse(userSession)), 0, UserSessions[i].ID));
+                }
+            }
+        }
         public List<UserSession> GetAllUserSessions() {
             return UserSessions;
         }
         /// <summary>
         /// thay đổi trạng thái Status của user
         /// </summary>
-        /// <param name="username">tên user</param>
-        /// <param name="state">trạng thái muốn đặt lại</param>
+        /// <param Name="username">tên user</param>
+        /// <param Name="state">trạng thái muốn đặt lại</param>
         public void SetState(string username, bool state)
         {
             foreach (UserSession us in UserSessions)
@@ -49,8 +68,8 @@ namespace chatapp.context
         /// <summary>
         /// thay đổi ip của user
         /// </summary>
-        /// <param name="username">tên user</param>
-        /// <param name="ip">đặt lai ip</param>
+        /// <param Name="username">tên user</param>
+        /// <param Name="ip">đặt lai ip</param>
         public void SetIP(string username, string ip)
         {
             foreach (UserSession us in UserSessions)
@@ -64,7 +83,7 @@ namespace chatapp.context
         /// <summary>
         /// Lấy tên user thông qua địa chỉ
         /// </summary>
-        /// <param name="ep">địa chỉ</param>
+        /// <param Name="ep">địa chỉ</param>
         /// <returns>tên user</returns>
         public string GetUsername(EndPoint ep)
         {
@@ -80,9 +99,9 @@ namespace chatapp.context
         /// <summary>
         /// thay đổi writer và reader
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="writer"></param>
-        /// <param name="reader"></param>
+        /// <param Name="username"></param>
+        /// <param Name="writer"></param>
+        /// <param Name="reader"></param>
         public void SetWriterAndReader(string username, StreamWriter writer, StreamReader reader)
         {
             foreach (UserSession us in UserSessions)

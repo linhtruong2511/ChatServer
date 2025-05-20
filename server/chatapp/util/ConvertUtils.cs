@@ -1,6 +1,7 @@
 ﻿using chatapp.common.Class;
 using chatapp.dto;
 using chatapp.dto.request;
+using chatapp.dto.response;
 using chatapp.model;
 using chatapp.service.managelist;
 using Newtonsoft.Json;
@@ -19,8 +20,8 @@ namespace chatapp.util
         /// <summary>
         /// chuyển từ packet sang Object
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="packet"></param>
+        /// <typeparam Name="T"></typeparam>
+        /// <param Name="packet"></param>
         /// <returns>1 đối tượng của kiểu cần chuyển tới</returns>
         public static T PacketDataToDTO<T>(Packet packet)
         {
@@ -29,8 +30,8 @@ namespace chatapp.util
         /// <summary>
         /// chuyển từ Object sang packet
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="Object"></param>
+        /// <typeparam Name="T"></typeparam>
+        /// <param Name="Object"></param>
         /// <returns>chuỗi lưu thông tin Object</returns>
         public static string DTOToPacketData<T>(T Object)
         {
@@ -39,8 +40,8 @@ namespace chatapp.util
         /// <summary>
         /// chuyển từ packet sang message
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="state"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="state"></param>
         /// <returns>1 message</returns>
         //public static Message PacketToMessage(Packet packet,int Status)
         //{
@@ -49,8 +50,8 @@ namespace chatapp.util
         /// <summary>
         ///  chuyển từ User request sang User
         /// </summary>
-        /// <param name="ur"></param>
-        /// <param name="tcpClient"></param>
+        /// <param Name="ur"></param>
+        /// <param Name="tcpClient"></param>
         /// <returns></returns>
         public static User UserRequestToUser(LoginRequest ur,TcpClient tcpClient)
         {
@@ -59,7 +60,7 @@ namespace chatapp.util
         /// <summary>
         /// tách IpEndpoint thành ip và port
         /// </summary>
-        /// <param name="ipendpoint"></param>
+        /// <param Name="ipendpoint"></param>
         /// <returns>mảng chuỗi gồm 2 thông tin đã tách</returns>
         public static string[] IPEndPointToIPandPort(string ipendpoint)
         {
@@ -67,12 +68,12 @@ namespace chatapp.util
         }
         public static UserSession UserToUserSession(User user)
         {
-            return new UserSession(user.ID,user.username,user.password,null,null,user.IP,user.Status);
+            return new UserSession(user.ID,user.name,user.username,user.password,null,null,user.IP,user.Status);
         }
         /// <summary>
         /// chuyển từ list<UserSession> sang list<User>
         /// </summary>
-        /// <param name="userlist"></param>
+        /// <param Name="userlist"></param>
         /// <returns>list<usersession></returns>
         public static List<UserSession> UserListToUserSessionList(List<User> users)
         {
@@ -83,7 +84,14 @@ namespace chatapp.util
             }
             return userSessions;
         }
-        
-        
+        public static List<UserResponse> UserListToUserResponseList(List<User> users)
+        {
+            List<UserResponse> userResponses = new List<UserResponse>();
+            foreach(User i in users)
+            {
+                userResponses.Add(new UserResponse(i));
+            }
+            return userResponses;
+        }
     }
 }

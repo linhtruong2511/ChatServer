@@ -52,6 +52,7 @@
     <Compile Include="common\Class\Packet.cs" />
     <Compile Include="common\Class\UserRequest.cs" />
     <Compile Include="common\Enums\PacketTypeEnum.cs" />
+    <Compile Include="ManageUserInfos.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="gui\AuthenticationPortal.cs">
       <SubType>Form</SubType>
@@ -67,11 +68,13 @@
     <Compile Include="gui\Gui.Designer.cs">
       <DependentUpon>Gui.cs</DependentUpon>
     </Compile>
+    <Compile Include="Message.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendMessageRequest.cs" />
     <Compile Include="service\MessageService.cs" />
     <Compile Include="service\UserService.cs" />
+    <Compile Include="UserInfo.cs" />
     <Compile Include="util\ConvertPacketDataUtils.cs" />
     <Compile Include="util\NetworkUtils.cs" />
   </ItemGroup>

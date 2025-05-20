@@ -32,7 +32,7 @@ namespace chatapp.service.managelist
         /// <summary>
         /// Thêm 1 usersession
         /// </summary>
-        /// <param name="usersession"></param>
+        /// <param Name="usersession"></param>
         public void AddUser(UserSession usersession)
         {
             this.usersessionlist.Add(usersession);
@@ -40,8 +40,8 @@ namespace chatapp.service.managelist
         /// <summary>
         /// thay đổi trạng thái Status của user
         /// </summary>
-        /// <param name="username">tên user</param>
-        /// <param name="state">trạng thái muốn đặt lại</param>
+        /// <param Name="username">tên user</param>
+        /// <param Name="state">trạng thái muốn đặt lại</param>
         public void SetState(string username,bool state)
         {
             foreach(UserSession us in usersessionlist)
@@ -55,8 +55,8 @@ namespace chatapp.service.managelist
         /// <summary>
         /// thay đổi ip của user
         /// </summary>
-        /// <param name="username">tên user</param>
-        /// <param name="ip">đặt lai ip</param>
+        /// <param Name="username">tên user</param>
+        /// <param Name="ip">đặt lai ip</param>
         public void SetIP(string username, string ip)
         {
             foreach (UserSession us in usersessionlist)
@@ -70,7 +70,7 @@ namespace chatapp.service.managelist
         /// <summary>
         /// Lấy tên user thông qua địa chỉ
         /// </summary>
-        /// <param name="ep">địa chỉ</param>
+        /// <param Name="ep">địa chỉ</param>
         /// <returns>tên user</returns>
         public string GetUsername(EndPoint ep)
         {
@@ -86,9 +86,9 @@ namespace chatapp.service.managelist
         /// <summary>
         /// thay đổi writer và reader
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="writer"></param>
-        /// <param name="reader"></param>
+        /// <param Name="username"></param>
+        /// <param Name="writer"></param>
+        /// <param Name="reader"></param>
         public void SetWriterAndReader(string username,StreamWriter writer,StreamReader reader)
         {
             foreach(UserSession us in usersessionlist)

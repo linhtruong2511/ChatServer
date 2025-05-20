@@ -19,8 +19,8 @@ namespace chatapp.service.userservice
         /// <summary>
         /// in ra thông báo sai format rồi gửi cho người gửi
         /// </summary>
-        /// <param name="packet">gói tin</param>
-        /// <param name="writer">luồng ghi của người gửi</param>
+        /// <param Name="packet">gói tin</param>
+        /// <param Name="writer">luồng ghi của người gửi</param>
         /// <returns>-1</returns>
         public static async Task<int> IncorrectPacketFormat(Packet packet,StreamWriter writer)
         {
