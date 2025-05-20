@@ -12,16 +12,17 @@ namespace chatapp.model
     /// </summary>
     internal class User
     {
+        public int ID { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public bool state { get; set; }
-        public string realtimeIP { get; set; }
-        public User(string username,string password,string realtimeIP,bool state=true)
+        public bool Status { get; set; }
+        public string IP { get; set; }
+        public User(string username,string password,string IP,bool state=true)
         {
             this.username = username;
             this.password = password;
-            this.realtimeIP = realtimeIP;
-            this.state = state;
+            this.IP = IP;
+            this.Status = state;
         }
         public User() { }
     }

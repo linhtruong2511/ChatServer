@@ -20,7 +20,7 @@ namespace chatapp.repository
             this.connection = Database.GetConnection();
         }
 
-        public List<User> getAllUser ()
+        public List<User> GetAllUser ()
         {
             // xử lý db lấy toàn bộ user làm gì gì đó
             List<User> users = new List<User>();
@@ -46,12 +46,12 @@ namespace chatapp.repository
         /// <returns>số lượng user được thêm</returns>
         public int Insert(User User)
         {
-            //using (SqlCommand cmd = new SqlCommand($"insert into {clientdatabase}(username,password,state,realtimeIP) values (@username,@password,@state,@realtimeIP)", connection))
+            //using (SqlCommand cmd = new SqlCommand($"insert into {clientdatabase}(username,password,Status,IP) values (@username,@password,@Status,@IP)", connection))
             //{
             //    cmd.Parameters.AddWithValue("@username", User.username);
             //    cmd.Parameters.AddWithValue("@password", User.password);
-            //    cmd.Parameters.AddWithValue("@state", User.state);
-            //    cmd.Parameters.AddWithValue("realtimeIP", User.realtimeIP);
+            //    cmd.Parameters.AddWithValue("@Status", User.Status);
+            //    cmd.Parameters.AddWithValue("IP", User.IP);
             //    return cmd.ExecuteNonQuery();
             //}
             return 1;
@@ -79,9 +79,9 @@ namespace chatapp.repository
         /// <returns>số lượng user được đổi</returns>
         public int SetState(string username, bool state)
         {
-            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set state=@state where username=@username"))
+            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set Status=@Status where username=@username"))
             //{
-            //    cmd.Parameters.AddWithValue("@state", state);
+            //    cmd.Parameters.AddWithValue("@Status", Status);
             //    cmd.Parameters.AddWithValue("@username", username);
             //    return cmd.ExecuteNonQuery();
             //}
@@ -113,7 +113,7 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserStateToFalse()
         {
-            using (SqlCommand cmd = new SqlCommand($"update users set state=0"))
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=0"))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -124,22 +124,22 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserIPToEmpty()
         {
-            using (SqlCommand cmd = new SqlCommand($"update user set realtimeIP='empty'"))
+            using (SqlCommand cmd = new SqlCommand($"update user set IP='empty'"))
             {
                 return cmd.ExecuteNonQuery();
             }
         }
         /// <summary>
-        /// chuyển realtimeIP của username sang giá trị ip
+        /// chuyển IP của username sang giá trị ip
         /// </summary>
         /// <param name="username"></param>
         /// <param name="ip"></param>
         /// <returns>số user bị chuyển</returns>
         public int SetRealTimeIP(string username,string ip)
         {
-            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set realtimeIP=@realtimeIP where username=@username"))
+            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set IP=@IP where username=@username"))
             //{
-            //    cmd.Parameters.AddWithValue("@realtimeIP", ip);
+            //    cmd.Parameters.AddWithValue("@IP", ip);
             //    cmd.Parameters.AddWithValue("@username", username);
             //    return cmd.ExecuteNonQuery();
             //}
@@ -149,7 +149,7 @@ namespace chatapp.repository
 
         public bool CheckPasswordUser(string username, string password)
         {
-            using (SqlCommand cmd = new SqlCommand("select id from users where username=@username and password=@password", connection))
+            using (SqlCommand cmd = new SqlCommand("select ID from users where username=@username and password=@password", connection))
             {
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);

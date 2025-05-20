@@ -38,7 +38,7 @@ namespace chatapp.service.managelist
             this.usersessionlist.Add(usersession);
         }
         /// <summary>
-        /// thay đổi trạng thái state của user
+        /// thay đổi trạng thái Status của user
         /// </summary>
         /// <param name="username">tên user</param>
         /// <param name="state">trạng thái muốn đặt lại</param>

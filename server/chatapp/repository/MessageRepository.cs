@@ -34,13 +34,13 @@ namespace chatapp.repository
         public void SaveMessage (int source, int destination, string contents, int status = 1)
         {
             DateTime dateTime = DateTime.Now;
-            string query = $"insert into message (source, destination, contents, status, createAt) values (@source, @destination, @contents, @status, @createAt)";
+            string query = $"insert into message (source, destination, contents, Status, createAt) values (@source, @destination, @contents, @Status, @createAt)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@source", source);
                 cmd.Parameters.AddWithValue("@destination", destination);
                 cmd.Parameters.AddWithValue("@contents", contents);
-                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@Status", status);
                 cmd.Parameters.AddWithValue("@createAt", dateTime);
 
                 cmd.ExecuteNonQuery();
@@ -71,12 +71,12 @@ namespace chatapp.repository
         /// <returns>số mess được lưu</returns>
         //public int Insert(Message message)
         //{
-        //    //using (SqlCommand cmd = new SqlCommand($"insert into {messdatabase}(data,source,destination,state,timestamp) values (@data,@source,@destination,@state,@timestamp)", connect))
+        //    //using (SqlCommand cmd = new SqlCommand($"insert into {messdatabase}(data,source,destination,Status,timestamp) values (@data,@source,@destination,@Status,@timestamp)", connect))
         //    //{
         //    //    cmd.Parameters.AddWithValue("@data", message.data);
         //    //    cmd.Parameters.AddWithValue("@source", message.source);
         //    //    cmd.Parameters.AddWithValue("@destination", message.destination);
-        //    //    cmd.Parameters.AddWithValue("@state", message.state);
+        //    //    cmd.Parameters.AddWithValue("@Status", message.Status);
         //    //    cmd.Parameters.AddWithValue("@timestamp", message.timestamp);
         //    //    return cmd.ExecuteNonQuery();
         //    //}
@@ -92,9 +92,9 @@ namespace chatapp.repository
         //    using (SqlConnection connect = new SqlConnection(connection))
         //    {
         //        connect.Open();
-        //        using (SqlCommand cmd = new SqlCommand($"delete from {messdatabase} where id = @id", connect))
+        //        using (SqlCommand cmd = new SqlCommand($"delete from {messdatabase} where ID = @ID", connect))
         //        {
-        //            cmd.Parameters.AddWithValue("@id", message.Id);
+        //            cmd.Parameters.AddWithValue("@ID", message.Id);
         //            return cmd.ExecuteNonQuery();
         //        }
         //    }
@@ -137,10 +137,10 @@ namespace chatapp.repository
         //    using (SqlConnection connect = new SqlConnection(connection))
         //    {
         //        connect.Open();
-        //        using (SqlCommand cmd = new SqlCommand($"select * from {messdatabase} where destination=@destination and state=@state order by timestamp", connect))
+        //        using (SqlCommand cmd = new SqlCommand($"select * from {messdatabase} where destination=@destination and Status=@Status order by timestamp", connect))
         //        {
         //            cmd.Parameters.AddWithValue("@destination",username);
-        //            cmd.Parameters.AddWithValue("@state",0);
+        //            cmd.Parameters.AddWithValue("@Status",0);
         //            using (SqlDataReader reader = cmd.ExecuteReader())
         //            {
         //                while (reader.Read())
@@ -160,15 +160,15 @@ namespace chatapp.repository
         /// <param name="message">message cần thay đổi</param>
         /// <param name="state">trạng thái muốn thay đổi</param>
         /// <returns>1 (số message được thay đổi)</returns>
-        //public static int SetMessageState(Message message,bool state)
+        //public static int SetMessageState(Message message,bool Status)
         //{
         //    using (SqlConnection connect = new SqlConnection(connection))
         //    {
         //        connect.Open();
-        //        using (SqlCommand cmd = new SqlCommand($"update {messdatabase} set state=@state where id=@id", connect))
+        //        using (SqlCommand cmd = new SqlCommand($"update {messdatabase} set Status=@Status where ID=@ID", connect))
         //        {
-        //            cmd.Parameters.AddWithValue("@state",state);
-        //            cmd.Parameters.AddWithValue("@id", message.Id);
+        //            cmd.Parameters.AddWithValue("@Status",Status);
+        //            cmd.Parameters.AddWithValue("@ID", message.Id);
         //            return cmd.ExecuteNonQuery();
         //        }
         //    }
