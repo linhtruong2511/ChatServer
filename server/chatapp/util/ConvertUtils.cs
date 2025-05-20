@@ -42,9 +42,9 @@ namespace chatapp.util
         /// <param name="packet"></param>
         /// <param name="state"></param>
         /// <returns>1 message</returns>
-        //public static Message PacketToMessage(Packet packet,int state)
+        //public static Message PacketToMessage(Packet packet,int Status)
         //{
-        //    return new Message(packet.Data, packet.From, packet.To, state);
+        //    return new Message(packet.Data, packet.From, packet.To, Status);
         //}
         /// <summary>
         ///  chuyển từ User request sang User
@@ -67,7 +67,7 @@ namespace chatapp.util
         }
         public static UserSession UserToUserSession(User user)
         {
-            return new UserSession(user.username,user.password,null,null,user.realtimeIP,user.state);
+            return new UserSession(user.ID,user.username,user.password,null,null,user.IP,user.Status);
         }
         /// <summary>
         /// chuyển từ list<UserSession> sang list<User>

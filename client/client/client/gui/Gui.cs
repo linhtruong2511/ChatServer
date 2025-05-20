@@ -40,18 +40,19 @@ namespace client.gui
             SendMessageRequest message = new SendMessageRequest();
             message.Contents = textBox1.Text;
             MessageService.SendMessage(mainapp.writer, message);
+
             Label lbl = new Label();
             lbl.Text = textBox1.Text;
-            lbl.AutoSize = true;
+            lbl.TextAlign = ContentAlignment.MiddleRight;
             lbl.MaximumSize = new Size(flp_messagescreen.Width - 50, 0);
 
+            lbl.Size = new Size(flp_messagescreen.Width - 50, 40);
             flp_messagescreen.FlowDirection = FlowDirection.TopDown;
             flp_messagescreen.WrapContents = false;
             flp_messagescreen.AutoScroll = true;
-
             flp_messagescreen.Controls.Add(lbl);
             flp_messagescreen.ScrollControlIntoView(lbl);
-
+            textBox1.Text = "";
         }
         public void ReceiveMessage()
         {

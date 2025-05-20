@@ -27,15 +27,13 @@ namespace chatapp.service
         // neu co bug thi o day
         public async Task SendMessage(UserSession userSession, int source, string content, int toUserId)
         {
-            List<UserSession> userSessions = ManageSessionUser.UserSessions;
-            StreamWriter writer = userSession.writer;
             messageRepository.SaveMessage(source, toUserId, content);
-            await NetworkUtils.WriteStreamAsync(writer, new Packet(PacketTypeEnum.SENDMESSAGE, content, source, toUserId));
+            await NetworkUtils.WriteStreamAsync(userSession.writer, new Packet(PacketTypeEnum.SENDMESSAGE, content, source, toUserId));
         }
 
         public void SaveMessage(int source, string content, int toUserId)
         {
-           messageRepository.SaveMessage(source, toUserId, content); 
+            messageRepository.SaveMessage(source, toUserId, content); 
         }   
     }
 }

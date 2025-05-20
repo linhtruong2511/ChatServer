@@ -11,24 +11,16 @@ using chatapp.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 namespace chatapp
 {
     internal class Controller
     {
         private TcpClient TcpClient;
         private event EventHandler ServiceEvent;
-        private ManageSessionUser manageSessionUser; //danh sách các lưu thông tin cần thiết các user trong phiên
+        private ManageSessionUser manageSessionUser;
         public UserService userService;
         public MessageService messageService;
         StreamReader reader;
@@ -59,7 +51,7 @@ namespace chatapp
                 {
                     Packet packet = await NetworkUtils.ReadStreamAsync(reader);
                     gui.ShowAction(packet.Data);
-                    int value = await HandleTask(packet, writer);
+                    int value = await HandleTask(packet);
                     if (value < 0) break;
                 }// nếu giá trị trả về sau xử lý > 0 thì vẫn tiếp tục đọc còn nếu không thì kết thúc
             }
@@ -84,14 +76,12 @@ namespace chatapp
         /// nếu <0 thì không đọc nữa <=> disconnect
         /// nếu >0 thì đọc tiếp
         /// </returns>
-        public async Task<int> HandleTask(Packet packet,StreamWriter writer)//xử lý thông điệp nhận được  
+        public async Task<int> HandleTask(Packet packet)//xử lý thông điệp nhận được  
         {
-
             switch (packet.Type)
             {
                 case PacketTypeEnum.LOGIN:
 
-                    //chuyển đổi dữ liệu nhận được thành đối tượng UserRequest
                     LoginRequest requestLogin = ConvertUtils.PacketDataToDTO<LoginRequest>(packet);
                     
                     bool loginSuccess = userService.Login(requestLogin.username, requestLogin.password);
@@ -102,19 +92,30 @@ namespace chatapp
                         Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "login success", 0, packet.From);
                         await NetworkUtils.WriteStreamAsync(writer, notification);
 
+                        // dự kiến viết tiếp ở đây
+                        // trả về lịch sử các tin nhắn ,
+                        // trả về các danh sách các user,ground đã kết nối (đã từng nhắn tin)
+                        // và danh sách các user,group của toàn bộ server
 
                         string data = notification.Data;
                         gui.AddMessage(data); // hiện thị thông báo trên giao
 
                         gui.ShowAction($"{requestLogin.username} success to login");
                         
-                        UserSession userSession = new UserSession();
-                        userSession.id = packet.From;
-                        userSession.writer = writer;
-                        userSession.reader = reader;
-                        userSession.username = requestLogin.username;
-
-                        ManageSessionUser.AddUserSession(userSession);
+                        // cập nhật userSession trong list 
+                        for(int i=0;i<ManageSessionUser.UserSessions.Count;i++)
+                        {
+                            UserSession userSession = ManageSessionUser.UserSessions[i];
+                            if (userSession.username == requestLogin.username)
+                            {
+                                userSession.reader = reader;
+                                userSession.writer = writer;
+                                userSession.realtimeIP = TcpClient.Client.RemoteEndPoint.ToString();
+                                userSession.isOnline = true;
+                                break;
+                            }
+                        }
+                        
                         return 1;
                     }
                     else
@@ -125,29 +126,29 @@ namespace chatapp
                         string data = notification.Data;
                         gui.AddMessage(notification.Data);
 
-                        gui.ShowAction($"someone with ip is {TcpClient.Client.RemoteEndPoint} fail to login");
+                        gui.ShowAction($"someone with {TcpClient.Client.RemoteEndPoint} ip was fail to login");
                         return 1;// không close vội cho client nhập lại 
                     }
                 case PacketTypeEnum.SENDMESSAGE:
                     //chuyển đổi dữ liệu nhận được thành đối tượng Message
 
-
-                    List<UserSession> userSessions = ManageSessionUser.UserSessions;
-
-                    SendMessageResquest requestMessage = ConvertUtils.PacketDataToDTO<SendMessageResquest>(packet);
-
-                    foreach (UserSession userSession in userSessions)
+                    SendMessageRequest requestMessage = ConvertUtils.PacketDataToDTO<SendMessageRequest>(packet);
+                    Console.WriteLine(requestMessage.Contents);
+                    foreach (UserSession userSession in ManageSessionUser.UserSessions)
                     {
-                        if (userSession.id == packet.To && userSession.isOnline)
+                        if (userSession.ID == packet.To && userSession.isOnline)
                         {
                             await messageService.SendMessage(userSession, packet.From, requestMessage.Contents, packet.To);
                         }
-                        else if (userSession.id == packet.To && !userSession.isOnline) // người dùng offline
+                        else if (userSession.ID == packet.To && !userSession.isOnline) // người dùng offline
                         {
                             // lưu thông tin vào cơ sở dữ liệu
                             messageService.SaveMessage(packet.From, requestMessage.Contents, packet.To);
                         }
-                        else return -1;
+                        else 
+                        { 
+                            continue; 
+                        }
                     }
                     return 1;
                 case PacketTypeEnum.DISCONNECT:

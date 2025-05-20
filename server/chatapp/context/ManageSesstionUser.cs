@@ -1,14 +1,12 @@
 ﻿using chatapp.common.Class;
+using chatapp.model;
 using chatapp.repository;
 using chatapp.service;
 using chatapp.util;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chatapp.context
 {
@@ -20,8 +18,8 @@ namespace chatapp.context
         public ManageSessionUser() {
             UserSessions = new List<UserSession>();
             UserService = new UserService();
+            UserSessions = ConvertUtils.UserListToUserSessionList(UserService.GetAllUser());
         }
-
         public static void AddUserSession(UserSession userSession) {
             UserSessions.Add(userSession);
         }
@@ -34,7 +32,7 @@ namespace chatapp.context
             return UserSessions;
         }
         /// <summary>
-        /// thay đổi trạng thái state của user
+        /// thay đổi trạng thái Status của user
         /// </summary>
         /// <param name="username">tên user</param>
         /// <param name="state">trạng thái muốn đặt lại</param>

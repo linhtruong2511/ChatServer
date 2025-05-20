@@ -46,9 +46,9 @@ namespace chatapp.service
             return await DefaultCase.IncorrectPacketFormat(packet, writer);
         }
         
-        public List<User> getAllUser()
+        public List<User> GetAllUser()
         {
-            return UserRepository.getAllUser();
+            return UserRepository.GetAllUser();
         }
     }
 }

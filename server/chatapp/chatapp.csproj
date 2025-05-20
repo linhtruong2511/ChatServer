@@ -56,7 +56,7 @@
     <Compile Include="Controller.cs" />
     <Compile Include="common\Class\Packet.cs" />
     <Compile Include="dto\request\LoginRequest.cs" />
-    <Compile Include="dto\request\SendMessageResquest.cs" />
+    <Compile Include="dto\request\SendMessageRequest.cs" />
     <Compile Include="dto\response\LoginResponse.cs" />
     <Compile Include="view\event_\DisconnectEvent.cs" />
     <Compile Include="view\event_\IEvent.cs" />
