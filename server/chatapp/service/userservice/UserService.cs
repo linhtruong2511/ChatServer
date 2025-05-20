@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace chatapp.service
 {
-    internal class UserService
+    public class UserService
     {
         private UserRepository UserRepository;
         public UserService() {
@@ -17,10 +17,10 @@ namespace chatapp.service
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="writer"></param>
-        /// <param name="reader"></param>
-        /// <param name="manageusersessionlist"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="writer"></param>
+        /// <param Name="reader"></param>
+        /// <param Name="manageusersessionlist"></param>
         /// <returns></returns>
         public bool Login(string username, string password)
         {
@@ -41,10 +41,10 @@ namespace chatapp.service
         //    //}
         //    //return -1;
         //}
-        public static async Task<int> Default(Packet packet, StreamWriter writer)
-        {
-            return await DefaultCase.IncorrectPacketFormat(packet, writer);
-        }
+        //public static async Task<int> Default(Packet packet, StreamWriter writer)
+        //{
+        //    return await DefaultCase.IncorrectPacketFormat(packet, writer);
+        //}
         
         public List<User> GetAllUser()
         {

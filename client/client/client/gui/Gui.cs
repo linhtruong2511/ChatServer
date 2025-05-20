@@ -21,7 +21,7 @@ namespace client.gui
         }
         public void Run()
         {
-            Task.Run(() => mainapp.Start());
+            Task.Run(() => mainapp.Start(this));
             mainapp.clientevent += HandleClientEvent;
         }
         public void HandleClientEvent(object sender,EventArgs e)
@@ -40,28 +40,62 @@ namespace client.gui
             SendMessageRequest message = new SendMessageRequest();
             message.Contents = textBox1.Text;
             MessageService.SendMessage(mainapp.writer, message);
-
-            Label lbl = new Label();
-            lbl.Text = textBox1.Text;
-            lbl.TextAlign = ContentAlignment.MiddleRight;
-            lbl.MaximumSize = new Size(flp_messagescreen.Width - 50, 0);
-
-            lbl.Size = new Size(flp_messagescreen.Width - 50, 40);
+            Message mymessage = new Message(message.Contents, mainapp.MyID, 2, 0);
+            ShowMyMessage(mymessage);
             flp_messagescreen.FlowDirection = FlowDirection.TopDown;
             flp_messagescreen.WrapContents = false;
             flp_messagescreen.AutoScroll = true;
-            flp_messagescreen.Controls.Add(lbl);
-            flp_messagescreen.ScrollControlIntoView(lbl);
             textBox1.Text = "";
         }
-        public void ReceiveMessage()
+        public void ShowMyMessage(Message myMessage)
         {
-
-        } 
-
-        private void flp_messagescreen_Paint(object sender, PaintEventArgs e)
-        {
-
+            Label lbl = new Label();
+            lbl.Text = myMessage.Contents;
+            lbl.TextAlign = ContentAlignment.MiddleRight;
+            lbl.MaximumSize = new Size(flp_messagescreen.Width - 50, 0);
+            lbl.Size = new Size(flp_messagescreen.Width - 50, 40);
+            if (flp_messagescreen.InvokeRequired)
+            {
+                flp_messagescreen.Invoke(new MethodInvoker(() => flp_messagescreen.Controls.Add(lbl)));// đưa về luồng chính rồi mới có thể thay đổi được controls
+            }
+            else
+            {
+                flp_messagescreen.Controls.Add(lbl);
+            }
         }
+        public void ShowOtherMessage(Message otherMesssage)
+        {
+            Label lbl = new Label();
+            lbl.Text = otherMesssage.Contents;
+            lbl.TextAlign = ContentAlignment.MiddleLeft;
+            lbl.MaximumSize = new Size(flp_messagescreen.Width - 50, 0);
+            lbl.Size = new Size(flp_messagescreen.Width - 50, 40);
+            if (flp_messagescreen.InvokeRequired)
+            {
+                flp_messagescreen.Invoke(new MethodInvoker(() => flp_messagescreen.Controls.Add(lbl)));
+            }
+            else
+            {
+                flp_messagescreen.Controls.Add(lbl);
+            }
+        }
+        public void ShowMessages(List<Message> messages)
+        {
+            for(int i = 0; i < messages.Count; i++)
+            {
+                if (messages[i].Source != mainapp.MyID)
+                {
+                    ShowOtherMessage(messages[i]);
+                }
+                else
+                {
+                    ShowMyMessage(messages[i]);
+                }
+            }
+        } 
+        //public void flp_messagescreen_Paint()
+        //{
+
+        //}
     }
 }

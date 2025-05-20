@@ -18,6 +18,7 @@ namespace client
         public StreamWriter writer { get; set; }
         public EventHandler clientevent { get; set; }
         public Controller controller { get; set; }
+        public int MyID { get; } = 1; 
         public App() 
         {
             Console.WriteLine("Client is online");
@@ -34,13 +35,12 @@ namespace client
             reader.Dispose();
             writer.Dispose();
         }
-        public async Task Start()
+        public async Task Start(Gui gui)
         {
             try
             {
-                Task reading = Task.Run(async () => await controller.HandleReadingTask(reader));
-                Task writing = Task.Run(async () => await controller.HandleWritingTask(writer));
-                await Task.WhenAll(reading, writing);
+                Task reading = Task.Run(async () => await controller.HandleReadingTask(reader,gui));
+                await reading;
             }
             catch(Exception ex)
             {
