@@ -23,8 +23,8 @@ namespace chatapp.service.userservice
         /// thông báo xác nhận ngắt kết nối
         /// thao tác với cơ sở dữ liêu lưu trạng thái của user
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="writer"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="writer"></param>
         /// <returns>-1</returns>
         public static async Task<int> SuccessDisconnect(Packet packet,StreamWriter writer,App app,EventHandler serverevent,UserRepository userRepository)
         {
