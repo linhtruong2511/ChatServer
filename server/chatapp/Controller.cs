@@ -24,6 +24,7 @@ namespace chatapp
         private ManageUser manageSessionUser;
         public UserService userService;
         public MessageService messageService;
+        public HandleController handleController;
         StreamReader reader;
         StreamWriter writer;
         MainForm gui;
@@ -77,66 +78,53 @@ namespace chatapp
         /// nếu <0 thì không đọc nữa <=> disconnect
         /// nếu >0 thì đọc tiếp
         /// </returns>
-        public async Task<int> HandleTask(Packet packet)//xử lý thông điệp nhận được  
+        public async Task<int> HandleTask(Packet packet)//xử lý thông điệp nhận được - chỉ trả về <0 khi có yêu cầu disconnect
         {
             switch (packet.Type)
             {
                 case PacketTypeEnum.LOGIN:
 
                     LoginRequest requestLogin = ConvertUtils.PacketDataToDTO<LoginRequest>(packet);
-                    
-                    bool loginSuccess = userService.Login(requestLogin.username, requestLogin.password);
 
-                    if (loginSuccess)
+                    if (handleController.IsCorrectUserInformation(requestLogin))
                     {
-                        // thong bao dang nhap thanh cong
-                        Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "login success", 0, packet.From);
-                        await NetworkUtils.WriteStreamAsync(writer, notification);
-                        string data = notification.Data;
-                        // dự kiến viết tiếp ở đây
-                        // trả về lịch sử các tin nhắn ,
-                        Packet historyMessages = new Packet(PacketTypeEnum.HISTORYMESSAGES, JsonConvert.SerializeObject(messageService.GetAllMessage(packet.From,2)),0, packet.From); 
-                        await NetworkUtils.WriteStreamAsync(writer, historyMessages);
-
-                        // và danh sách các user,group của toàn bộ server
-                        Packet userInfo = new Packet(PacketTypeEnum.USERINFO, JsonConvert.SerializeObject(ManageUser.UserResponses), 0, packet.From);
-                        await NetworkUtils.WriteStreamAsync(writer, userInfo);
-                        
-                        gui.AddMessage(data); // hiện thị thông báo trên giao
-
-                        gui.ShowAction($"{requestLogin.username} success to login");
-                        
-                        // cập nhật userSession trong list 
-                        for(int i=0;i<ManageUser.UserSessions.Count;i++)
+                        if (handleController.IsUserOnline(requestLogin))
                         {
-                            UserSession userSession = ManageUser.UserSessions[i];
-                            if (userSession.username == requestLogin.username)
-                            {
-                                userSession.reader = reader;
-                                userSession.writer = writer;
-                                userSession.realtimeIP = TcpClient.Client.RemoteEndPoint.ToString();
-                                userSession.isOnline = true;
-                                break;
-                            }
+                            // thông báo không thể đăng nhập vì đã có người sử dụng account này rồi 
+                            Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "Can't login because this account is online", 0, packet.From);
+                            await NetworkUtils.WriteStreamAsync(writer, notification);
                         }
-                        return 1;
+                        else
+                        {
+                            // nếu đăng nhập thành công trả về id và name của user (không cần thông báo login success nữa để nó là 1 type của packet luôn) 
+                            Packet successLogin = new Packet(PacketTypeEnum.SUCCESSLOGIN,JsonConvert.SerializeObject(handleController.GetUserLoginInformation(requestLogin)), 0, packet.From);
+                            await NetworkUtils.WriteStreamAsync(writer, successLogin);
+                            
+                            // tiếp đó trả về danh sách các user tồn tại trong cơ sở dữ liệu về cho client để có thể hiển thị trên ui và kết nối
+                            Packet userInfo = new Packet(PacketTypeEnum.USERINFO, JsonConvert.SerializeObject(ManageUser.UserResponses), 0, packet.From);
+                            await NetworkUtils.WriteStreamAsync(writer, userInfo);
+                            
+                            // update thông tin của user vừa được login vào danh sách quản lý usersession
+                            handleController.UpdateUserSessions(writer, reader, TcpClient, requestLogin);
+                            
+                            // thông báo lên cho server
+                            gui.ShowAction($"{requestLogin.username} success to login");
+                        }
                     }
                     else
                     {
-                        //thong bao dang nhap that bai
-                        Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "login fail", 0, packet.From);
+                        // thông báo đăng nhập thất bại do không đúng thông tin
+                        Packet notification = new Packet(PacketTypeEnum.NOTIFICATION, "Can't login because incorrect username and password", 0, packet.From);
                         await NetworkUtils.WriteStreamAsync(writer, notification);
-                        string data = notification.Data;
-                        gui.AddMessage(notification.Data);
-
+                        
+                        // thông báo lên cho server
                         gui.ShowAction($"someone with {TcpClient.Client.RemoteEndPoint} ip was fail to login");
-                        return 1;// không close vội cho client nhập lại 
                     }
+                    return 1;
                 case PacketTypeEnum.SENDMESSAGE:
-                    //chuyển đổi dữ liệu nhận được thành đối tượng Message
 
+                    //chuyển đổi dữ liệu nhận được thành đối tượng Message
                     SendMessageRequest requestMessage = ConvertUtils.PacketDataToDTO<SendMessageRequest>(packet);
-                    Console.WriteLine(requestMessage.Contents);
                     foreach (UserSession userSession in ManageUser.UserSessions)
                     {
                         if (userSession.ID == packet.To && userSession.isOnline)

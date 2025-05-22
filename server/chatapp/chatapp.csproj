@@ -52,13 +52,14 @@
     <Compile Include="common\Class\UserSession.cs" />
     <Compile Include="common\Enums\PacketTypeEnum.cs" />
     <Compile Include="context\Database.cs" />
-    <Compile Include="context\ManageSesstionUser.cs" />
+    <Compile Include="context\ManageeUser.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="common\Class\Packet.cs" />
     <Compile Include="dto\request\LoginRequest.cs" />
     <Compile Include="dto\request\SendMessageRequest.cs" />
     <Compile Include="dto\response\LoginResponse.cs" />
     <Compile Include="dto\response\UserResponse.cs" />
+    <Compile Include="HandleController.cs" />
     <Compile Include="view\event_\DisconnectEvent.cs" />
     <Compile Include="view\event_\IEvent.cs" />
     <Compile Include="view\event_\LoginFailEvent.cs" />

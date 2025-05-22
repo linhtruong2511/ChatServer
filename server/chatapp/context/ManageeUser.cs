@@ -19,13 +19,14 @@ namespace chatapp.context
     {
         public static List<UserSession> UserSessions { get; set; }
         public static List<UserResponse> UserResponses { get; set; }
+        public static List<User> Users { get; set; }
         public UserService UserService { get; set; }
 
         public ManageUser() {
             UserService = new UserService();
-            List<User> users = UserService.GetAllUser();
-            UserSessions = ConvertUtils.UserListToUserSessionList(users);
-            UserResponses = ConvertUtils.UserListToUserResponseList(users);
+            Users = UserService.GetAllUser();
+            UserSessions = ConvertUtils.UserListToUserSessionList(Users);
+            UserResponses = ConvertUtils.UserListToUserResponseList(Users);
         }
         public static async Task AddUser(UserSession userSession) {
             UserSessions.Add(userSession);

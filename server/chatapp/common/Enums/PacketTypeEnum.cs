@@ -18,7 +18,7 @@ namespace chatapp.common
     {
         NOTIFICATION,
         LOGIN,
-        SIGNUP,
+        SUCCESSLOGIN,
         DISCONNECT,
         SENDMESSAGE,
         HISTORYMESSAGES,
