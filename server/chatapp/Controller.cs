@@ -106,7 +106,10 @@ namespace chatapp
                             
                             // update thông tin của user vừa được login vào danh sách quản lý usersession
                             handleController.UpdateUserSessions(writer, reader, TcpClient, requestLogin);
-                            
+
+                            // update thông tin của user vừa được login lên db
+                            userService.UpdateUserStatusInDB(requestLogin.username, true);
+
                             // thông báo lên cho server
                             gui.ShowAction($"{requestLogin.username} success to login");
                         }

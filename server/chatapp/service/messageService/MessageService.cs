@@ -27,13 +27,15 @@ namespace chatapp.service
         // neu co bug thi o day
         public async Task SendMessage(UserSession userSession, int source, string content, int toUserId)
         {
+            // trạng thái message = 1 do đã được gửi
             messageRepository.SaveMessage(source, toUserId, content);
             await NetworkUtils.WriteStreamAsync(userSession.writer, new Packet(PacketTypeEnum.SENDMESSAGE, content, source, toUserId));
         }
 
         public void SaveMessage(int source, string content, int toUserId)
         {
-            messageRepository.SaveMessage(source, toUserId, content); 
+            // trạng thái message = 0 do chưa được gửi
+            messageRepository.SaveMessage(source, toUserId, content,0); 
         }
         public List<Message> GetAllMessage(int source,int destination = 2)
         {

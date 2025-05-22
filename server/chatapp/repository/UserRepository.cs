@@ -77,16 +77,14 @@ namespace chatapp.repository
         /// <param Name="username">tên</param>
         /// <param Name="state">trạng thái muốn đổi sang</param>
         /// <returns>số lượng user được đổi</returns>
-        public int SetState(string username, bool state)
+        public void SetStatus(string username, bool status)
         {
-            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set Status=@Status where username=@username"))
-            //{
-            //    cmd.Parameters.AddWithValue("@Status", Status);
-            //    cmd.Parameters.AddWithValue("@username", username);
-            //    return cmd.ExecuteNonQuery();
-            //}
-
-            return 1;
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=@Status where username=@username"))
+            {
+                cmd.Parameters.AddWithValue("@Status", status);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.ExecuteNonQuery();
+            }
         }
         /// <summary>
         /// lấy tất cả user trong database

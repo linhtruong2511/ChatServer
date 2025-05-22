@@ -30,6 +30,10 @@ namespace chatapp.service
             return false;
 
         }
+        public void UpdateUserStatusInDB(string username,bool status)
+        {
+            UserRepository.SetStatus(username, status);
+        }
         //public static async Task<int> Disconnect(Packet packet, StreamWriter writer, ManageUserSessionList manageusersessionlist,App app,EventHandler serverevent)
         //{
         //    //for (int i = 0; i < manageusersessionlist.usersessionlist.Count; i++)
