@@ -15,7 +15,7 @@ namespace chatapp.util
         /// đọc trường của thực thể và ghi nó vào thuộc tính tương ứng của lớp đại diện
         /// điều kiện bắt buộc là tên của các thuộc tính phải trùng với tên trong database(không phân biệt chữ hoa chữ thường)
         /// </summary>
-        /// <param name="reader">SqlDataReader</param>
+        /// <param Name="reader">SqlDataReader</param>
         /// <returns>lớp tương ứng của thực thể</returns>
         public static T SqlReaderToEntity(SqlDataReader reader)
         {

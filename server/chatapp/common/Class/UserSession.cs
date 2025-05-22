@@ -16,9 +16,10 @@ namespace chatapp.common.Class
     /// ->Status: trạng thái của user
     /// ->
     /// </summary>
-    internal class UserSession
+    public class UserSession
     {
         public int ID { get; set; }
+        public string Name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public StreamReader reader { get; set; }
@@ -26,9 +27,10 @@ namespace chatapp.common.Class
         public bool isOnline { get; set; }
         public string realtimeIP { get; set; }
 
-        public UserSession(int ID,string username, string password, StreamReader reader, StreamWriter writer, string realtimeIP="",bool state=true)
+        public UserSession(int ID,string username,string name, string password, StreamReader reader, StreamWriter writer, string realtimeIP="",bool state=true)
         {
             this.ID = ID;
+            this.Name = name;
             this.username = username;
             this.password = password;
             this.reader = reader;
