@@ -41,5 +41,9 @@ namespace chatapp.service
         {
             return messageRepository.GetAllMessages(source,destination);
         }
+        public void UpdateMessageStatus(int id,bool status)
+        {
+            messageRepository.UpdateMessageStatus(id,status);
+        }
     }
 }

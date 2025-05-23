@@ -3,6 +3,7 @@ using chatapp.context;
 using chatapp.dto.request;
 using chatapp.dto.response;
 using chatapp.model;
+using chatapp.service;
 using chatapp.util;
 using System;
 using System.Collections.Generic;

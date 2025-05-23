@@ -17,7 +17,7 @@ namespace chatapp.repository
 
         public List<Message> GetAllMessages(int source, int destination)
         {
-            string query = $"select * from message where source=@source and destination=@destination";
+            string query = "select * from message where source=@source and destination=@destination order by createAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@source", source);
@@ -37,7 +37,7 @@ namespace chatapp.repository
         public void SaveMessage (int source, int destination, string contents, int status = 1)
         {
             DateTime dateTime = DateTime.Now;
-            string query = $"insert into message (source, destination, contents, Status, createAt) values (@source, @destination, @contents, @Status, @createAt)";
+            string query = "insert into message (source, destination, contents, Status, createAt) values (@source, @destination, @contents, @Status, @createAt)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@source", source);
@@ -48,6 +48,17 @@ namespace chatapp.repository
 
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public void UpdateMessageStatus(int id,bool status)
+        {
+            string query = "update message set status=@status where id=@id";
+            using (SqlCommand cmd = new SqlCommand(query, conn)) 
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.ExecuteNonQuery();
+            } 
         }
 
 

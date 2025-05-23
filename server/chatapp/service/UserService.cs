@@ -1,7 +1,6 @@
 ﻿using chatapp.dto;
 using chatapp.model;
 using chatapp.repository;
-using chatapp.service.userservice;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;

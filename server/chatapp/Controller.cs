@@ -5,9 +5,9 @@ using chatapp.dto;
 using chatapp.dto.request;
 using chatapp.dto.response;
 using chatapp.gui.event_;
+using chatapp.model;
 using chatapp.repository;
 using chatapp.service;
-using chatapp.service.managelist;
 using chatapp.util;
 using Newtonsoft.Json;
 using System;
@@ -144,6 +144,36 @@ namespace chatapp
                             continue; 
                         }
                     }
+                    return 1;
+                case PacketTypeEnum.HISTORYMESSAGES:
+                    List<HistoryMessage> historyMessages = new List<HistoryMessage>();
+                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To);
+                    int index = 0;
+
+                    while(index<messages.Count)
+                    {
+
+                        // update status của những tin nhắn == 0 thành 1 
+                        if (messages[index].Status == 0)
+                        {
+                            messageService.UpdateMessageStatus(messages[index].Id, true);
+                        }
+
+                        // thêm vào danh sách tin nhắn gửi đi 
+                        historyMessages.Add(new HistoryMessage(messages[index]));
+                        index++;
+
+                        // mỗi lần gửi 5 tin nhắn cho user 
+                        if (historyMessages.Count == 5 || index >= messages.Count)
+                        {
+                            Packet historyMessagePacket = new Packet(PacketTypeEnum.HISTORYMESSAGES, JsonConvert.SerializeObject(historyMessages), 0, packet.From);
+                            await NetworkUtils.WriteStreamAsync(writer, historyMessagePacket);
+                            historyMessages.Clear();
+                        }
+                    }
+                    // khi hết tin nhắn gửi thông báo kết thúc
+                    Packet endSendHistoryMessages = new Packet(PacketTypeEnum.NOTIFICATION, "end", 0, packet.From);
+                    await NetworkUtils.WriteStreamAsync(writer, endSendHistoryMessages);
                     return 1;
                 case PacketTypeEnum.DISCONNECT:
                     return -1;

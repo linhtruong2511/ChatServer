@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace chatapp.model
 {
     /// <summary>
-    /// lớp đại diện cho thực thể messdatabase trong cơ sở dữ liệu
+    /// lớp đại diện cho thực thể message trong cơ sở dữ liệu
     /// </summary>
     public class Message
     {
