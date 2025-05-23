@@ -52,12 +52,15 @@
     <Compile Include="common\Class\UserSession.cs" />
     <Compile Include="common\Enums\PacketTypeEnum.cs" />
     <Compile Include="context\Database.cs" />
-    <Compile Include="context\ManageSesstionUser.cs" />
+    <Compile Include="context\ManageeUser.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="common\Class\Packet.cs" />
     <Compile Include="dto\request\LoginRequest.cs" />
     <Compile Include="dto\request\SendMessageRequest.cs" />
+    <Compile Include="dto\response\HistoryMessage.cs" />
     <Compile Include="dto\response\LoginResponse.cs" />
+    <Compile Include="dto\response\UserResponse.cs" />
+    <Compile Include="HandleController.cs" />
     <Compile Include="view\event_\DisconnectEvent.cs" />
     <Compile Include="view\event_\IEvent.cs" />
     <Compile Include="view\event_\LoginFailEvent.cs" />
@@ -72,21 +75,14 @@
     <Compile Include="view\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="service\managelist\ManageTaskList.cs" />
     <Compile Include="model\Message.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="repository\MessageRepository.cs" />
     <Compile Include="repository\UserRepository.cs" />
-    <Compile Include="service\managelist\ManageUserSessionList.cs" />
-    <Compile Include="service\messageService\SendMessageCase.cs" />
-    <Compile Include="service\messageService\MessageService.cs" />
-    <Compile Include="service\userservice\DefaultCase.cs" />
-    <Compile Include="service\userservice\DisconnectCase.cs" />
-    <Compile Include="service\userservice\LoginCase.cs" />
-    <Compile Include="service\userservice\SignUpCase.cs" />
-    <Compile Include="service\userservice\UserService.cs" />
+    <Compile Include="service\MessageService.cs" />
+    <Compile Include="service\UserService.cs" />
     <Compile Include="util\ConvertUtils.cs" />
     <Compile Include="util\SqlUtils.cs" />
     <Compile Include="util\NetworkUtils.cs" />

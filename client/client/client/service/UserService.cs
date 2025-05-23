@@ -18,7 +18,7 @@ namespace client.server
         {
             string notification;
             Console.WriteLine(ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur));
-            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.LOGIN, ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur),0,0));
+            NetworkUtils.WriteStream(writer, new Packet(PacketTypeEnum.LOGIN, ConvertPacketDataUtils.DTOToPacketData<UserRequest>(ur),1,0));
             notification = NetworkUtils.ReadStream(reader).Data;
             Console.WriteLine(notification);
             return notification;

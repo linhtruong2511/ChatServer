@@ -74,7 +74,7 @@
             this.flp_messagescreen.Name = "flp_messagescreen";
             this.flp_messagescreen.Size = new System.Drawing.Size(567, 367);
             this.flp_messagescreen.TabIndex = 0;
-            this.flp_messagescreen.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_messagescreen_Paint);
+            //this.flp_messagescreen.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_messagescreen_Paint);
             // 
             // Gui
             // 
