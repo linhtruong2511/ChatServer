@@ -1,5 +1,4 @@
-﻿using chatapp.managelist;
-using System;
+﻿using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using chatapp.context;
@@ -10,7 +9,6 @@ namespace chatapp
     {
         public TcpListener TcpListener { get; set; }
         public ManageUser ManageSessionUser { get; set; } 
-        public ManageTaskList TaskList{ get; set; }
         public event EventHandler ServerEvent;
         public MainForm gui;
 

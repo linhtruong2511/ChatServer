@@ -52,3 +52,4 @@ C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.csproj
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.csproj.Up2Date
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.pdb
+C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe.config

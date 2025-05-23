@@ -13,6 +13,7 @@ using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace chatapp
 {
@@ -81,6 +82,15 @@ namespace chatapp
                     break;
                 }
             }
+        }
+        public void DisconnectUser(StreamReader reader,StreamWriter writer,TcpClient tcpClient,UserService userService,string username)
+        {
+            userService.UpdateUserStatusInDB(username, false);
+            userService.UpdateUserIPInDB(username, "empty");
+            ManageUser.SetStatus(username, false);
+            ManageUser.SetIP(username, "empty");
+            reader.Dispose();
+            writer.Dispose();
         }
     }
 }

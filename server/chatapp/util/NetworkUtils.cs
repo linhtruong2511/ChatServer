@@ -24,7 +24,14 @@ namespace chatapp.util
         public static async Task<Packet> ReadStreamAsync(StreamReader stream)
         {
             string data = await stream.ReadLineAsync();
-            return JsonConvert.DeserializeObject<Packet>(data);    
+            if (data == null) // xảy ra khi kết nối bị ngắt
+            {
+                return new Packet(common.PacketTypeEnum.DISCONNECT, "", 0, 0);
+            }
+            else 
+            {
+                return JsonConvert.DeserializeObject<Packet>(data);
+            }
         }
         /// <summary>
         /// chuyển packet thành chuỗi gửi đi
@@ -34,6 +41,7 @@ namespace chatapp.util
         /// <returns>void</returns>
         public static async Task WriteStreamAsync(StreamWriter stream, Packet packet)
         {
+            Console.WriteLine(packet.Data);
             await stream.WriteLineAsync(JsonConvert.SerializeObject(packet)); 
         }
     }

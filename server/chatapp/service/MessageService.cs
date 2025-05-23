@@ -4,7 +4,6 @@ using chatapp.context;
 using chatapp.dto;
 using chatapp.model;
 using chatapp.repository;
-using chatapp.service.managelist;
 using chatapp.util;
 using System;
 using System.Collections.Generic;

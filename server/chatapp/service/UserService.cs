@@ -33,6 +33,10 @@ namespace chatapp.service
         {
             UserRepository.SetStatus(username, status);
         }
+        public void UpdateUserIPInDB(string username,string ip)
+        {
+            UserRepository.SetRealTimeIP(username, ip);
+        }
         //public static async Task<int> Disconnect(Packet packet, StreamWriter writer, ManageUserSessionList manageusersessionlist,App app,EventHandler serverevent)
         //{
         //    //for (int i = 0; i < manageusersessionlist.usersessionlist.Count; i++)
@@ -52,6 +56,14 @@ namespace chatapp.service
         public List<User> GetAllUser()
         {
             return UserRepository.GetAllUser();
+        }
+        public void ResetAllUserStatus()
+        {
+            UserRepository.SetAllUserStatusToFalse();
+        }
+        public void ResetAllUserIP()
+        {
+            UserRepository.SetAllUserIPToEmpty();
         }
     }
 }

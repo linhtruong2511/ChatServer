@@ -79,7 +79,7 @@ namespace chatapp.repository
         /// <returns>số lượng user được đổi</returns>
         public void SetStatus(string username, bool status)
         {
-            using (SqlCommand cmd = new SqlCommand($"update users set Status=@Status where username=@username"))
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=@Status where username=@username",connection))
             {
                 cmd.Parameters.AddWithValue("@Status", status);
                 cmd.Parameters.AddWithValue("@username", username);
@@ -109,9 +109,9 @@ namespace chatapp.repository
         /// chuyển trạng thái của tất cả user thành 0 ->reset trạng thái
         /// </summary>
         /// <returns>số lượng user bị chuyển</returns>
-        public int SetAllUserStateToFalse()
+        public int SetAllUserStatusToFalse()
         {
-            using (SqlCommand cmd = new SqlCommand($"update users set Status=0"))
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=0",connection))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -122,7 +122,7 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserIPToEmpty()
         {
-            using (SqlCommand cmd = new SqlCommand($"update user set IP='empty'"))
+            using (SqlCommand cmd = new SqlCommand($"update users set IP='empty'",connection))
             {
                 return cmd.ExecuteNonQuery();
             }

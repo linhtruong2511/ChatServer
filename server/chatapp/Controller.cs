@@ -25,15 +25,15 @@ namespace chatapp
         public UserService userService;
         public MessageService messageService;
         public HandleController handleController;
-        StreamReader reader;
-        StreamWriter writer;
-        MainForm gui;
-
-        
+        public StreamReader reader;
+        public StreamWriter writer;
+        public string username = "empty";
+        public MainForm gui;
         public Controller(TcpClient tcpClient, MainForm gui) 
         {
             userService = new UserService();
             messageService = new MessageService();
+            handleController = new HandleController();
             this.TcpClient = tcpClient;
             this.gui = gui;
             reader = new StreamReader(tcpClient.GetStream());
@@ -52,20 +52,20 @@ namespace chatapp
                 while (true) 
                 {
                     Packet packet = await NetworkUtils.ReadStreamAsync(reader);
-                    gui.ShowAction(packet.Data);
                     int value = await HandleTask(packet);
                     if (value < 0) break;
                 }// nếu giá trị trả về sau xử lý > 0 thì vẫn tiếp tục đọc còn nếu không thì kết thúc
             }
             catch (Exception ex)
             {
-                Console.WriteLine("is close");
+                Console.WriteLine($"{username} is close");
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
             finally
             {
-                reader.Dispose();
-                writer.Dispose();
+                // đóng kết nối với user khi có lỗi
+                handleController.DisconnectUser(reader, writer, TcpClient, userService, username);
             }
         }
         /// <summary>
@@ -96,6 +96,9 @@ namespace chatapp
                         }
                         else
                         {
+                            // lưu thông tin user đã kết nối cho controller
+                            username = requestLogin.username;
+
                             // nếu đăng nhập thành công trả về id và name của user (không cần thông báo login success nữa để nó là 1 type của packet luôn) 
                             Packet successLogin = new Packet(PacketTypeEnum.SUCCESSLOGIN,JsonConvert.SerializeObject(handleController.GetUserLoginInformation(requestLogin)), 0, packet.From);
                             await NetworkUtils.WriteStreamAsync(writer, successLogin);
@@ -176,6 +179,9 @@ namespace chatapp
                     await NetworkUtils.WriteStreamAsync(writer, endSendHistoryMessages);
                     return 1;
                 case PacketTypeEnum.DISCONNECT:
+                    // đóng kết nối
+                    handleController.DisconnectUser(reader, writer, TcpClient, userService, username);
+                    gui.ShowAction($"{username} is disconnect");
                     return -1;
 
             }

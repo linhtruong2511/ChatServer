@@ -24,6 +24,8 @@ namespace chatapp.context
 
         public ManageUser() {
             UserService = new UserService();
+            UserService.ResetAllUserStatus();
+            UserService.ResetAllUserIP();
             Users = UserService.GetAllUser();
             UserSessions = ConvertUtils.UserListToUserSessionList(Users);
             UserResponses = ConvertUtils.UserListToUserResponseList(Users);
@@ -56,7 +58,7 @@ namespace chatapp.context
         /// </summary>
         /// <param Name="username">tên user</param>
         /// <param Name="state">trạng thái muốn đặt lại</param>
-        public void SetState(string username, bool state)
+        public static void SetStatus(string username, bool state)
         {
             foreach (UserSession us in UserSessions)
             {
@@ -71,7 +73,7 @@ namespace chatapp.context
         /// </summary>
         /// <param Name="username">tên user</param>
         /// <param Name="ip">đặt lai ip</param>
-        public void SetIP(string username, string ip)
+        public static void SetIP(string username, string ip)
         {
             foreach (UserSession us in UserSessions)
             {
@@ -123,7 +125,7 @@ namespace chatapp.context
                 {
                     SetIP(username, "empty");
                     SetWriterAndReader(username, null, null);
-                    SetState(username, false);
+                    SetStatus(username, false);
                 }
             }
         }
