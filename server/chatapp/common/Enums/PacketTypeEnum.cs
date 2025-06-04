@@ -16,13 +16,16 @@ namespace chatapp.common
     /// </summary>
     internal enum PacketTypeEnum
     {
-        NOTIFICATION,
-        LOGIN,
-        SUCCESSLOGIN,
-        DISCONNECT,
-        SENDMESSAGE,
-        HISTORYMESSAGES,
-        USERINFO,
-        ADDUSERINFO,
+        NOTIFICATION = 1,
+        LOGIN = 2,
+        SUCCESSLOGIN = 3,
+        DISCONNECT = 4,
+        SENDMESSAGE = 5,
+        HISTORYMESSAGES = 6,
+        USERINFO = 7,
+        ADDUSERINFO = 8,
+        HISTORYFILE = 9,
+        SENDFILE = 10,
+        HISTORYCHAT =11,
     }
 }

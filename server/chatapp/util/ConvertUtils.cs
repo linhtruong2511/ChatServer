@@ -24,46 +24,7 @@ namespace chatapp.util
         /// <returns>1 đối tượng của kiểu cần chuyển tới</returns>
         public static T PacketDataToDTO<T>(Packet packet)
         {
-            return JsonConvert.DeserializeObject<T>(packet.Data);
-        }
-        /// <summary>
-        /// chuyển từ Object sang packet
-        /// </summary>
-        /// <typeparam Name="T"></typeparam>
-        /// <param Name="Object"></param>
-        /// <returns>chuỗi lưu thông tin Object</returns>
-        public static string DTOToPacketData<T>(T Object)
-        {
-            return JsonConvert.SerializeObject(Object);
-        }
-        /// <summary>
-        /// chuyển từ packet sang message
-        /// </summary>
-        /// <param Name="packet"></param>
-        /// <param Name="state"></param>
-        /// <returns>1 message</returns>
-        //public static Message PacketToMessage(Packet packet,int Status)
-        //{
-        //    return new Message(packet.Data, packet.From, packet.To, Status);
-        //}
-        /// <summary>
-        ///  chuyển từ User request sang User
-        /// </summary>
-        /// <param Name="ur"></param>
-        /// <param Name="tcpClient"></param>
-        /// <returns></returns>
-        public static User UserRequestToUser(LoginRequest ur,TcpClient tcpClient)
-        {
-            return new User(ur.username, ur.password, tcpClient.Client.RemoteEndPoint.ToString());
-        }
-        /// <summary>
-        /// tách IpEndpoint thành ip và port
-        /// </summary>
-        /// <param Name="ipendpoint"></param>
-        /// <returns>mảng chuỗi gồm 2 thông tin đã tách</returns>
-        public static string[] IPEndPointToIPandPort(string ipendpoint)
-        {
-             return ipendpoint.Split(':');
+            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(packet.Data));
         }
         public static UserSession UserToUserSession(User user)
         {
