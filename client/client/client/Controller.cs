@@ -1,6 +1,11 @@
-﻿using chatapp.dto.request;
+﻿using chatapp.common;
+using chatapp.dto;
+using chatapp.dto.request;
+using chatapp.util;
+using client.gui;
 using client.server;
 using client.service;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,19 +31,31 @@ namespace client
             reader.Dispose();
             writer.Dispose();
         }
-        public async Task HandleReadingTask(StreamReader reader)
+        public async Task HandleReadingTask(StreamReader reader,Gui gui)
         {
-            while (true) // dừng khi disconnect
+            while (true)
             {
-                await MessageService.ReceiveMessage(reader);
+                Packet packet = await NetworkUtils.ReadStreamAsync(reader);
+                if (packet.Type == PacketTypeEnum.SENDMESSAGE)
+                {
+                    Console.WriteLine($"\n{packet.From} : {JsonConvert.DeserializeObject<SendMessageRequest>(packet.Data).Contents}");
+                }
+                else if (packet.Type == PacketTypeEnum.HISTORYMESSAGES)
+                {
+                    List<Message> messages = JsonConvert.DeserializeObject<List<Message>>(packet.Data);
+                    gui.ShowMessages(messages);
+                }
+                else if (packet.Type == PacketTypeEnum.USERINFO)
+                {
+                    ManageUserInfos.userInfos = JsonConvert.DeserializeObject<List<UserInfo>>(packet.Data);
+                }
+                else if (packet.Type == PacketTypeEnum.ADDUSERINFO)
+                {
+                    ManageUserInfos.userInfos.Add(JsonConvert.DeserializeObject<UserInfo>(packet.Data));
+                }
+                else
+                    break;
             }
-        }
-        public async Task HandleWritingTask(StreamWriter writer)
-        {
-            while (true) { }// dừng khi disconnect
-            //{
-            //    await MessageService.SendMessage(writer,new SendMessageRequest());
-            //}
         }
         public async Task HandleDisconnect()
         {

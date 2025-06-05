@@ -42,7 +42,7 @@ namespace chatapp.repository
         /// <summary>
         /// thêm 1 user -> database
         /// </summary>
-        /// <param name="User"></param>
+        /// <param Name="User"></param>
         /// <returns>số lượng user được thêm</returns>
         public int Insert(User User)
         {
@@ -59,7 +59,7 @@ namespace chatapp.repository
         /// <summary>
         /// xoá 1 user sử dụng username
         /// </summary>
-        /// <param name="username">tên user cần xoá</param>
+        /// <param Name="username">tên user cần xoá</param>
         /// <returns>số lượng user được xoá</returns>
         public int Delete(string username)
         {
@@ -74,19 +74,17 @@ namespace chatapp.repository
         /// <summary>
         /// đổi trạng thái 1 user
         /// </summary>
-        /// <param name="username">tên</param>
-        /// <param name="state">trạng thái muốn đổi sang</param>
+        /// <param Name="username">tên</param>
+        /// <param Name="state">trạng thái muốn đổi sang</param>
         /// <returns>số lượng user được đổi</returns>
-        public int SetState(string username, bool state)
+        public void SetStatus(string username, bool status)
         {
-            //using (SqlCommand cmd = new SqlCommand($"update {clientdatabase} set Status=@Status where username=@username"))
-            //{
-            //    cmd.Parameters.AddWithValue("@Status", Status);
-            //    cmd.Parameters.AddWithValue("@username", username);
-            //    return cmd.ExecuteNonQuery();
-            //}
-
-            return 1;
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=@Status where username=@username",connection))
+            {
+                cmd.Parameters.AddWithValue("@Status", status);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.ExecuteNonQuery();
+            }
         }
         /// <summary>
         /// lấy tất cả user trong database
@@ -111,9 +109,9 @@ namespace chatapp.repository
         /// chuyển trạng thái của tất cả user thành 0 ->reset trạng thái
         /// </summary>
         /// <returns>số lượng user bị chuyển</returns>
-        public int SetAllUserStateToFalse()
+        public int SetAllUserStatusToFalse()
         {
-            using (SqlCommand cmd = new SqlCommand($"update users set Status=0"))
+            using (SqlCommand cmd = new SqlCommand($"update users set Status=0",connection))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -124,7 +122,7 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserIPToEmpty()
         {
-            using (SqlCommand cmd = new SqlCommand($"update user set IP='empty'"))
+            using (SqlCommand cmd = new SqlCommand($"update users set IP='empty'",connection))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -132,8 +130,8 @@ namespace chatapp.repository
         /// <summary>
         /// chuyển IP của username sang giá trị ip
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="ip"></param>
+        /// <param Name="username"></param>
+        /// <param Name="ip"></param>
         /// <returns>số user bị chuyển</returns>
         public int SetRealTimeIP(string username,string ip)
         {

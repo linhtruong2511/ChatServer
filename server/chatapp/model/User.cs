@@ -10,9 +10,10 @@ namespace chatapp.model
     /// <summary>
     /// lớp đại diện cho thực thể ở bảng clientdatabase trong cơ sở dữ liệu
     /// </summary>
-    internal class User
+    public class User
     {
         public int ID { get; set; }
+        public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public bool Status { get; set; }

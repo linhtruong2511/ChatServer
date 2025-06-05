@@ -1,14 +1,13 @@
 ﻿using chatapp.dto;
 using chatapp.model;
 using chatapp.repository;
-using chatapp.service.userservice;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace chatapp.service
 {
-    internal class UserService
+    public class UserService
     {
         private UserRepository UserRepository;
         public UserService() {
@@ -17,10 +16,10 @@ namespace chatapp.service
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="packet"></param>
-        /// <param name="writer"></param>
-        /// <param name="reader"></param>
-        /// <param name="manageusersessionlist"></param>
+        /// <param Name="packet"></param>
+        /// <param Name="writer"></param>
+        /// <param Name="reader"></param>
+        /// <param Name="manageusersessionlist"></param>
         /// <returns></returns>
         public bool Login(string username, string password)
         {
@@ -29,6 +28,14 @@ namespace chatapp.service
                 return true;
             return false;
 
+        }
+        public void UpdateUserStatusInDB(string username,bool status)
+        {
+            UserRepository.SetStatus(username, status);
+        }
+        public void UpdateUserIPInDB(string username,string ip)
+        {
+            UserRepository.SetRealTimeIP(username, ip);
         }
         //public static async Task<int> Disconnect(Packet packet, StreamWriter writer, ManageUserSessionList manageusersessionlist,App app,EventHandler serverevent)
         //{
@@ -41,14 +48,22 @@ namespace chatapp.service
         //    //}
         //    //return -1;
         //}
-        public static async Task<int> Default(Packet packet, StreamWriter writer)
-        {
-            return await DefaultCase.IncorrectPacketFormat(packet, writer);
-        }
+        //public static async Task<int> Default(Packet packet, StreamWriter writer)
+        //{
+        //    return await DefaultCase.IncorrectPacketFormat(packet, writer);
+        //}
         
         public List<User> GetAllUser()
         {
             return UserRepository.GetAllUser();
+        }
+        public void ResetAllUserStatus()
+        {
+            UserRepository.SetAllUserStatusToFalse();
+        }
+        public void ResetAllUserIP()
+        {
+            UserRepository.SetAllUserIPToEmpty();
         }
     }
 }
