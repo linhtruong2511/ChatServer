@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace chatapp.common.Class
 {
@@ -13,6 +8,8 @@ namespace chatapp.common.Class
     /// ->password : mật khẩu
     /// ->reader : luồng đọc của server với user
     /// ->writer : luồng ghi của server với user
+    /// ->lock_writer : khoá gán với luồng ghi của user
+    /// ->lock_reader : khoá gán với luồng đọc của user
     /// ->Status: trạng thái của user
     /// ->
     /// </summary>
@@ -22,12 +19,15 @@ namespace chatapp.common.Class
         public string Name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public StreamReader reader { get; set; }
-        public StreamWriter writer { get; set; }
+        public BinaryReader reader { get; set; }
+        public BinaryWriter writer { get; set; }
         public bool isOnline { get; set; }
         public string realtimeIP { get; set; }
 
-        public UserSession(int ID,string username,string name, string password, StreamReader reader, StreamWriter writer, string realtimeIP="",bool state=true)
+        public object lock_reader { get; set; }
+
+        public object lock_writer { get; set; }
+        public UserSession(int ID,string name,string username, string password, BinaryReader reader, BinaryWriter writer, string realtimeIP="",bool state=true)
         {
             this.ID = ID;
             this.Name = name;

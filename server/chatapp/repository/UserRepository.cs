@@ -1,14 +1,8 @@
 ﻿using chatapp.context;
 using chatapp.model;
 using chatapp.util;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chatapp.repository
 {
@@ -90,21 +84,6 @@ namespace chatapp.repository
         /// lấy tất cả user trong database
         /// </summary>
         /// <returns>list các user</returns>
-        //public List<User> GetAllUser()
-        //{
-        //    List<User> userlist = new List<User>();
-        //        using (SqlCommand cmd = new SqlCommand($"select * from {clientdatabase}"))
-        //        {
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    userlist.Add(SqlUtils<User>.SqlReaderToEntity(reader));
-        //                }
-        //            }
-        //        }
-        //        return userlist;
-        //}
         /// <summary>
         /// chuyển trạng thái của tất cả user thành 0 ->reset trạng thái
         /// </summary>

@@ -3,11 +3,9 @@ using System;
 
 namespace chatapp.dto.response
 {
-    public class HistoryMessage
+    public class HistoryMessage : ChatObject 
     {
         public string Contents { get; set; }
-        public int Source { get; set; }
-        public DateTime CreateAt { get; set; }
         public HistoryMessage(Message message) 
         {
             this.Contents = message.Contents;

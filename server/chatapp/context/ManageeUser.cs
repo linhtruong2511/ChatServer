@@ -3,15 +3,13 @@ using chatapp.common.Class;
 using chatapp.dto;
 using chatapp.dto.response;
 using chatapp.model;
-using chatapp.repository;
 using chatapp.service;
 using chatapp.util;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace chatapp.context
 {
@@ -30,23 +28,24 @@ namespace chatapp.context
             UserSessions = ConvertUtils.UserListToUserSessionList(Users);
             UserResponses = ConvertUtils.UserListToUserResponseList(Users);
         }
-        public static async Task AddUser(UserSession userSession) {
+        public void AddUser(UserSession userSession) {
             UserSessions.Add(userSession);
             UserResponses.Add(new UserResponse(userSession));
-            await ChangeClientUserInfos(userSession);
+            ChangeClientUserInfos(userSession);
         }
 
         public static void RemoveUser(UserSession userSession) {
             UserSessions.Remove(userSession);
             UserResponses.Remove(new UserResponse(userSession));
         }
-        public static async Task ChangeClientUserInfos(UserSession userSession)
+        public void ChangeClientUserInfos(UserSession userSession)
         {
             for (int i = 0; i < UserSessions.Count; i++)
             {
                 if (UserSessions[i].isOnline)
                 {
-                    await NetworkUtils.WriteStreamAsync(UserSessions[i].writer, new Packet(PacketTypeEnum.ADDUSERINFO, JsonConvert.SerializeObject(new UserResponse(userSession)), 0, UserSessions[i].ID));
+                    Packet packet = new Packet(PacketTypeEnum.ADDUSERINFO,Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new UserResponse(userSession))), 0, UserSessions[i].ID);
+                    NetworkUtils.Write(UserSessions[i].writer,packet,userSession.lock_writer);
                 }
             }
         }
@@ -105,7 +104,7 @@ namespace chatapp.context
         /// <param Name="username"></param>
         /// <param Name="writer"></param>
         /// <param Name="reader"></param>
-        public void SetWriterAndReader(string username, StreamWriter writer, StreamReader reader)
+        public void SetWriterAndReader(string username, BinaryWriter writer, BinaryReader reader)
         {
             foreach (UserSession us in UserSessions)
             {

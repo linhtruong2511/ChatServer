@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="common\Class\FileInfos.cs" />
+    <Compile Include="common\Class\PacketFile.cs" />
     <Compile Include="common\Class\UserSession.cs" />
     <Compile Include="common\Enums\PacketTypeEnum.cs" />
     <Compile Include="context\Database.cs" />
@@ -58,17 +60,11 @@
     <Compile Include="dto\request\LoginRequest.cs" />
     <Compile Include="dto\request\SendMessageRequest.cs" />
     <Compile Include="dto\response\HistoryMessage.cs" />
-    <Compile Include="dto\response\LoginResponse.cs" />
     <Compile Include="dto\response\UserResponse.cs" />
     <Compile Include="HandleController.cs" />
-    <Compile Include="view\event_\DisconnectEvent.cs" />
-    <Compile Include="view\event_\IEvent.cs" />
-    <Compile Include="view\event_\LoginFailEvent.cs" />
-    <Compile Include="view\event_\LoginSuccessEvent.cs" />
-    <Compile Include="view\event_\MessagEvent.cs" />
-    <Compile Include="view\event_\ServerOnlineEvent.cs" />
-    <Compile Include="view\event_\SignUpSuccessEvent.cs" />
-    <Compile Include="view\event_\SignUpFailEvent.cs" />
+    <Compile Include="model\ChatObject.cs" />
+    <Compile Include="repository\FileRepository.cs" />
+    <Compile Include="service\FileService.cs" />
     <Compile Include="view\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
