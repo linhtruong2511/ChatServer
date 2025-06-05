@@ -10,6 +10,7 @@ using chatapp.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -132,43 +133,12 @@ namespace chatapp
                         }
                     }
                     return 1;
-                case PacketTypeEnum.HISTORYMESSAGES:
-                    List<HistoryMessage> historyMessages = new List<HistoryMessage>();
-                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To);
-                    int index = 0;
-
-                    while(index<messages.Count)
-                    {
-
-                        // update status của những tin nhắn == 0 thành 1 
-                        if (messages[index].Status == 0)
-                        {
-                            messageService.UpdateMessageStatus(messages[index].Id, true);
-                        }
-
-                        // thêm vào danh sách tin nhắn gửi đi 
-                        historyMessages.Add(new HistoryMessage(messages[index]));
-                        index++;
-
-                        // mỗi lần gửi 5 tin nhắn cho user 
-                        if (historyMessages.Count == 5 || index >= messages.Count)
-                        {
-                            Packet historyMessagePacket = new Packet(PacketTypeEnum.HISTORYMESSAGES, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(historyMessages)), 0, packet.From);
-                            NetworkUtils.Write(writer,historyMessagePacket,lock_writer);
-                            historyMessages.Clear();
-                        }
-                    }
-                    // khi hết tin nhắn gửi thông báo kết thúc
-                    Packet endSendHistoryMessages = new Packet(PacketTypeEnum.NOTIFICATION, Encoding.UTF8.GetBytes("end"), 0, packet.From);
-                    Console.WriteLine(Encoding.UTF8.GetString(endSendHistoryMessages.Data));
-                    NetworkUtils.Write(writer, endSendHistoryMessages,lock_writer);
-                    return 1;
                 case PacketTypeEnum.SENDFILE:
                     foreach (UserSession userSession in ManageUser.UserSessions)
                     {
                         if (userSession.ID == packet.To && userSession.isOnline)
                         {
-                            fileService.SendFile(userSession.writer,(PacketFile)packet,lock_writer);
+                            fileService.SendFile(userSession.writer, (PacketFile)packet, lock_writer);
                         }
                         else if (userSession.ID == packet.To && !userSession.isOnline)
                         {
@@ -180,21 +150,48 @@ namespace chatapp
                         }
                     }
                     return 1;
-                case PacketTypeEnum.HISTORYFILE:
-                    List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To);
-                    foreach(FileInfos file in files)
-                    {
-                        PacketFile packetFile = new PacketFile(PacketTypeEnum.HISTORYFILE, file.Data, file.source, file.destination,file.createAt,file.FileName);
-                        NetworkUtils.Write(writer,packetFile,lock_writer);
-                    }
-                    Console.WriteLine("end to file");
-                    return 1;
                 case PacketTypeEnum.DISCONNECT:
-                    // đóng kết nối
                     handleController.DisconnectUser(reader, writer, TcpClient, userService, username);
                     gui.ShowAction($"{username} is disconnect");
                     return -1;
+                case PacketTypeEnum.HISTORYCHAT:
+                    DateTime from = JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data));
+                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To, from);
+                    if (messages.Count != 0)
+                    {
+                        List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To, from, messages[messages.Count - 1].CreateAt);
+                        SortedList<DateTime, ChatObject> chatObjects = new SortedList<DateTime, ChatObject>();
+                        for (int i = 0; i < messages.Count; i++)
+                        {
+                            chatObjects.Add(messages[i].CreateAt, messages[i]);
+                        }
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            chatObjects.Add(files[i].CreateAt, files[i]);
+                        }
+                        for (int i = 0; i < chatObjects.Count; i++)
+                        {
+                            if (chatObjects.Values[i] is Message)
+                            {
+                                Message message = (Message)chatObjects.Values[i];
+                                Packet packetmessage = new Packet(PacketTypeEnum.HISTORYMESSAGES, Encoding.UTF8.GetBytes(message.Contents), message.Source, message.Destination, message.CreateAt);
+                                NetworkUtils.Write(writer, packetmessage, lock_writer);
+                            }
+                            else
+                            {
+                                FileInfos file = (FileInfos)chatObjects.Values[i];
+                                Packet packetfile = new PacketFile(PacketTypeEnum.HISTORYFILE, file.Data, file.Source, file.Destination, file.CreateAt, file.FileName);
+                                NetworkUtils.Write(writer, packetfile, lock_writer);
+                            }
+                        }
+                    }
+                    break;
+                case PacketTypeEnum.DELETEFILE:
 
+                    break;
+                case PacketTypeEnum.DELETEMESSAGE:
+                    break;
+                
             }
             return 1;
         }

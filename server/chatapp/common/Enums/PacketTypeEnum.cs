@@ -27,5 +27,8 @@ namespace chatapp.common
         HISTORYFILE = 9,
         SENDFILE = 10,
         HISTORYCHAT =11,
+        DELETEMESSAGE = 12,
+        DELETEFILE = 13,
+   
     }
 }

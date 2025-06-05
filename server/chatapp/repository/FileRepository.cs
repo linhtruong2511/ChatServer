@@ -16,44 +16,29 @@ namespace chatapp.repository
         {
             conn = Database.GetConnection();
         }
-        //public void SaveFile(int source,int destination, byte[] data,string filename,DateTime createAt,bool status=false)
-        //{
-        //    string query = "insert into files (source, destination, data, filename, createAt,status) values (@source, @destination, @data, @filename, @createAt,@status)";
-        //    using (SqlCommand cmd = new SqlCommand(query, conn))
-        //    {
-        //        cmd.Parameters.AddWithValue("@source", source);
-        //        cmd.Parameters.AddWithValue("@destination", destination);
-        //        cmd.Parameters.AddWithValue("@data", data);
-        //        cmd.Parameters.AddWithValue("@filename", filename);
-        //        cmd.Parameters.AddWithValue("@createAt", createAt);
-        //        cmd.Parameters.AddWithValue("@status", status);
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //}
-        public void SaveFile(int source, int destination, byte[] data, string filename, DateTime createAt, bool status = false)
+        public void SaveFile(int Source, int Destination, byte[] data, string filename, DateTime CreateAt, bool status = false)
         {
-            string query = "INSERT INTO files (source, destination, data, filename, createAt, status) " +
-                           "VALUES (@source, @destination, @data, @filename, @createAt, @status)";
-            Console.WriteLine(data.Length);
+            string query = "insert into files (Source, Destination, data, filename, CreateAt,status) values (@Source, @Destination, @data, @filename, @CreateAt,@status)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.Add("@source", SqlDbType.Int).Value = source;
-                cmd.Parameters.Add("@destination", SqlDbType.Int).Value = destination;
-                cmd.Parameters.Add("@data", SqlDbType.VarBinary, data.Length).Value = data; // RÕ KIỂU DỮ LIỆU!
-                cmd.Parameters.Add("@filename", SqlDbType.NVarChar, 255).Value = filename;
-                cmd.Parameters.Add("@createAt", SqlDbType.DateTime).Value = createAt;
-                cmd.Parameters.Add("@status", SqlDbType.Bit).Value = status;
-
+                cmd.Parameters.AddWithValue("@Source", Source);
+                cmd.Parameters.AddWithValue("@Destination", Destination);
+                cmd.Parameters.AddWithValue("@data", data);
+                cmd.Parameters.AddWithValue("@filename", filename);
+                cmd.Parameters.AddWithValue("@CreateAt", CreateAt);
+                cmd.Parameters.AddWithValue("@status", status);
                 cmd.ExecuteNonQuery();
             }
         }
-        public List<FileInfos> GetAllFile(int source,int destination)
+        public List<FileInfos> GetAllFile(int source,int destination,DateTime from,DateTime to)
         {
-            string query = "select * from files where (source=@source and destination=@destination) or (destination=@source and source=@destination)";
+            string query = "select * from files where ((Source=@Source and Destination=@Destination) or (Destination=@Source and Source=@Destination)) and (CreateAt < @from and CreateAt > @to) order by CreateAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@source", source);
-                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@Source", source);
+                cmd.Parameters.AddWithValue("@Destination", destination);
+                cmd.Parameters.AddWithValue("@from", from);
+                cmd.Parameters.AddWithValue("@to", to);
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<FileInfos> files = new List<FileInfos>();
                 while (reader.Read())

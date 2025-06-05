@@ -15,13 +15,14 @@ namespace chatapp.repository
             conn = Database.GetConnection();
         }
 
-        public List<Message> GetAllMessages(int source, int destination)
+        public List<Message> GetAllMessages(int source, int destination,DateTime from)
         {
-            string query = "select * from message where (source=@source and destination=@destination) or (source=@destination and destination=@source) order by createAt";
+            string query = "select top 20 * from message where ((Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source)) and(CreateAt <= @from)order by CreateAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@source", source);
-                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@Source", source);
+                cmd.Parameters.AddWithValue("@Destination", destination);
+                cmd.Parameters.AddWithValue("@from", from);
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<Message> messages = new List<Message>();
                 while (reader.Read())
@@ -37,14 +38,14 @@ namespace chatapp.repository
         public void SaveMessage (int source, int destination, string contents, int status = 1)
         {
             DateTime dateTime = DateTime.Now;
-            string query = "insert into message (source, destination, contents, Status, createAt) values (@source, @destination, @contents, @Status, @createAt)";
+            string query = "insert into message (Source, Destination, contents, Status, CreateAt) values (@Source, @Destination, @contents, @Status, @CreateAt)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@source", source);
-                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@Source", source);
+                cmd.Parameters.AddWithValue("@Destination", destination);
                 cmd.Parameters.AddWithValue("@contents", contents);
                 cmd.Parameters.AddWithValue("@Status", status);
-                cmd.Parameters.AddWithValue("@createAt", dateTime);
+                cmd.Parameters.AddWithValue("@CreateAt", dateTime);
 
                 cmd.ExecuteNonQuery();
             }

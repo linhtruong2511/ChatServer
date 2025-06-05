@@ -27,9 +27,9 @@ namespace chatapp.service
             fileRepository.SaveFile(packet.From, packet.To, packet.Data, packet.fileName, packet.createAt, true);
             NetworkUtils.Write(writer, packet, lock_writer);
         }
-        public List<FileInfos> GetAllFile(int source, int destination)
+        public List<FileInfos> GetAllFile(int source, int destination,DateTime from,DateTime to)
         {
-            return fileRepository.GetAllFile(source, destination);
+            return fileRepository.GetAllFile(source, destination,from,to);
         }
         public void UpdateFileStatus(int id, bool status)
         {

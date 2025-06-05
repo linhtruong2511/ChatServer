@@ -12,8 +12,6 @@ namespace chatapp.util
         private NetworkUtils() { }
         public static Packet Read(BinaryReader reader,object lock_reader)
         {
-            try
-            {
                 PacketTypeEnum packetType;
                 int packetLength,from,to;
                 byte[] bytes;
@@ -28,29 +26,17 @@ namespace chatapp.util
                     from = reader.ReadInt32();
                     to = reader.ReadInt32();
                     timestamp = reader.ReadString();
-                    Console.WriteLine(timestamp);
                     createAt = JsonConvert.DeserializeObject<DateTime>(timestamp);
                     if(packetType == PacketTypeEnum.SENDFILE || packetType == PacketTypeEnum.HISTORYFILE)
                     {
                         fileName = reader.ReadString();
+                        return new PacketFile(packetType, bytes, from, to, createAt, fileName);
+                    }
+                    else
+                    {
+                        return new Packet(packetType, bytes, from, to, createAt);
                     }
                 }
-                Console.WriteLine(packetType);
-                if (fileName == "")
-                {
-                    return new Packet(packetType, bytes, from, to,createAt);
-                }
-                else
-                {
-                    return new PacketFile(packetType, bytes, from, to, createAt, fileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error reading packet: " + ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return new Packet(PacketTypeEnum.DISCONNECT, new byte[0], 0, 0);
-            }
         }
         public static void Write(BinaryWriter writer, Packet packet,object lock_writer)
         {
@@ -65,7 +51,6 @@ namespace chatapp.util
                 if(packet is PacketFile)
                 {
                     writer.Write(((PacketFile)packet).fileName);
-                    Console.WriteLine(packet.DataLength);
                 }
                 writer.Flush();
             }

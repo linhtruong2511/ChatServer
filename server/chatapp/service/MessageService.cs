@@ -4,6 +4,7 @@ using chatapp.dto;
 using chatapp.model;
 using chatapp.repository;
 using chatapp.util;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,9 +30,9 @@ namespace chatapp.service
             // trạng thái message = 0 do chưa được gửi
             messageRepository.SaveMessage(source, toUserId, content,0); 
         }
-        public List<Message> GetAllMessage(int source,int destination = 2)
+        public List<Message> GetAllMessage(int source,int destination,DateTime from)
         {
-            return messageRepository.GetAllMessages(source,destination);
+            return messageRepository.GetAllMessages(source,destination,from);
         }
         public void UpdateMessageStatus(int id,bool status)
         {

@@ -62,6 +62,7 @@
     <Compile Include="dto\response\HistoryMessage.cs" />
     <Compile Include="dto\response\UserResponse.cs" />
     <Compile Include="HandleController.cs" />
+    <Compile Include="model\ChatObject.cs" />
     <Compile Include="repository\FileRepository.cs" />
     <Compile Include="service\FileService.cs" />
     <Compile Include="view\MainForm.cs">
