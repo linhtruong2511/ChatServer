@@ -35,5 +35,9 @@ namespace chatapp.service
         {
             fileRepository.UpdateFileStatus(id, status);
         }
+        public void DeleteFile(int Source, int Destination, DateTime createAt)
+        {
+            fileRepository.DeleteFile(Source, Destination, createAt);
+        } 
     }
 }

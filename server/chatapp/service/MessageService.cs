@@ -22,21 +22,25 @@ namespace chatapp.service
         {
             // trạng thái message = 1 do đã được gửi
             messageRepository.SaveMessage(source, toUserId, content);
-            NetworkUtils.Write(userSession.writer, new Packet(PacketTypeEnum.SENDMESSAGE, Encoding.UTF8.GetBytes(content), source, toUserId),userSession.lock_writer);
+            NetworkUtils.Write(userSession.writer, new Packet(PacketTypeEnum.SENDMESSAGE, Encoding.UTF8.GetBytes(content), source, toUserId), userSession.lock_writer);
         }
 
         public void SaveMessage(int source, string content, int toUserId)
         {
             // trạng thái message = 0 do chưa được gửi
-            messageRepository.SaveMessage(source, toUserId, content,0); 
+            messageRepository.SaveMessage(source, toUserId, content, 0);
         }
-        public List<Message> GetAllMessage(int source,int destination,DateTime from)
+        public List<Message> GetAllMessage(int source, int destination, DateTime from)
         {
-            return messageRepository.GetAllMessages(source,destination,from);
+            return messageRepository.GetAllMessages(source, destination, from);
         }
-        public void UpdateMessageStatus(int id,bool status)
+        public void UpdateMessageStatus(int id, bool status)
         {
-            messageRepository.UpdateMessageStatus(id,status);
+            messageRepository.UpdateMessageStatus(id, status);
+        }
+        public void DeleteMessage(int Source, int Destination, DateTime createAt)
+        {
+            messageRepository.DeleteMessage(Source, Destination, createAt);
         }
     }
 }

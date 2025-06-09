@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
 
 namespace chatapp.repository
 {
@@ -25,7 +24,7 @@ namespace chatapp.repository
                 cmd.Parameters.AddWithValue("@Destination", Destination);
                 cmd.Parameters.AddWithValue("@data", data);
                 cmd.Parameters.AddWithValue("@filename", filename);
-                cmd.Parameters.AddWithValue("@CreateAt", CreateAt);
+                cmd.Parameters.Add("@CreateAt",SqlDbType.DateTime2).Value = CreateAt;
                 cmd.Parameters.AddWithValue("@status", status);
                 cmd.ExecuteNonQuery();
             }
@@ -37,8 +36,8 @@ namespace chatapp.repository
             {
                 cmd.Parameters.AddWithValue("@Source", source);
                 cmd.Parameters.AddWithValue("@Destination", destination);
-                cmd.Parameters.AddWithValue("@from", from);
-                cmd.Parameters.AddWithValue("@to", to);
+                cmd.Parameters.Add("@from",SqlDbType.DateTime2).Value = from;
+                cmd.Parameters.Add("@to", SqlDbType.DateTime2).Value = to;
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<FileInfos> files = new List<FileInfos>();
                 while (reader.Read())
@@ -57,6 +56,17 @@ namespace chatapp.repository
             {
                 cmd.Parameters.AddWithValue("@status",status);
                 cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void DeleteFile(int Source,int Destination,DateTime createAt)
+        {
+            string query = "delete from files where Source=@Source and Destination=@Destination and CreateAt=@CreateAt";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Source", Source);
+                cmd.Parameters.AddWithValue("@Destination", Destination);
+                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
                 cmd.ExecuteNonQuery();
             }
         }

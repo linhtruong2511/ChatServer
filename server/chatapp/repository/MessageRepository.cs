@@ -3,6 +3,7 @@ using chatapp.model;
 using chatapp.util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace chatapp.repository
@@ -17,12 +18,12 @@ namespace chatapp.repository
 
         public List<Message> GetAllMessages(int source, int destination,DateTime from)
         {
-            string query = "select top 20 * from message where ((Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source)) and(CreateAt <= @from)order by CreateAt desc";
+            string query = "select top 5 * from message where ((Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source)) and(CreateAt < @from) order by CreateAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Source", source);
                 cmd.Parameters.AddWithValue("@Destination", destination);
-                cmd.Parameters.AddWithValue("@from", from);
+                cmd.Parameters.Add("@from", SqlDbType.DateTime2).Value = from;
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<Message> messages = new List<Message>();
                 while (reader.Read())
@@ -45,8 +46,7 @@ namespace chatapp.repository
                 cmd.Parameters.AddWithValue("@Destination", destination);
                 cmd.Parameters.AddWithValue("@contents", contents);
                 cmd.Parameters.AddWithValue("@Status", status);
-                cmd.Parameters.AddWithValue("@CreateAt", dateTime);
-
+                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = dateTime;
                 cmd.ExecuteNonQuery();
             }
         }
@@ -61,5 +61,16 @@ namespace chatapp.repository
                 cmd.ExecuteNonQuery();
             } 
         } 
+        public void DeleteMessage(int Source,int Destination,DateTime createAt)
+        {
+            string query = "delete from message where (Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source) and CreateAt=@CreateAt";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Source", Source);
+                cmd.Parameters.AddWithValue("@Destination", Destination);
+                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

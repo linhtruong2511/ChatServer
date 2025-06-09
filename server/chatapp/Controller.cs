@@ -10,6 +10,7 @@ using chatapp.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net.Sockets;
@@ -155,11 +156,12 @@ namespace chatapp
                     gui.ShowAction($"{username} is disconnect");
                     return -1;
                 case PacketTypeEnum.HISTORYCHAT:
-                    DateTime from = JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data));
-                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To, from);
+                    DateTime timestampload = JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data));
+                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To, timestampload);
+                    
                     if (messages.Count != 0)
                     {
-                        List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To, from, messages[messages.Count - 1].CreateAt);
+                        List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To, timestampload, messages[messages.Count - 1].CreateAt);
                         SortedList<DateTime, ChatObject> chatObjects = new SortedList<DateTime, ChatObject>();
                         for (int i = 0; i < messages.Count; i++)
                         {
@@ -169,7 +171,7 @@ namespace chatapp
                         {
                             chatObjects.Add(files[i].CreateAt, files[i]);
                         }
-                        for (int i = 0; i < chatObjects.Count; i++)
+                        for (int i = chatObjects.Count-1; i >=0; i--)
                         {
                             if (chatObjects.Values[i] is Message)
                             {
@@ -187,11 +189,18 @@ namespace chatapp
                     }
                     break;
                 case PacketTypeEnum.DELETEFILE:
-
+                    Console.WriteLine("receive change message");
+                    //fileService.DeleteFile(packet.From, packet.To, packet.createAt);
+                    NetworkUtils.Write(writer, packet, lock_writer);
                     break;
                 case PacketTypeEnum.DELETEMESSAGE:
+                    Console.WriteLine("receive delete message");
+                    //messageService.DeleteMessage(packet.From, packet.To, packet.createAt);
+                    NetworkUtils.Write(writer, packet, lock_writer);
                     break;
-                
+                case PacketTypeEnum.CHANGEMESSAGE:
+                    break;
+
             }
             return 1;
         }

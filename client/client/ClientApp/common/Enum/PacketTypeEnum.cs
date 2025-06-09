@@ -1,14 +1,12 @@
-﻿namespace chatapp.common
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClientApp.common.Enum
 {
-    /// <summary>
-    /// định dạng gói tin:
-    /// ->NOFITICATION: gói tin thông báo
-    /// ->LOGIN : gói tin đăng nhập
-    /// ->SIGNUP : gói tin đăng ký
-    /// ->DISCONNECT : gói tin huỷ kết nối
-    /// -> SENDMESSAGE : gói tin gửi dữ liệu
-    /// </summary>
-    internal enum PacketTypeEnum
+    public enum PacketTypeEnum
     {
         NOTIFICATION = 1,
         LOGIN = 2,
@@ -20,7 +18,7 @@
         ADDUSERINFO = 8,
         HISTORYFILE = 9,
         SENDFILE = 10,
-        HISTORYCHAT =11,
+        HISTORYCHAT = 11,
         DELETEMESSAGE = 12,
         DELETEFILE = 13,
         CHANGEMESSAGE = 14,
