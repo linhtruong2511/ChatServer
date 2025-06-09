@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace chatapp.common
+﻿namespace chatapp.common
 {
     /// <summary>
     /// định dạng gói tin:
@@ -16,13 +10,21 @@ namespace chatapp.common
     /// </summary>
     internal enum PacketTypeEnum
     {
-        NOTIFICATION,
-        LOGIN,
-        SUCCESSLOGIN,
-        DISCONNECT,
-        SENDMESSAGE,
-        HISTORYMESSAGES,
-        USERINFO,
-        ADDUSERINFO,
+        NOTIFICATION = 1,
+        LOGIN = 2,
+        SUCCESSLOGIN = 3,
+        DISCONNECT = 4,
+        SENDMESSAGE = 5,
+        HISTORYMESSAGES = 6,
+        USERINFO = 7,
+        ADDUSERINFO = 8,
+        HISTORYFILE = 9,
+        SENDFILE = 10,
+        HISTORYCHAT =11,
+        DELETEMESSAGE = 12,
+        DELETEFILE = 13,
+        CHANGEMESSAGE = 14,
+        GROUPINFO = 15,
+        ADDTOAGROUP = 16,
     }
 }

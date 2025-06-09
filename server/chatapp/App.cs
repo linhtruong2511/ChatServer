@@ -31,22 +31,17 @@ namespace chatapp
         public void Start()
         {
             TcpListener.Start(10);
-            //Console.WriteLine("Server is online");
-            //serverEvent?.Invoke(this, new ServerOnlineEvent());
-            //
             //ServerOnlineEvent sẽ hiển thị tất cả những thứ mà admin có quyền quản
             //lý lên UI của server
             //
             do
             {
                 TcpClient tcpClient = TcpListener.AcceptTcpClient();
-                Task client = new Task(async() =>
+                Task client = new Task(() =>
                 {
-                    //Controller controller = new Controller(TcpClient, gui);
                     Controller controller = new Controller(tcpClient, gui);
-                    await controller.HandleClient(this,ServerEvent);
+                    controller.HandleClient(this,ServerEvent);
                 });
-                //TaskList.AddTask(client);
                 client.Start();
             } while (true);
         }

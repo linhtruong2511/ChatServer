@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace chatapp.model
+﻿namespace chatapp.model
 {
-    /// <summary>
-    /// lớp đại diện cho thực thể ở bảng clientdatabase trong cơ sở dữ liệu
-    /// </summary>
     public class User
     {
         public int ID { get; set; }

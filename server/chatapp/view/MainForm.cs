@@ -1,6 +1,6 @@
-﻿using chatapp.gui.event_;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,14 +15,6 @@ namespace chatapp
             InitializeComponent();
             App app = new App(this);
             Task.Run(() => app.Start());
-            app.ServerEvent += HandleServerEvent;
-        }
-        public void HandleServerEvent(object sender,EventArgs e)
-        {
-            //if(e is IEvent)
-            //{
-            //    txt_notification.Text += DateTime.Now.ToString() + " : " + ((IEvent)e).HandleEvent() + "\r\n";
-            //}
         }
         public void ShowAction(string Action)
         {
