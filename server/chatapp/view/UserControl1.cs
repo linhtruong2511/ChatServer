@@ -21,5 +21,9 @@ namespace chatapp
         {
 
         }
+        public void ShowAction(string Action)
+        {
+               textBox1.Text += DateTime.Now.ToString() + " : " + Action + "\r\n";
+        }
     }
 }

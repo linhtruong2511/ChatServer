@@ -148,6 +148,7 @@ namespace chatapp
                             continue; 
                         }
                     }
+                    gui.ShowAction($"{username} send message");
                     // fix: Tìm kiếm
                     return 1;
                 
@@ -167,6 +168,7 @@ namespace chatapp
                             continue;
                         }
                     }
+                    gui.ShowAction($"{username} send file");
                     return 1;
 
                 case PacketTypeEnum.DISCONNECT:
@@ -211,7 +213,7 @@ namespace chatapp
                                 NetworkUtils.Write(writer, packetfile, lock_writer);
                             }
                         }
-
+                        gui.ShowAction($"{username} load history chat");
                     }
                     break;
 
