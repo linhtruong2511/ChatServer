@@ -143,5 +143,15 @@ namespace chatapp.repository
                 }
             }
         }
+
+        public int CountUser()
+        {
+            using (SqlCommand cmd = new SqlCommand("select count(*) from users", connection))
+            {
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+
+
     }
 }

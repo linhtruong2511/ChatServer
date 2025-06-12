@@ -38,7 +38,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.userControl12 = new chatapp.UserControl1();
+            this.userControl12 = new chatapp.UCDashboard();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -186,6 +186,6 @@
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Panel panel1;
-        private UserControl1 userControl12;
+        private UCDashboard userControl12;
     }
 }

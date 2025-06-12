@@ -1,6 +1,6 @@
 ﻿namespace chatapp
 {
-    partial class UserControl1
+    partial class UCDashboard
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,7 +34,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblUserCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
@@ -93,7 +93,6 @@
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(485, 624);
             this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // label11
             // 
@@ -137,22 +136,22 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.lblUserCount);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(8, 68);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(482, 33);
             this.panel3.TabIndex = 1;
             // 
-            // label13
+            // lblUserCount
             // 
-            this.label13.AutoSize = true;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label13.Location = new System.Drawing.Point(431, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 16);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "label13";
+            this.lblUserCount.AutoSize = true;
+            this.lblUserCount.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblUserCount.Location = new System.Drawing.Point(431, 0);
+            this.lblUserCount.Name = "lblUserCount";
+            this.lblUserCount.Size = new System.Drawing.Size(51, 16);
+            this.lblUserCount.TabIndex = 2;
+            this.lblUserCount.Text = "label13";
             // 
             // label2
             // 
@@ -405,14 +404,15 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(501, 624);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
-            // UserControl1
+            // UCDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "UserControl1";
+            this.Name = "UCDashboard";
             this.Size = new System.Drawing.Size(992, 624);
+            this.Load += new System.EventHandler(this.UCDashboard_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -464,7 +464,7 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblUserCount;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;

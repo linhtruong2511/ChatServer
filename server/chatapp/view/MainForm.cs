@@ -1,5 +1,7 @@
-﻿using System;
+﻿using chatapp.context;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,8 +14,9 @@ namespace chatapp
 
         public MainForm()
         {
-            InitializeComponent();
             App app = new App(this);
+            InitializeComponent();
+
             Task.Run(() => app.Start());
         }
         public void ShowAction(string Action)

@@ -68,13 +68,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="repository\DepartmentRepository.cs" />
     <Compile Include="repository\FileRepository.cs" />
     <Compile Include="service\FileService.cs" />
-    <Compile Include="view\UserControl1.cs">
+    <Compile Include="view\UCDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="view\UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <Compile Include="view\UCDashboard.Designer.cs">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="view\MainForm.cs">
       <SubType>Form</SubType>
@@ -106,8 +107,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <EmbeddedResource Include="view\UCDashboard.resx">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using chatapp.context;
@@ -17,6 +18,8 @@ namespace chatapp
             // mở connection cho toàn app
             Database db = new Database();
             db.OpenConnection();
+
+            SqlConnection conn = Database.GetConnection();
 
             // quản lý user connect tới là việc của toàn bộ app nên để context cho nó bao bọc app lại => ở nơi đâu cũng có thể sử dụng để danh sách các user connect này
             // như vậy sẽ đỡ mất công truyền xuống
