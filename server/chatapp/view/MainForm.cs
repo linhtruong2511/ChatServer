@@ -18,28 +18,19 @@ namespace chatapp
         }
         public void ShowAction(string Action)
         {
-            textBox1.Text += DateTime.Now.ToString() + " : " + Action + "\r\n";
+            //textBox1.Text += DateTime.Now.ToString() + " : " + Action + "\r\n";
         }
-        public void AddMessage(string message)
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            messages.Add(message);
-            loadDashboard();
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(16, 16);
+            imageList.Images.Add("user", Properties.Resources.bar_chart);
+
+            this.btnDashboard.ImageList = imageList;
         }
 
-        public void loadDashboard()
-        {
-           
-        }
-
-
-
-
-        private void dgvDashboard_DataSourceChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

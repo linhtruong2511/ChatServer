@@ -21,15 +21,26 @@ namespace chatapp
     {
         private TcpClient TcpClient;
         public UserService userService;
+
         public MessageService messageService;
+        // service để quản lý file, gửi file, lưu file, lấy file từ cơ sở dữ liệu
         public FileService fileService;
+
         public HandleController handleController;
+
+        // sử dụng BinaryReader và BinaryWriter để đọc và ghi dữ liệu từ/to luồng mạng
         public BinaryReader reader;
         public BinaryWriter writer;
+
+        // khoá để đồng bộ hoá việc đọc và ghi dữ liệu từ/to luồng mạng, tránh tình trạng nhiều luồng cùng truy cập vào
         public readonly object lock_reader = new object();
         public readonly object lock_writer = new object();
+
         public string username = "empty";
+
+        // giao diện chính của ứng dụng để có thể hiển thị thông báo
         public MainForm gui;
+
         public Controller(TcpClient tcpClient, MainForm gui) 
         {
             userService = new UserService();
@@ -51,7 +62,8 @@ namespace chatapp
                     Packet packet = NetworkUtils.Read(reader,lock_reader);
                     int value = HandleTask(packet);
                     if (value < 0) break;
-                }// nếu giá trị trả về sau xử lý > 0 thì vẫn tiếp tục đọc còn nếu không thì kết thúc
+                }
+                // nếu giá trị trả về sau xử lý > 0 thì vẫn tiếp tục đọc còn nếu không thì kết thúc
             }
             catch (Exception ex)
             {
@@ -65,13 +77,15 @@ namespace chatapp
                 handleController.DisconnectUser(reader, writer, TcpClient, userService, username);
             }
         }
-        public int HandleTask(Packet packet)//xử lý thông điệp nhận được - chỉ trả về <0 khi có yêu cầu disconnect
+        //xử lý thông điệp nhận được - chỉ trả về <0 khi có yêu cầu disconnect
+        public int HandleTask(Packet packet)
         {
             switch (packet.Type)
             {
                 case PacketTypeEnum.LOGIN:
 
                     LoginRequest requestLogin = ConvertUtils.PacketDataToDTO<LoginRequest>(packet);
+
                     if (handleController.IsCorrectUserInformation(requestLogin))
                     {
                         if (handleController.IsUserOnline(requestLogin))
@@ -113,10 +127,11 @@ namespace chatapp
                         gui.ShowAction($"someone with {TcpClient.Client.RemoteEndPoint} ip was fail to login");
                     }
                     return 1;
+                
                 case PacketTypeEnum.SENDMESSAGE:
-
                     //chuyển đổi dữ liệu nhận được thành đối tượng Message
                     SendMessageRequest requestMessage = ConvertUtils.PacketDataToDTO<SendMessageRequest>(packet);
+                    
                     foreach (UserSession userSession in ManageUser.UserSessions)
                     {
                         if (userSession.ID == packet.To && userSession.isOnline)
@@ -133,7 +148,9 @@ namespace chatapp
                             continue; 
                         }
                     }
+                    // fix: Tìm kiếm
                     return 1;
+                
                 case PacketTypeEnum.SENDFILE:
                     foreach (UserSession userSession in ManageUser.UserSessions)
                     {
@@ -151,26 +168,34 @@ namespace chatapp
                         }
                     }
                     return 1;
+
                 case PacketTypeEnum.DISCONNECT:
                     handleController.DisconnectUser(reader, writer, TcpClient, userService, username);
                     gui.ShowAction($"{username} is disconnect");
                     return -1;
+
                 case PacketTypeEnum.HISTORYCHAT:
-                    DateTime timestampload = JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data));
-                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To, timestampload);
-                    
+                    // lấy thời gian tải lịch sử chat từ packet để làm gì ?
+                    DateTime timeStampLoad = JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data));
+                    List<Message> messages = messageService.GetAllMessage(packet.From, packet.To, timeStampLoad);
+                 
                     if (messages.Count != 0)
                     {
-                        List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To, timestampload, messages[messages.Count - 1].CreateAt);
+                        // nếu có tin nhắn thì lấy tất cả file liên quan đến cuộc trò chuyện này
+                        List<FileInfos> files = fileService.GetAllFile(packet.From, packet.To, timeStampLoad, messages[messages.Count - 1].CreateAt);
+                        // tạo một danh sách các đối tượng chat để sắp xếp theo thời gian tạo
                         SortedList<DateTime, ChatObject> chatObjects = new SortedList<DateTime, ChatObject>();
+                        
                         for (int i = 0; i < messages.Count; i++)
                         {
                             chatObjects.Add(messages[i].CreateAt, messages[i]);
                         }
+
                         for (int i = 0; i < files.Count; i++)
                         {
                             chatObjects.Add(files[i].CreateAt, files[i]);
                         }
+
                         for (int i = chatObjects.Count-1; i >=0; i--)
                         {
                             if (chatObjects.Values[i] is Message)
@@ -186,18 +211,22 @@ namespace chatapp
                                 NetworkUtils.Write(writer, packetfile, lock_writer);
                             }
                         }
+
                     }
                     break;
+
                 case PacketTypeEnum.DELETEFILE:
                     Console.WriteLine("receive change message");
                     //fileService.DeleteFile(packet.From, packet.To, packet.createAt);
                     NetworkUtils.Write(writer, packet, lock_writer);
                     break;
+
                 case PacketTypeEnum.DELETEMESSAGE:
                     Console.WriteLine("receive delete message");
                     //messageService.DeleteMessage(packet.From, packet.To, packet.createAt);
                     NetworkUtils.Write(writer, packet, lock_writer);
                     break;
+
                 case PacketTypeEnum.CHANGEMESSAGE:
                     break;
 

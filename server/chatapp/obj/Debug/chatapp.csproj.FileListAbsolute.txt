@@ -28,8 +28,6 @@ C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.cspr
 C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.pdb
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.AssemblyReference.cache
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe.config
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.Gui.resources
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.GenerateResource.cache
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.CoreCompileInputs.cache
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe
@@ -53,3 +51,6 @@ C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.csproj
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.pdb
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe.config
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.MainForm.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.Properties.Resources.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.UserControl1.resources
