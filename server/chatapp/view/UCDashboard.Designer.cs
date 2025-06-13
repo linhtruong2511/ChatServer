@@ -32,34 +32,34 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label11 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblDepartmentCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblUserCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblProjectCount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
+            this.lblProjectCountFinished = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.W = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblMaxSalary = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
+            this.lblMinSalary = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
+            this.lblAverageSalary = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label20 = new System.Windows.Forms.Label();
+            this.lblCountAttendance = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
+            this.lblCountTask = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -112,7 +112,7 @@
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.label12);
+            this.panel8.Controls.Add(this.lblDepartmentCount);
             this.panel8.Controls.Add(this.label1);
             this.panel8.Location = new System.Drawing.Point(6, 26);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
@@ -120,16 +120,16 @@
             this.panel8.Size = new System.Drawing.Size(444, 27);
             this.panel8.TabIndex = 1;
             // 
-            // label12
+            // lblDepartmentCount
             // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label12.Location = new System.Drawing.Point(403, 0);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "label12";
+            this.lblDepartmentCount.AutoSize = true;
+            this.lblDepartmentCount.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblDepartmentCount.Location = new System.Drawing.Point(403, 0);
+            this.lblDepartmentCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDepartmentCount.Name = "lblDepartmentCount";
+            this.lblDepartmentCount.Size = new System.Drawing.Size(41, 13);
+            this.lblDepartmentCount.TabIndex = 1;
+            this.lblDepartmentCount.Text = "label12";
             // 
             // label1
             // 
@@ -176,7 +176,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.lblProjectCount);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(6, 88);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -184,16 +184,16 @@
             this.panel1.Size = new System.Drawing.Size(444, 27);
             this.panel1.TabIndex = 0;
             // 
-            // label14
+            // lblProjectCount
             // 
-            this.label14.AutoSize = true;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label14.Location = new System.Drawing.Point(403, 0);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "label14";
+            this.lblProjectCount.AutoSize = true;
+            this.lblProjectCount.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblProjectCount.Location = new System.Drawing.Point(403, 0);
+            this.lblProjectCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProjectCount.Name = "lblProjectCount";
+            this.lblProjectCount.Size = new System.Drawing.Size(41, 13);
+            this.lblProjectCount.TabIndex = 2;
+            this.lblProjectCount.Text = "label14";
             // 
             // label3
             // 
@@ -208,7 +208,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.lblProjectCountFinished);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(6, 119);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
@@ -216,16 +216,16 @@
             this.panel2.Size = new System.Drawing.Size(444, 27);
             this.panel2.TabIndex = 1;
             // 
-            // label15
+            // lblProjectCountFinished
             // 
-            this.label15.AutoSize = true;
-            this.label15.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label15.Location = new System.Drawing.Point(403, 0);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "label15";
+            this.lblProjectCountFinished.AutoSize = true;
+            this.lblProjectCountFinished.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblProjectCountFinished.Location = new System.Drawing.Point(403, 0);
+            this.lblProjectCountFinished.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProjectCountFinished.Name = "lblProjectCountFinished";
+            this.lblProjectCountFinished.Size = new System.Drawing.Size(41, 13);
+            this.lblProjectCountFinished.TabIndex = 2;
+            this.lblProjectCountFinished.Text = "label15";
             // 
             // label4
             // 
@@ -240,7 +240,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.label16);
+            this.panel6.Controls.Add(this.W);
             this.panel6.Controls.Add(this.label5);
             this.panel6.Location = new System.Drawing.Point(6, 150);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
@@ -248,16 +248,16 @@
             this.panel6.Size = new System.Drawing.Size(444, 27);
             this.panel6.TabIndex = 1;
             // 
-            // label16
+            // W
             // 
-            this.label16.AutoSize = true;
-            this.label16.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label16.Location = new System.Drawing.Point(403, 0);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 13);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "label16";
+            this.W.AutoSize = true;
+            this.W.Dock = System.Windows.Forms.DockStyle.Right;
+            this.W.Location = new System.Drawing.Point(403, 0);
+            this.W.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.W.Name = "W";
+            this.W.Size = new System.Drawing.Size(41, 13);
+            this.W.TabIndex = 2;
+            this.W.Text = "label16";
             // 
             // label5
             // 
@@ -272,7 +272,7 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.label17);
+            this.panel5.Controls.Add(this.lblMaxSalary);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Location = new System.Drawing.Point(6, 181);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
@@ -280,16 +280,16 @@
             this.panel5.Size = new System.Drawing.Size(444, 27);
             this.panel5.TabIndex = 1;
             // 
-            // label17
+            // lblMaxSalary
             // 
-            this.label17.AutoSize = true;
-            this.label17.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label17.Location = new System.Drawing.Point(403, 0);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 13);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "label17";
+            this.lblMaxSalary.AutoSize = true;
+            this.lblMaxSalary.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblMaxSalary.Location = new System.Drawing.Point(403, 0);
+            this.lblMaxSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMaxSalary.Name = "lblMaxSalary";
+            this.lblMaxSalary.Size = new System.Drawing.Size(41, 13);
+            this.lblMaxSalary.TabIndex = 2;
+            this.lblMaxSalary.Text = "label17";
             // 
             // label6
             // 
@@ -304,7 +304,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.lblMinSalary);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Location = new System.Drawing.Point(6, 212);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
@@ -312,16 +312,16 @@
             this.panel4.Size = new System.Drawing.Size(444, 27);
             this.panel4.TabIndex = 1;
             // 
-            // label18
+            // lblMinSalary
             // 
-            this.label18.AutoSize = true;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label18.Location = new System.Drawing.Point(403, 0);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 13);
-            this.label18.TabIndex = 2;
-            this.label18.Text = "label18";
+            this.lblMinSalary.AutoSize = true;
+            this.lblMinSalary.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblMinSalary.Location = new System.Drawing.Point(403, 0);
+            this.lblMinSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMinSalary.Name = "lblMinSalary";
+            this.lblMinSalary.Size = new System.Drawing.Size(41, 13);
+            this.lblMinSalary.TabIndex = 2;
+            this.lblMinSalary.Text = "label18";
             // 
             // label7
             // 
@@ -336,7 +336,7 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.label19);
+            this.panel7.Controls.Add(this.lblAverageSalary);
             this.panel7.Controls.Add(this.label8);
             this.panel7.Location = new System.Drawing.Point(6, 243);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
@@ -344,16 +344,16 @@
             this.panel7.Size = new System.Drawing.Size(444, 27);
             this.panel7.TabIndex = 2;
             // 
-            // label19
+            // lblAverageSalary
             // 
-            this.label19.AutoSize = true;
-            this.label19.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label19.Location = new System.Drawing.Point(403, 0);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 13);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "label19";
+            this.lblAverageSalary.AutoSize = true;
+            this.lblAverageSalary.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblAverageSalary.Location = new System.Drawing.Point(403, 0);
+            this.lblAverageSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAverageSalary.Name = "lblAverageSalary";
+            this.lblAverageSalary.Size = new System.Drawing.Size(41, 13);
+            this.lblAverageSalary.TabIndex = 2;
+            this.lblAverageSalary.Text = "label19";
             // 
             // label8
             // 
@@ -368,7 +368,7 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.label20);
+            this.panel9.Controls.Add(this.lblCountAttendance);
             this.panel9.Controls.Add(this.label9);
             this.panel9.Location = new System.Drawing.Point(6, 274);
             this.panel9.Margin = new System.Windows.Forms.Padding(2);
@@ -376,16 +376,16 @@
             this.panel9.Size = new System.Drawing.Size(444, 27);
             this.panel9.TabIndex = 1;
             // 
-            // label20
+            // lblCountAttendance
             // 
-            this.label20.AutoSize = true;
-            this.label20.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label20.Location = new System.Drawing.Point(403, 0);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 13);
-            this.label20.TabIndex = 2;
-            this.label20.Text = "label20";
+            this.lblCountAttendance.AutoSize = true;
+            this.lblCountAttendance.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblCountAttendance.Location = new System.Drawing.Point(403, 0);
+            this.lblCountAttendance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCountAttendance.Name = "lblCountAttendance";
+            this.lblCountAttendance.Size = new System.Drawing.Size(41, 13);
+            this.lblCountAttendance.TabIndex = 2;
+            this.lblCountAttendance.Text = "label20";
             // 
             // label9
             // 
@@ -400,7 +400,7 @@
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.label21);
+            this.panel10.Controls.Add(this.lblCountTask);
             this.panel10.Controls.Add(this.label10);
             this.panel10.Location = new System.Drawing.Point(6, 305);
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
@@ -408,16 +408,16 @@
             this.panel10.Size = new System.Drawing.Size(444, 27);
             this.panel10.TabIndex = 3;
             // 
-            // label21
+            // lblCountTask
             // 
-            this.label21.AutoSize = true;
-            this.label21.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label21.Location = new System.Drawing.Point(403, 0);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(41, 13);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "label21";
+            this.lblCountTask.AutoSize = true;
+            this.lblCountTask.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblCountTask.Location = new System.Drawing.Point(403, 0);
+            this.lblCountTask.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCountTask.Name = "lblCountTask";
+            this.lblCountTask.Size = new System.Drawing.Size(41, 13);
+            this.lblCountTask.TabIndex = 2;
+            this.lblCountTask.Text = "label21";
             // 
             // label10
             // 
@@ -443,6 +443,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(6, 6);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
@@ -517,16 +518,16 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblDepartmentCount;
         private System.Windows.Forms.Label lblUserCount;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lblProjectCount;
+        private System.Windows.Forms.Label lblProjectCountFinished;
+        private System.Windows.Forms.Label W;
+        private System.Windows.Forms.Label lblMaxSalary;
+        private System.Windows.Forms.Label lblMinSalary;
+        private System.Windows.Forms.Label lblAverageSalary;
+        private System.Windows.Forms.Label lblCountAttendance;
+        private System.Windows.Forms.Label lblCountTask;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

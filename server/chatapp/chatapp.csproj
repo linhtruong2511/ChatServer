@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{978E2D5B-B1AC-45A9-9317-9A3924A08F84}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Winexe</OutputType>
     <RootNamespace>chatapp</RootNamespace>
     <AssemblyName>chatapp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -62,14 +62,26 @@
     <Compile Include="dto\response\HistoryMessage.cs" />
     <Compile Include="dto\response\UserResponse.cs" />
     <Compile Include="HandleController.cs" />
+    <Compile Include="model\Attendance.cs" />
     <Compile Include="model\ChatObject.cs" />
+    <Compile Include="model\Department.cs" />
+    <Compile Include="model\LeaveRequest.cs" />
+    <Compile Include="model\Position.cs" />
+    <Compile Include="model\Project.cs" />
+    <Compile Include="model\Salary.cs" />
+    <Compile Include="model\Task.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="repository\AttendanceRepository.cs" />
     <Compile Include="repository\DepartmentRepository.cs" />
     <Compile Include="repository\FileRepository.cs" />
+    <Compile Include="repository\PositionRepository.cs" />
+    <Compile Include="repository\ProjectRepository.cs" />
+    <Compile Include="repository\SalaryRepository.cs" />
+    <Compile Include="repository\TaskRepository.cs" />
     <Compile Include="service\FileService.cs" />
     <Compile Include="view\UCDashboard.cs">
       <SubType>UserControl</SubType>
@@ -94,6 +106,18 @@
     <Compile Include="util\ConvertUtils.cs" />
     <Compile Include="util\SqlUtils.cs" />
     <Compile Include="util\NetworkUtils.cs" />
+    <Compile Include="view\UCDepartment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCDepartment.Designer.cs">
+      <DependentUpon>UCDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UCUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCUser.Designer.cs">
+      <DependentUpon>UCUser.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCDepartment.resx">
+      <DependentUpon>UCDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCUser.resx">
+      <DependentUpon>UCUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

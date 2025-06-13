@@ -27,17 +27,6 @@ C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.cspr
 C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.csproj.Up2Date
 C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\chatapp-main\server\chatapp\obj\Debug\chatapp.pdb
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.AssemblyReference.cache
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.GenerateResource.cache
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.CoreCompileInputs.cache
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.pdb
-D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.exe.config
-D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.exe
-D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.pdb
-D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\Newtonsoft.Json.dll
-D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\Newtonsoft.Json.xml
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.Up2Date
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\bin\Debug\chatapp.exe.config
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\bin\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\bin\Debug\chatapp.pdb
@@ -51,13 +40,20 @@ C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.csproj
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.pdb
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe.config
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.MainForm.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.AssemblyReference.cache
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.Properties.Resources.resources
-<<<<<<< HEAD
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.UCDashboard.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.MainForm.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.view.UCDepartment.resources
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.GenerateResource.cache
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.CoreCompileInputs.cache
+D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.exe.config
+D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.exe
+D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\chatapp.pdb
+D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\Newtonsoft.Json.dll
+D:\Chat-App\chatapp-server\server\chatapp\bin\Debug\Newtonsoft.Json.xml
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.csproj.Up2Date
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.pdb
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe.config
-=======
-D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.UserControl1.resources
-C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.Properties.Resources.resources
-C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.UserControl1.resources
->>>>>>> 18b9dbf96927781ffde924ce3b640b3548da9681
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.view.UCUser.resources

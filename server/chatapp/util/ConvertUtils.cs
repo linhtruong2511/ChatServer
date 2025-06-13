@@ -6,6 +6,7 @@ using chatapp.model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -28,7 +29,7 @@ namespace chatapp.util
         }
         public static UserSession UserToUserSession(User user)
         {
-            return new UserSession(user.ID,user.name,user.username,user.password,null,null,user.IP,user.Status);
+            return new UserSession(user.ID,user.Name,user.Username,user.Password,null,null,user.IP,user.Status);
         }
         /// <summary>
         /// chuyển từ list<UserSession> sang list<User>
@@ -52,6 +53,21 @@ namespace chatapp.util
                 userResponses.Add(new UserResponse(i));
             }
             return userResponses;
+        }
+
+        public static User ConvertReaderToUser(SqlDataReader reader)
+        {
+            User user = new User();
+            user.Name = reader["Name"] as string;
+            user.Username = reader["Username"] as string;
+            user.Password = reader["Password"] as string;
+            user.Address = reader["Address"] as string;
+            user.Phone = reader["Phone"] as string;
+            user.DepartmentId = reader["Department_Id"] != DBNull.Value ? (int)reader["Department_Id"] : -1;
+            user.PositionId = reader["Position_Id"] != DBNull.Value ? (int)reader["Position_Id"] : -1;
+            user.ID = reader["ID"] != DBNull.Value ? (int)reader["ID"] : -1;
+            user.CreateAt = reader["CreateAt"] != DBNull.Value ? (DateTime)reader["CreateAt"] : DateTime.MinValue;
+            return user;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace chatapp.dto.response
         public UserResponse(User user)
         {
             this.ID = user.ID;
-            this.Name = user.name;
+            this.Name = user.Name;
         }
         public UserResponse(UserSession userSession)
         {
