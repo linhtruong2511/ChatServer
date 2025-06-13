@@ -19,11 +19,6 @@ namespace chatapp
 
             Task.Run(() => app.Start());
         }
-        public void ShowAction(string Action)
-        {
-            //textBox1.Text += DateTime.Now.ToString() + " : " + Action + "\r\n";
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             ImageList imageList = new ImageList();
@@ -36,6 +31,10 @@ namespace chatapp
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+        public void ShowAction(string Action)
+        {
+            userControl12.ShowAction(Action);
         }
     }
 }

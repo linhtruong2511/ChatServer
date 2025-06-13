@@ -26,5 +26,9 @@ namespace chatapp
         {
             this.lblUserCount.Text = userRepository.CountUser().ToString();
         }
+        public void ShowAction(string action)
+        {  
+            textBox1.Text+= $"{DateTime.Now.ToString("HH:mm:ss")} - {action}\r\n";
+        }
     }
 }

@@ -53,5 +53,11 @@ C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.pdb
 C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.exe.config
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.MainForm.resources
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.Properties.Resources.resources
+<<<<<<< HEAD
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.UCDashboard.resources
 D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.exe.config
+=======
+D:\Chat-App\chatapp-server\server\chatapp\obj\Debug\chatapp.UserControl1.resources
+C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.Properties.Resources.resources
+C:\Users\DELL11032023\Desktop\ChatServer\server\chatapp\obj\Debug\chatapp.UserControl1.resources
+>>>>>>> 18b9dbf96927781ffde924ce3b640b3548da9681
