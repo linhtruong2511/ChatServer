@@ -101,7 +101,7 @@ namespace chatapp.repository
         /// <returns>số lượng user bị chuyển</returns>
         public int SetAllUserIPToEmpty()
         {
-            using (SqlCommand cmd = new SqlCommand($"update users set IP='empty'",connection))
+            using (SqlCommand cmd = new SqlCommand($"update users set IP='empty'", connection))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -143,5 +143,15 @@ namespace chatapp.repository
                 }
             }
         }
+
+        public int CountUser()
+        {
+            using (SqlCommand cmd = new SqlCommand("select count(*) from users", connection))
+            {
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+
+
     }
 }

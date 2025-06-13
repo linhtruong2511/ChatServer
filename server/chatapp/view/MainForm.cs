@@ -1,5 +1,7 @@
-﻿using System;
+﻿using chatapp.context;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,36 +14,27 @@ namespace chatapp
 
         public MainForm()
         {
-            InitializeComponent();
             App app = new App(this);
+            InitializeComponent();
+
             Task.Run(() => app.Start());
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(16, 16);
+            imageList.Images.Add("user", Properties.Resources.bar_chart);
+
+            this.btnDashboard.ImageList = imageList;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
         public void ShowAction(string Action)
         {
-            textBox1.Text += DateTime.Now.ToString() + " : " + Action + "\r\n";
-        }
-        public void AddMessage(string message)
-        {
-            messages.Add(message);
-            loadDashboard();
-        }
-
-        public void loadDashboard()
-        {
-           
-        }
-
-
-
-
-        private void dgvDashboard_DataSourceChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            userControl12.ShowAction(Action);
         }
     }
 }
