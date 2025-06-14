@@ -15,26 +15,44 @@ namespace chatapp
         UCDashboard UCDashboard;
         UCDepartment UCDepartment;
         UCUser UCUser;
-
+        UCProject UCProject;
+        UCAttendance UCAttendance;
+        UCSalary UCSalary;
+        UCTask UCTask;
         public MainForm()
         {
             App app = new App(this);
-            UCDashboard = new UCDashboard();
-            UCDepartment = new UCDepartment();
-            UCUser = new UCUser();
+            InitializeComponent();
 
+
+            UCDashboard = new UCDashboard();
+            UCDepartment = new UCDepartment(this.panel1);
+            UCUser = new UCUser();
+            UCProject = new UCProject();
+            UCAttendance = new UCAttendance();
+            UCTask = new UCTask();
+            UCSalary = new UCSalary();
+            
             // style user controls
+            UCSalary.Dock = DockStyle.Fill;
+            UCTask.Dock = DockStyle.Fill;
+            UCAttendance.Dock = DockStyle.Fill;
             UCUser.Dock = DockStyle.Fill;
             UCDepartment.Dock = DockStyle.Fill;
             UCDashboard.Dock = DockStyle.Fill;
+            UCProject.Dock = DockStyle.Fill;
             
-            InitializeComponent();
 
             Task.Run(() => app.Start());
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
             panel1.Controls.Add(new UCDashboard());
+
+            Image image = Properties.Resources.dashboard;
+            Image resize = new Bitmap(image, new Size(20, 20)); 
+
+            button1.Image = resize;
         }
 
         public void ShowAction(string Action)
@@ -58,6 +76,35 @@ namespace chatapp
         {
             panel1.Controls.Clear();
             panel1.Controls.Add(UCUser);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            panel1.Controls.Add(UCProject);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            panel1.Controls.Add(UCAttendance);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            panel1.Controls.Add(UCSalary);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            panel1.Controls.Add(UCTask);
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

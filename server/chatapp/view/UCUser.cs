@@ -15,16 +15,39 @@ namespace chatapp.view
     public partial class UCUser : UserControl
     {
         private UserRepository userRepository = new UserRepository();
-        
-
+        private List<User> users = new List<User>();
         public UCUser()
         {
             InitializeComponent();
         }
 
+        public UCUser(List<User> users)
+        {
+            InitializeComponent();
+            this.users = users;
+            InitData();
+        }
+        private void SetHeaderText()
+        {
+            dataGridView1.Columns["ID"].HeaderText = "ID";
+            dataGridView1.Columns["Name"].HeaderText = "Họ và Tên";
+            dataGridView1.Columns["Username"].HeaderText = "Tên đăng nhập";
+            dataGridView1.Columns["DepartmentId"].HeaderText = "Mã Phòng ban";
+            dataGridView1.Columns["PositionId"].HeaderText = "Mã Chức vụ";
+        }
         private void UCUser_Load(object sender, EventArgs e)
         {
-            LoadData();
+            InitData();
+            SetCombobox();
+            if (users.Count == 0)
+            {
+                users = userRepository.GetAllUser();
+            }
+            ReloadData(users);
+        }
+
+        private void SetCombobox()
+        {
             List<Department> departments = new DepartmentRepository().GetDepartments();
             List<Position> positions = new PositionRepository().GetAllPostsition();
 
@@ -41,11 +64,14 @@ namespace chatapp.view
             cbPosition.SelectedIndex = -1; // Không chọn mặc định
         }
 
-        private void LoadData()
+        private void SetDataGridViewProperties(List<User> users)
         {
-            List<User> users = userRepository.GetAllUser();
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Chọn toàn bộ hàng khi click
             dataGridView1.MultiSelect = false; // Không cho phép chọn nhiều hàng cùng lúc
+            dataGridView1.AllowUserToAddRows = false; // Không cho phép thêm hàng mới
+            dataGridView1.AllowUserToDeleteRows = false; // Không cho phép xóa hàng
+            dataGridView1.ReadOnly = true; // Đặt DataGridView ở chế độ chỉ đọc
+
             dataGridView1.DataSource = null; // Đặt DataSource về null trước khi cập nhật
             dataGridView1.DataSource = users.Select(u => new
             {
@@ -55,32 +81,25 @@ namespace chatapp.view
                 u.DepartmentId,
                 u.PositionId
             }).ToList();
-            dataGridView1.Columns["ID"].Visible = false; // Ẩn cột ID nếu không cần thiết
-            dataGridView1.Columns["Name"].HeaderText = "Họ và Tên"; // Đổi tên cột
-            dataGridView1.Columns["Username"].HeaderText = "Tên đăng nhập"; // Đổi tên cột
-            dataGridView1.Columns["DepartmentId"].HeaderText = "Mã Phòng ban"; // Đổi tên cột
-            dataGridView1.Columns["PositionId"].HeaderText = "Mã Chức vụ"; // Đổi tên cột
-
         }
 
-        private void LoadData(List<User> users)
+        public void InitData()
         {
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Chọn toàn bộ hàng khi click
-            dataGridView1.MultiSelect = false; // Không cho phép chọn nhiều hàng cùng lúc
-            dataGridView1.DataSource = null; // Đặt DataSource về null trước khi cập nhật
-            dataGridView1.DataSource = users.Select(u => new
-            {
-                u.ID,
-                u.Name,
-                u.Username,
-                u.DepartmentId,
-                u.PositionId
-            }).ToList();
-            dataGridView1.Columns["ID"].Visible = false; // Ẩn cột ID nếu không cần thiết
-            dataGridView1.Columns["Name"].HeaderText = "Họ và Tên"; // Đổi tên cột
-            dataGridView1.Columns["Username"].HeaderText = "Tên đăng nhập"; // Đổi tên cột
-            dataGridView1.Columns["DepartmentId"].HeaderText = "Mã Phòng ban"; // Đổi tên cột
-            dataGridView1.Columns["PositionId"].HeaderText = "Mã Chức vụ"; // Đổi tên cột
+            SetDataGridViewProperties(this.users);
+            SetHeaderText();
+        }
+
+        private void ReloadData()
+        {
+            users = userRepository.GetAllUser();
+            SetDataGridViewProperties(users);
+            SetHeaderText();
+        }
+
+        private void ReloadData(List<User> users)
+        {
+            SetDataGridViewProperties(users);
+            SetHeaderText();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,12 +132,27 @@ namespace chatapp.view
             };
 
             userRepository.AddUser(user);
-            LoadData();
+            ReloadData();
         }
 
         private void extraSearch_Click(object sender, EventArgs e)
         {
-
+            FormExtraSearch formExtraSearch = new FormExtraSearch();
+            if(formExtraSearch.ShowDialog() == DialogResult.OK)
+            {
+                List<User> filteredUsers = userRepository.SearchUserByFullInformation(
+                    formExtraSearch.User
+                );
+                if (filteredUsers.Count > 0)
+                {
+                    ReloadData(filteredUsers);
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy người dùng phù hợp với tiêu chí tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReloadData(); // Hiển thị lại toàn bộ người dùng nếu không có kết quả
+                }
+            }
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -168,7 +202,7 @@ namespace chatapp.view
             if (result == DialogResult.Yes)
             {
                 userRepository.DeleteUserById(user.ID);
-                LoadData();
+                ReloadData();
                 MessageBox.Show("Đã xóa người dùng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -176,18 +210,43 @@ namespace chatapp.view
         private void toànBộNhânSựPhòngBanNàyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<User> users = userRepository.GetAllUsersByDepartmentId((int)dataGridView1.SelectedRows[0].Cells["DepartmentId"].Value);
-            LoadData(users);
+            ReloadData(users);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            LoadData();
+            ReloadData();
         }
 
         private void toànBộNhânSựCủaVịTríToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<User> users = userRepository.GetAllUsersByPositionId((int)dataGridView1.SelectedRows[0].Cells["PositionId"].Value);
-            LoadData(users);
+            ReloadData(users);
+        }
+
+        private void txtSearchUserId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Ngăn chặn âm thanh "ding" khi nhấn Enter
+                int userId;
+                if (int.TryParse(txtSearchUserId.Text, out userId) && userId > 0)
+                {
+                    User user = userRepository.GetUserById(userId);
+                    if (user != null)
+                    {
+                        ReloadData(new List<User> { user });
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy người dùng với ID này.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập ID người dùng hợp lệ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
     }
 }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace chatapp.model
 {
-    internal class Project
+    public class Project
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int DepartmentId { get; set; }
         public DateTime CreateAt { get; set; }
+        public bool Finished {  get; set; }
     }
 }

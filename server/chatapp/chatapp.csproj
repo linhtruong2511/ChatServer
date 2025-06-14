@@ -33,12 +33,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.105.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.105.0\lib\netstandard2.0\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d5f7376574c51ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Parser.2.0.0\lib\netstandard2.0\ClosedXML.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.3.1.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.1.1\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c77e27b81f4d0187, processorArchitecture=MSIL">
+      <HintPath>..\packages\RBush.Signed.4.0.0\lib\net47\RBush.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +83,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
@@ -70,6 +108,7 @@
     <Compile Include="model\Project.cs" />
     <Compile Include="model\Salary.cs" />
     <Compile Include="model\Task.cs" />
+    <Compile Include="model\UserProject.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +122,30 @@
     <Compile Include="repository\SalaryRepository.cs" />
     <Compile Include="repository\TaskRepository.cs" />
     <Compile Include="service\FileService.cs" />
+    <Compile Include="view\FormAddUserToProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FormAddUserToProject.Designer.cs">
+      <DependentUpon>FormAddUserToProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FormExtraSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FormExtraSearch.Designer.cs">
+      <DependentUpon>FormExtraSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FormListUserInProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FormListUserInProject.Designer.cs">
+      <DependentUpon>FormListUserInProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UCAttendance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCAttendance.Designer.cs">
+      <DependentUpon>UCAttendance.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\UCDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +175,24 @@
     <Compile Include="view\UCDepartment.Designer.cs">
       <DependentUpon>UCDepartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\UCProject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCProject.Designer.cs">
+      <DependentUpon>UCProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UCSalary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCSalary.Designer.cs">
+      <DependentUpon>UCSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UCTask.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="view\UCTask.Designer.cs">
+      <DependentUpon>UCTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\UCUser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +212,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\FormAddUserToProject.resx">
+      <DependentUpon>FormAddUserToProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FormExtraSearch.resx">
+      <DependentUpon>FormExtraSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FormListUserInProject.resx">
+      <DependentUpon>FormListUserInProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCAttendance.resx">
+      <DependentUpon>UCAttendance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\UCDashboard.resx">
       <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +232,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\UCDepartment.resx">
       <DependentUpon>UCDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCProject.resx">
+      <DependentUpon>UCProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCSalary.resx">
+      <DependentUpon>UCSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UCTask.resx">
+      <DependentUpon>UCTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UCUser.resx">
       <DependentUpon>UCUser.cs</DependentUpon>
@@ -170,6 +272,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dashboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mtalogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mtalogo-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\technology-company.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comparison-between-limited-1596780615.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

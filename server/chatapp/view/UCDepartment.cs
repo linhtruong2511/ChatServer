@@ -15,9 +15,12 @@ namespace chatapp.view
     public partial class UCDepartment : UserControl
     {
         private DepartmentRepository departmentRepository = new DepartmentRepository();
-        public UCDepartment()
+        private UserRepository userRepository = new UserRepository();
+        Panel parentPanel = null;
+        public UCDepartment(Panel parentPanel)
         {
             InitializeComponent();
+            this.parentPanel = parentPanel;
         }
 
         private void UCDepartment_Load(object sender, EventArgs e)
@@ -113,6 +116,16 @@ namespace chatapp.view
             {
                 MessageBox.Show("Please select a department to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void nhânViênCủaPhòngNàyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<User> users = userRepository.GetAllUsersByDepartmentId(
+                Convert.ToInt32(dgvDepartment.SelectedRows[0].Cells["Id"].Value)
+            );
+            parentPanel.Controls.Clear();
+            UCUser uCUser = new UCUser(users);
+            parentPanel.Controls.Add(uCUser);
         }
     }
 }

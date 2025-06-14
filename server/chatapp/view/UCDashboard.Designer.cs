@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label11 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblDepartmentCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,8 +64,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -81,6 +84,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.label11);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel1.Controls.Add(this.panel8);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel1);
@@ -110,11 +114,21 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Thông tin chung";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::chatapp.Properties.Resources.comparison_between_limited_1596780615;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(443, 168);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.lblDepartmentCount);
             this.panel8.Controls.Add(this.label1);
-            this.panel8.Location = new System.Drawing.Point(6, 26);
+            this.panel8.Location = new System.Drawing.Point(6, 200);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(444, 27);
@@ -146,7 +160,7 @@
             // 
             this.panel3.Controls.Add(this.lblUserCount);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(6, 57);
+            this.panel3.Location = new System.Drawing.Point(6, 231);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(444, 27);
@@ -178,7 +192,7 @@
             // 
             this.panel1.Controls.Add(this.lblProjectCount);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(6, 88);
+            this.panel1.Location = new System.Drawing.Point(6, 262);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(444, 27);
@@ -210,7 +224,7 @@
             // 
             this.panel2.Controls.Add(this.lblProjectCountFinished);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Location = new System.Drawing.Point(6, 119);
+            this.panel2.Location = new System.Drawing.Point(6, 293);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(444, 27);
@@ -242,7 +256,7 @@
             // 
             this.panel6.Controls.Add(this.W);
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(6, 150);
+            this.panel6.Location = new System.Drawing.Point(6, 324);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(444, 27);
@@ -274,7 +288,7 @@
             // 
             this.panel5.Controls.Add(this.lblMaxSalary);
             this.panel5.Controls.Add(this.label6);
-            this.panel5.Location = new System.Drawing.Point(6, 181);
+            this.panel5.Location = new System.Drawing.Point(6, 355);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(444, 27);
@@ -306,7 +320,7 @@
             // 
             this.panel4.Controls.Add(this.lblMinSalary);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Location = new System.Drawing.Point(6, 212);
+            this.panel4.Location = new System.Drawing.Point(6, 386);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(444, 27);
@@ -338,7 +352,7 @@
             // 
             this.panel7.Controls.Add(this.lblAverageSalary);
             this.panel7.Controls.Add(this.label8);
-            this.panel7.Location = new System.Drawing.Point(6, 243);
+            this.panel7.Location = new System.Drawing.Point(6, 417);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(444, 27);
@@ -370,7 +384,7 @@
             // 
             this.panel9.Controls.Add(this.lblCountAttendance);
             this.panel9.Controls.Add(this.label9);
-            this.panel9.Location = new System.Drawing.Point(6, 274);
+            this.panel9.Location = new System.Drawing.Point(6, 448);
             this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(444, 27);
@@ -402,7 +416,7 @@
             // 
             this.panel10.Controls.Add(this.lblCountTask);
             this.panel10.Controls.Add(this.label10);
-            this.panel10.Location = new System.Drawing.Point(6, 305);
+            this.panel10.Location = new System.Drawing.Point(6, 479);
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(444, 27);
@@ -432,24 +446,37 @@
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.Controls.Add(this.label12);
             this.flowLayoutPanel2.Controls.Add(this.textBox1);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(474, 0);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(455, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(376, 507);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(395, 507);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // textBox1
             // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
+            this.textBox1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(6, 22);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(368, 499);
+            this.textBox1.Size = new System.Drawing.Size(357, 483);
             this.textBox1.TabIndex = 0;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(7, 4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(191, 16);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Trạng thái kết nối máy khách";
             // 
             // contextMenuStrip1
             // 
@@ -468,6 +495,7 @@
             this.Load += new System.EventHandler(this.UCDashboard_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -531,5 +559,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label12;
     }
 }

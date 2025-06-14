@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvDepartment = new System.Windows.Forms.DataGridView();
-            this.txtDepartmentName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.cmtDepartment = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.xemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtDepartmentName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.nhânViênCủaPhòngNàyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartment)).BeginInit();
             this.cmtDepartment.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,37 @@
             this.dgvDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDepartment.Size = new System.Drawing.Size(811, 437);
             this.dgvDepartment.TabIndex = 0;
+            // 
+            // cmtDepartment
+            // 
+            this.cmtDepartment.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xemToolStripMenuItem,
+            this.xóaToolStripMenuItem,
+            this.updateToolStripMenuItem,
+            this.nhânViênCủaPhòngNàyToolStripMenuItem});
+            this.cmtDepartment.Name = "cmtDepartment";
+            this.cmtDepartment.Size = new System.Drawing.Size(211, 114);
+            // 
+            // xemToolStripMenuItem
+            // 
+            this.xemToolStripMenuItem.Name = "xemToolStripMenuItem";
+            this.xemToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.xemToolStripMenuItem.Text = "Xem";
+            this.xemToolStripMenuItem.Click += new System.EventHandler(this.xemToolStripMenuItem_Click);
+            // 
+            // xóaToolStripMenuItem
+            // 
+            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
+            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.xóaToolStripMenuItem.Text = "Xóa";
+            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.updateToolStripMenuItem.Text = "Cập nhật";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.sửaToolStripMenuItem_Click);
             // 
             // txtDepartmentName
             // 
@@ -79,35 +111,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cmtDepartment
+            // nhânViênCủaPhòngNàyToolStripMenuItem
             // 
-            this.cmtDepartment.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xemToolStripMenuItem,
-            this.xóaToolStripMenuItem,
-            this.updateToolStripMenuItem});
-            this.cmtDepartment.Name = "cmtDepartment";
-            this.cmtDepartment.Size = new System.Drawing.Size(181, 92);
-            // 
-            // xemToolStripMenuItem
-            // 
-            this.xemToolStripMenuItem.Name = "xemToolStripMenuItem";
-            this.xemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.xemToolStripMenuItem.Text = "Xem";
-            this.xemToolStripMenuItem.Click += new System.EventHandler(this.xemToolStripMenuItem_Click);
-            // 
-            // xóaToolStripMenuItem
-            // 
-            this.xóaToolStripMenuItem.Name = "xóaToolStripMenuItem";
-            this.xóaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.xóaToolStripMenuItem.Text = "Xóa";
-            this.xóaToolStripMenuItem.Click += new System.EventHandler(this.xóaToolStripMenuItem_Click);
-            // 
-            // updateToolStripMenuItem
-            // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.updateToolStripMenuItem.Text = "Cập nhật";
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.sửaToolStripMenuItem_Click);
+            this.nhânViênCủaPhòngNàyToolStripMenuItem.Name = "nhânViênCủaPhòngNàyToolStripMenuItem";
+            this.nhânViênCủaPhòngNàyToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.nhânViênCủaPhòngNàyToolStripMenuItem.Text = "Nhân viên của phòng này";
+            this.nhânViênCủaPhòngNàyToolStripMenuItem.Click += new System.EventHandler(this.nhânViênCủaPhòngNàyToolStripMenuItem_Click);
             // 
             // UCDepartment
             // 
@@ -138,5 +147,6 @@
         private System.Windows.Forms.ToolStripMenuItem xemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xóaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nhânViênCủaPhòngNàyToolStripMenuItem;
     }
 }

@@ -11,7 +11,7 @@ namespace chatapp.model
         public int Id { get; set; }
         public int UserId { get; set; }
         public DateTime Date { get; set; }
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public TimeSpan CheckIn { get; set; }
+        public TimeSpan CheckOut { get; set; }
     }
 }

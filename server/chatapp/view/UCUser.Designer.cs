@@ -34,6 +34,7 @@
             this.xemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xóaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toànBộNhânSựPhòngBanNàyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toànBộNhânSựCủaVịTríToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
@@ -45,14 +46,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.extraSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtSearchUserId = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cbDepartment = new System.Windows.Forms.ComboBox();
             this.cbPosition = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.toànBộNhânSựCủaVịTríToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +76,7 @@
             this.toànBộNhânSựPhòngBanNàyToolStripMenuItem,
             this.toànBộNhânSựCủaVịTríToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // xemToolStripMenuItem
@@ -99,6 +99,13 @@
             this.toànBộNhânSựPhòngBanNàyToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.toànBộNhânSựPhòngBanNàyToolStripMenuItem.Text = "Toàn bộ nhân sự của phòng ban";
             this.toànBộNhânSựPhòngBanNàyToolStripMenuItem.Click += new System.EventHandler(this.toànBộNhânSựPhòngBanNàyToolStripMenuItem_Click);
+            // 
+            // toànBộNhânSựCủaVịTríToolStripMenuItem
+            // 
+            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Name = "toànBộNhânSựCủaVịTríToolStripMenuItem";
+            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Text = "Toàn bộ nhân sự của vị trí";
+            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Click += new System.EventHandler(this.toànBộNhânSựCủaVịTríToolStripMenuItem_Click);
             // 
             // txtName
             // 
@@ -189,17 +196,17 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(7, 268);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.Size = new System.Drawing.Size(140, 13);
             this.label3.TabIndex = 14;
-            this.label3.Text = "Tìm kiếm theo tên";
+            this.label3.Text = "Tìm kiếm theo mã nhân viên";
             // 
-            // textBox3
+            // txtSearchUserId
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 265);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(133, 20);
-            this.textBox3.TabIndex = 13;
-            this.textBox3.Text = "Tìm kiếm theo tên";
+            this.txtSearchUserId.Location = new System.Drawing.Point(157, 265);
+            this.txtSearchUserId.Name = "txtSearchUserId";
+            this.txtSearchUserId.Size = new System.Drawing.Size(133, 20);
+            this.txtSearchUserId.TabIndex = 13;
+            this.txtSearchUserId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchUserId_KeyDown);
             // 
             // label6
             // 
@@ -254,13 +261,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // toànBộNhânSựCủaVịTríToolStripMenuItem
-            // 
-            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Name = "toànBộNhânSựCủaVịTríToolStripMenuItem";
-            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Text = "Toàn bộ nhân sự của vị trí";
-            this.toànBộNhânSựCủaVịTríToolStripMenuItem.Click += new System.EventHandler(this.toànBộNhânSựCủaVịTríToolStripMenuItem_Click);
-            // 
             // UCUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,7 +272,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtSearchUserId);
             this.Controls.Add(this.extraSearch);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -309,7 +309,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button extraSearch;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtSearchUserId;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbPosition;
         private System.Windows.Forms.ComboBox cbDepartment;

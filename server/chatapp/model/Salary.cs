@@ -10,7 +10,8 @@ namespace chatapp.model
     {
         public int UserID { get; set; } 
         public int Id { get; set; } 
-        public int Base_Salary { get; set; }    
-        public int Bonus { get; set; }
-    }
+        public decimal Base_Salary { get; set; }    
+        public decimal Bonus { get; set; }
+        public DateTime Date { get; set; } // Assuming you have a date field to track when the salary was issued
+}
 }

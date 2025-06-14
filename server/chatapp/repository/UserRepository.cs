@@ -204,6 +204,7 @@ namespace chatapp.repository
             }
         }
 
+
         public User getUserByDepartmentID(int departmentId)
         {
             using (SqlCommand cmd = new SqlCommand("select * from users where DepartmentId=@DepartmentId", connection))
@@ -268,14 +269,14 @@ namespace chatapp.repository
 
             if (!string.IsNullOrEmpty(user.Name))
             {
-                conditions.Add("Name = @Name");
-                parameters.Add(new SqlParameter("@Name", user.Name));
+                conditions.Add("Name like @Name");
+                parameters.Add(new SqlParameter("@Name", "%" + user.Name + "%"));
             }
 
             if (!string.IsNullOrEmpty(user.Username))
             {
-                conditions.Add("Username = @Username");
-                parameters.Add(new SqlParameter("@Username", user.Username));
+                conditions.Add("Username like @Username");
+                parameters.Add(new SqlParameter("@Username", "%" + user.Username + "%"));
             }
 
             if (!string.IsNullOrEmpty(user.Password))
@@ -286,8 +287,8 @@ namespace chatapp.repository
 
             if (!string.IsNullOrEmpty(user.Address))
             {
-                conditions.Add("Address = @Address");
-                parameters.Add(new SqlParameter("@Address", user.Address));
+                conditions.Add("Address like @Address");
+                parameters.Add(new SqlParameter("@Address", "%" + user.Address + "%"));
             }
 
             if (!string.IsNullOrEmpty(user.Phone))
@@ -296,13 +297,13 @@ namespace chatapp.repository
                 parameters.Add(new SqlParameter("@Phone", user.Phone));
             }
 
-            if (user.PositionId != 0)
+            if (user.PositionId != -1)
             {
                 conditions.Add("PositionId = @PositionId");
                 parameters.Add(new SqlParameter("@PositionId", user.PositionId));
             }
 
-            if (user.DepartmentId != 0)
+            if (user.DepartmentId != -1)
             {
                 conditions.Add("DepartmentId = @DepartmentId");
                 parameters.Add(new SqlParameter("@DepartmentId", user.DepartmentId));
