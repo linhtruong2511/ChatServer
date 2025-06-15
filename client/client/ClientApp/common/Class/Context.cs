@@ -31,7 +31,7 @@ namespace ClientApp.common.Class
             try
             {
                 TcpClient = new TcpClient();
-                TcpClient.Connect("192.168.177.102", 5000);
+                TcpClient.Connect("192.168.177.78", 5000);
             }
             catch(Exception ex)
             {

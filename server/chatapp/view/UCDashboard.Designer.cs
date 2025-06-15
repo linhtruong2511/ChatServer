@@ -45,7 +45,7 @@
             this.lblProjectCountFinished = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.W = new System.Windows.Forms.Label();
+            this.lblProjectCountUnFinished = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblMaxSalary = new System.Windows.Forms.Label();
@@ -63,8 +63,8 @@
             this.lblCountTask = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -254,7 +254,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.W);
+            this.panel6.Controls.Add(this.lblProjectCountUnFinished);
             this.panel6.Controls.Add(this.label5);
             this.panel6.Location = new System.Drawing.Point(6, 324);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
@@ -262,16 +262,16 @@
             this.panel6.Size = new System.Drawing.Size(444, 27);
             this.panel6.TabIndex = 1;
             // 
-            // W
+            // lblProjectCountUnFinished
             // 
-            this.W.AutoSize = true;
-            this.W.Dock = System.Windows.Forms.DockStyle.Right;
-            this.W.Location = new System.Drawing.Point(403, 0);
-            this.W.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.W.Name = "W";
-            this.W.Size = new System.Drawing.Size(41, 13);
-            this.W.TabIndex = 2;
-            this.W.Text = "label16";
+            this.lblProjectCountUnFinished.AutoSize = true;
+            this.lblProjectCountUnFinished.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblProjectCountUnFinished.Location = new System.Drawing.Point(403, 0);
+            this.lblProjectCountUnFinished.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProjectCountUnFinished.Name = "lblProjectCountUnFinished";
+            this.lblProjectCountUnFinished.Size = new System.Drawing.Size(41, 13);
+            this.lblProjectCountUnFinished.TabIndex = 2;
+            this.lblProjectCountUnFinished.Text = "label16";
             // 
             // label5
             // 
@@ -456,6 +456,16 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(395, 507);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(7, 4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(191, 16);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Trạng thái kết nối máy khách";
+            // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -467,16 +477,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(357, 483);
             this.textBox1.TabIndex = 0;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(7, 4);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(191, 16);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Trạng thái kết nối máy khách";
             // 
             // contextMenuStrip1
             // 
@@ -550,7 +550,7 @@
         private System.Windows.Forms.Label lblUserCount;
         private System.Windows.Forms.Label lblProjectCount;
         private System.Windows.Forms.Label lblProjectCountFinished;
-        private System.Windows.Forms.Label W;
+        private System.Windows.Forms.Label lblProjectCountUnFinished;
         private System.Windows.Forms.Label lblMaxSalary;
         private System.Windows.Forms.Label lblMinSalary;
         private System.Windows.Forms.Label lblAverageSalary;

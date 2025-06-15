@@ -34,7 +34,6 @@ D:\Chat-App\chatapp-server\client\client\ClientApp\bin\Debug\ClientApp.pdb
 D:\Chat-App\chatapp-server\client\client\ClientApp\bin\Debug\Newtonsoft.Json.dll
 D:\Chat-App\chatapp-server\client\client\ClientApp\bin\Debug\Newtonsoft.Json.xml
 D:\Chat-App\chatapp-server\client\client\ClientApp\obj\Debug\ClientApp.csproj.AssemblyReference.cache
-D:\Chat-App\chatapp-server\client\client\ClientApp\obj\Debug\ClientApp.exe.config
 D:\Chat-App\chatapp-server\client\client\ClientApp\obj\Debug\ClientApp.LoginForm.resources
 D:\Chat-App\chatapp-server\client\client\ClientApp\obj\Debug\ClientApp.MainForm.resources
 D:\Chat-App\chatapp-server\client\client\ClientApp\obj\Debug\ClientApp.Properties.Resources.resources

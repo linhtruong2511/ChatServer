@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -45,8 +46,11 @@ namespace ClientApp
                     UserInfo userInfo = JsonConvert.DeserializeObject<UserInfo>(Encoding.UTF8.GetString(loginResponsePacket.Data));
                     Context.MyId = userInfo.Id;
                     Context.Name = userInfo.Name;
-                    this.Hide();
-                    MainForm.Show();
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.Visible = false;
+                        MainForm.Show();
+                    }));
                     Packet userInfoPacket = NetworkUtils.Read(Context.Reader);
                     Context.Users = JsonConvert.DeserializeObject<List<UserInfo>>(Encoding.UTF8.GetString(userInfoPacket.Data));
                     MainForm.ShowUsers();
