@@ -18,17 +18,17 @@ namespace chatapp.service
         {
             messageRepository = new MessageRepository();
         }
-        public void SendMessage(UserSession userSession, int source, string content, int toUserId)
+        public void SendMessage(UserSession userSession, int source, string content, int toUserId,DateTime createAt)
         {
             // trạng thái message = 1 do đã được gửi
-            messageRepository.SaveMessage(source, toUserId, content);
+            messageRepository.SaveMessage(source, toUserId, content,createAt);
             NetworkUtils.Write(userSession.writer, new Packet(PacketTypeEnum.SENDMESSAGE, Encoding.UTF8.GetBytes(content), source, toUserId), userSession.lock_writer);
         }
 
-        public void SaveMessage(int source, string content, int toUserId)
+        public void SaveMessage(int source, string content, int toUserId,DateTime createAt)
         {
             // trạng thái message = 0 do chưa được gửi
-            messageRepository.SaveMessage(source, toUserId, content, 0);
+            messageRepository.SaveMessage(source, toUserId, content,createAt,0);
         }
         public List<Message> GetAllMessage(int source, int destination, DateTime from)
         {

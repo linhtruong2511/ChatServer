@@ -19,12 +19,14 @@ namespace ClientApp.common.Class
             this.Control = new Label
             {
                 Text = contents,
+                BackColor = source == Context.MyId ? Color.LightGreen : Color.WhiteSmoke,
+                ForeColor = source == Context.MyId ? Color.Black : Color.Black,
                 AutoSize = true,
                 Padding = new Padding(10)
             };
             ((Label)Control).MouseClick += (sender, e) =>
             {
-                if (e.Button == MouseButtons.Right && this.Source == Context.MyId)
+                if (e.Button == MouseButtons.Right && this.Source == Context.MyId&&!IsDeleted)
                 {
                     ContextMenuStrip ctms = new ContextMenuStrip();
 
@@ -60,6 +62,7 @@ namespace ClientApp.common.Class
         }
         public void DeleteMessageEffect()
         {
+            this.IsDeleted = true;
             ((Label)this.Control).Text = "tin nhắn đã xoá";
             ((Label)this.Control).Font = new Font("Arial", 10, FontStyle.Italic);
             ((Label)this.Control).ForeColor = Color.Red;

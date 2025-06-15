@@ -25,7 +25,7 @@ namespace chatapp
             // quản lý user connect tới là việc của toàn bộ app nên để context cho nó bao bọc app lại => ở nơi đâu cũng có thể sử dụng để danh sách các user connect này
             // như vậy sẽ đỡ mất công truyền xuống
             ManageSessionUser = new ManageUser();
-            IPEndPoint ipEndPoint = new IPEndPoint(System.Net.IPAddress.Parse("192.168.177.102"), 5000);
+            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Loopback, 5000);
             TcpListener = new TcpListener(ipEndPoint);
             this.gui = gui;
         }
