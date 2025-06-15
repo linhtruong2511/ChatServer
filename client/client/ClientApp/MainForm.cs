@@ -26,12 +26,13 @@ namespace ClientApp
             flow_chat.Scroll += async (sender, e) =>
             {
                 if (flow_chat.VerticalScroll.Value == VerticalScroll.Minimum)
-                    Controller.LoadConservation(this);
+                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.NUMBEROFCHATLOAD, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
             };
             flow_chat.MouseWheel += async (sender, e) =>
             {
                 if (flow_chat.VerticalScroll.Value == VerticalScroll.Minimum)
-                    Controller.LoadConservation(this);
+
+                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.NUMBEROFCHATLOAD, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
             };
             loginForm.Show();
             Task reading = Task.Run(() =>
