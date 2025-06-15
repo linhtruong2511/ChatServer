@@ -100,11 +100,17 @@ namespace chatapp
                             username = requestLogin.username;
 
                             // nếu đăng nhập thành công trả về id và name của user (không cần thông báo login success nữa để nó là 1 type của packet luôn) 
-                            Packet successLogin = new Packet(PacketTypeEnum.SUCCESSLOGIN,Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(handleController.GetUserLoginInformation(requestLogin))), 0, packet.From);
+                            Packet successLogin = new Packet(PacketTypeEnum.SUCCESSLOGIN,
+                                Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(handleController.GetUserLoginInformation(requestLogin))),
+                                0, 
+                                packet.From
+                                );
                             NetworkUtils.Write(writer, successLogin, lock_writer);
                             
                             // tiếp đó trả về danh sách các user tồn tại trong cơ sở dữ liệu về cho client để có thể hiển thị trên ui và kết nối
-                            Packet userInfo = new Packet(PacketTypeEnum.USERINFO, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ManageUser.UserResponses)), 0, packet.From);
+                            Packet userInfo = new Packet(PacketTypeEnum.USERINFO,
+                                Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ManageUser.UserResponses)),
+                                0, packet.From);
                             NetworkUtils.Write(writer, userInfo, lock_writer);
                             
                             // update thông tin của user vừa được login vào danh sách quản lý usersession
@@ -203,11 +209,15 @@ namespace chatapp
                     }
                     else
                     {
-                        FileInfos file = fileService.GetAFile(packet.From,packet.To,packet.createAt);
+                        FileInfos file = fileService.GetAFile(
+                            packet.From,
+                            packet.To,
+                            JsonConvert.DeserializeObject<DateTime>(Encoding.UTF8.GetString(packet.Data)));
                         if (file != null)
                         {
                             NetworkUtils.Write(writer, new Packet(PacketTypeEnum.NUMBEROFCHATLOAD, BitConverter.GetBytes(1), 0, packet.From), lock_writer);
-                            NetworkUtils.Write(writer, new PacketFile(PacketTypeEnum.HISTORYFILE, file.Data, file.Source, file.Destination, file.FileName),lock_writer);
+                            NetworkUtils.Write(writer, new PacketFile(PacketTypeEnum.HISTORYFILE, file.Data, file.Source, file.Destination,file.CreateAt, file.FileName),lock_writer);
+                            
                         }
                         else
                         {

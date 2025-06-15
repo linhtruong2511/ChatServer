@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Drawing;
 using System.Net;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,12 +45,23 @@ namespace ClientApp
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("An error occurred while reading data from the server: " + ex.Message, "Error");
-                   // MessageBox.Show(ex.StackTrace);
-                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.DISCONNECT,Encoding.UTF8.GetBytes(""), Context.MyId, 0));
+                    MessageBox.Show("An error occurred while reading data from the server: " + ex.Message, "Error");
+                    MessageBox.Show(ex.StackTrace);
+                    //NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.DISCONNECT,Encoding.UTF8.GetBytes(""), Context.MyId, 0));
                 }
             });
 
+        }
+
+        private void handleMouseWheel () 
+        {
+            if (flow_chat.VerticalScroll.Value == VerticalScroll.Minimum)
+                NetworkUtils.Write(
+                    Context.Writer, 
+                    new Packet(
+                        common.Enum.PacketTypeEnum.HISTORYCHAT,
+                        Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)),
+                        Context.MyId, Context.DestinationId));
         }
         public void ShowUser(UserInfo userInfo)
         {
@@ -85,7 +97,11 @@ namespace ClientApp
                     flow_chat.Controls.Clear();
                     Context.Reset(userInfo.Id);
                     Console.WriteLine("/");
-                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.HISTORYCHAT, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
+                    NetworkUtils.Write(
+                        Context.Writer, new Packet(
+                            common.Enum.PacketTypeEnum.HISTORYCHAT,
+                            Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)),
+                            Context.MyId, Context.DestinationId));
                 }
             };
             AddControlToPanel(flow_UserList, btn);
@@ -142,7 +158,7 @@ namespace ClientApp
         {
             if (panel.InvokeRequired)
             {
-                panel.Invoke(new MethodInvoker(() => panel.Controls.Add(control)));
+                panel.Invoke(new Action(() => panel.Controls.Add(control)));
             }
             else
             {
@@ -150,7 +166,7 @@ namespace ClientApp
             }
             if (IsPastObject)
             {
-                panel.Controls.SetChildIndex(control, 0);
+                panel.Invoke(new Action(() => panel.Controls.SetChildIndex(control, 0)));
             }
         }
         public void ShowChatObject(ChatObject chatObject, bool IsPastObject)
@@ -204,7 +220,10 @@ namespace ClientApp
             {
                 BackColor = Color.Aqua
             };
-            tooltip.SetToolTip(chatObject.Control, "Gửi lúc : " + chatObject.CreateAt.ToString("dd/MM/yyyy HH:mm:ss"));
+            this.Invoke(new Action(() =>
+            {
+                tooltip.SetToolTip(chatObject.Control, "Gửi lúc : " + chatObject.CreateAt.ToString("dd/MM/yyyy HH:mm:ss"));
+            }));
 
 
             AddControlToPanel(flp, chatObject.Control);

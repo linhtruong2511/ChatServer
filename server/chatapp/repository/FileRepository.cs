@@ -32,7 +32,7 @@ namespace chatapp.repository
         }
         public List<FileInfos> GetAllFile(int source,int destination,DateTime from,DateTime to)
         {
-            string query = "select * from files where ((Source=@Source and Destination=@Destination) or (Destination=@Source and Source=@Destination)) and (CreateAt < @from and CreateAt > @to) order by CreateAt desc";
+            string query = "select * from files where ((Source=@Source and Destination=@Destination) or (Destination=@Source and Source=@Destination)) and (CreateAt < @from and CreateAt > @to) order by createAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Source", source);

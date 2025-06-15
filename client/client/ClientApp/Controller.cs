@@ -54,7 +54,9 @@ namespace ClientApp
                     case PacketTypeEnum.HISTORYFILE:
 
                         packetFile = (PacketFile)packet;
-                            file = new MyFileInfo(packetFile.fileName, packetFile.Data, packetFile.From, packetFile.createAt);
+                            file = new MyFileInfo(packetFile.fileName, 
+                                packetFile.Data, packetFile.From, 
+                                packetFile.createAt);
                             Context.chatObjects.Add(file.CreateAt, file);
                             Context.count++;
                             if (Context.count == Context.numberOfLoadChat)
@@ -150,7 +152,10 @@ namespace ClientApp
                         MainForm.ShowChatObject(Context.chatObjects.Values[i], true);
                     Context.lastChatLoad = Context.chatObjects.Values[0].CreateAt;
                 }
-                Context.lastChatLoad = DateTime.Now;
+                else
+                {
+                    Context.lastChatLoad = DateTime.Now;
+                }
                 IsLoading = false;
             }
         }
