@@ -6,7 +6,6 @@ using System;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace ClientApp
 {
@@ -36,39 +35,54 @@ namespace ClientApp
                         Application.Exit();
                         break;
                     case PacketTypeEnum.SENDMESSAGE:
-                        MainForm.ShowChatObject(new HistoryMessage(packet.From, packet.createAt, Encoding.UTF8.GetString(packet.Data)),false);
-                        Context.lastChatIndex++;
+                        if (packet.From == Context.DestinationId)
+                        {
+                            HistoryMessage hm = new HistoryMessage(packet.From, packet.createAt, Encoding.UTF8.GetString(packet.Data));
+                            MainForm.ShowChatObject(hm, false);
+                        }
                         break;
                     case PacketTypeEnum.HISTORYMESSAGES:
-                        HistoryMessage historyMessage = new HistoryMessage(packet.From, packet.createAt, Encoding.UTF8.GetString(packet.Data));
-                        Context.chatObjects.Add(historyMessage.CreateAt,historyMessage);
-                        Context.lastChatIndex++;
+                            HistoryMessage historyMessage = new HistoryMessage(packet.From, packet.createAt, Encoding.UTF8.GetString(packet.Data));
+                            Context.chatObjects.Add(historyMessage.CreateAt, historyMessage);
+                            Context.count++;
+                            Console.WriteLine(Context.count);
+                            if (Context.count == Context.numberOfLoadChat)
+                            {
+                                LoadConservation(MainForm);
+                            }
                         break;
                     case PacketTypeEnum.HISTORYFILE:
+
                         packetFile = (PacketFile)packet;
-                        file = new MyFileInfo(packetFile.fileName,packetFile.Data,packetFile.From,packetFile.createAt);
-                        Context.chatObjects.Add(file.CreateAt, file);
-                        Context.lastChatIndex++;
+                            file = new MyFileInfo(packetFile.fileName, 
+                                packetFile.Data, packetFile.From, 
+                                packetFile.createAt);
+                            Context.chatObjects.Add(file.CreateAt, file);
+                            Context.count++;
+                            if (Context.count == Context.numberOfLoadChat)
+                            {
+                                LoadConservation(MainForm);
+                            }
                         break;
                     case PacketTypeEnum.SENDFILE:
                         packetFile = (PacketFile)packet;
                         file = new MyFileInfo(packetFile.fileName, packetFile.Data, packetFile.From, packetFile.createAt);
-                        Context.chatObjects.Add(file.CreateAt, file);
-                        MainForm.ShowChatObject(file, false);
+                        if (packetFile.From == Context.DestinationId)
+                        {
+                            Context.chatObjects.Add(file.CreateAt, file);
+                            MainForm.ShowChatObject(file, false);
+                        }
                         break;
                     case PacketTypeEnum.ADDUSERINFO:
                         MainForm.ShowUser(JsonConvert.DeserializeObject<UserInfo>(Encoding.UTF8.GetString(packet.Data)));
                         break;
                     case PacketTypeEnum.DELETEMESSAGE:
-                        Console.WriteLine("Delete message");
                         int index_message = Context.chatObjects.IndexOfKey(packet.createAt);
-                        Console.WriteLine(packet.createAt + "/" + index_message);
-                        if (packet.From == Context.MyId && packet.To == Context.DestinationId && index_message != -1 && Context.chatObjects.Values[index_message] is HistoryMessage)
+                        if (packet.From == Context.DestinationId && packet.To == Context.MyId && index_message != -1 && Context.chatObjects.Values[index_message] is HistoryMessage)
                         {
                             HistoryMessage hMessage = (HistoryMessage)Context.chatObjects.Values[index_message];
                             if (hMessage.Control.InvokeRequired)
                             {
-                                Console.WriteLine("xD");
                                 hMessage.Control.Invoke(new MethodInvoker(() =>
                                 {
                                     hMessage.DeleteMessageEffect();
@@ -76,18 +90,27 @@ namespace ClientApp
                             }
                             else
                             {
-                                Console.WriteLine("hehe");
                                 hMessage.DeleteMessageEffect();
                             }
                         }
                         break;
+                    case PacketTypeEnum.NUMBEROFCHATLOAD:
+                        Context.numberOfLoadChat = BitConverter.ToInt32(packet.Data, 0);
+                        Context.count = 0;
+                        break;
                     case PacketTypeEnum.DELETEFILE:
-                        Console.WriteLine("Delete file");
                         int index_file = Context.chatObjects.IndexOfKey(packet.createAt);
-                        if(packet.From == Context.MyId && packet.To == Context.DestinationId && index_file != -1 && Context.chatObjects.Values[index_file] is MyFileInfo)
+                        if(packet.From == Context.DestinationId && packet.To == Context.MyId && index_file != -1 && Context.chatObjects.Values[index_file] is MyFileInfo)
                         {
                             MyFileInfo fileInfo = (MyFileInfo)Context.chatObjects.Values[index_file];
-                            fileInfo.DeleteFileEffect(IsImageFile(fileInfo.fileName));
+                            if (fileInfo.Control.InvokeRequired)
+                            {
+                                fileInfo.Control.Invoke(new MethodInvoker(()=>fileInfo.DeleteFileEffect(IsImageFile(fileInfo.fileName))));
+                            }
+                            else
+                            {
+                                fileInfo.DeleteFileEffect(IsImageFile(fileInfo.fileName));
+                            }
                         }
                         break;
                     case PacketTypeEnum.GROUPINFO:
@@ -103,7 +126,7 @@ namespace ClientApp
         {
             byte[] fileData = File.ReadAllBytes(pathFile);
             MyFileInfo file = new MyFileInfo(Path.GetFileName(pathFile), fileData,Context.MyId, DateTime.Now);
-            PacketFile packetFile = new PacketFile(PacketTypeEnum.SENDFILE,fileData,Context.MyId,Context.DestinationId,DateTime.Now,Path.GetFileName(pathFile));
+            PacketFile packetFile = new PacketFile(PacketTypeEnum.SENDFILE,fileData,Context.MyId,Context.DestinationId,file.CreateAt,Path.GetFileName(pathFile));
             Context.chatObjects.Add(file.CreateAt, file);
             MainForm.ShowChatObject(file,false);
             NetworkUtils.Write(Context.Writer, packetFile);
@@ -113,23 +136,23 @@ namespace ClientApp
             SendMessage sendMessage = new SendMessage();
             sendMessage.Contents = text;
             Packet packet = new Packet(PacketTypeEnum.SENDMESSAGE, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(sendMessage)), Context.MyId, Context.DestinationId);
-            MainForm.ShowChatObject(new HistoryMessage(Context.MyId, packet.createAt, text),false);
+            HistoryMessage historyMessage = new HistoryMessage(Context.MyId, packet.createAt, text);
+            Context.chatObjects.Add(packet.createAt,historyMessage);
+            MainForm.ShowChatObject(historyMessage,false);
             NetworkUtils.Write(Context.Writer, packet);
         }
-        public async Task LoadConservation(MainForm MainForm)
+        public void LoadConservation(MainForm MainForm)
         {
             if (!IsLoading)
             {
                 IsLoading = true;
-                NetworkUtils.Write(Context.Writer, new Packet(PacketTypeEnum.HISTORYCHAT, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
-                await Task.Run(() => Task.Delay(3000));
-                if (Context.lastChatIndex != 0)
+                if (Context.numberOfLoadChat != 0)
                 {
-                    for (int i = Context.lastChatIndex - 1; i >= 0; i--)
+                    for (int i = Context.numberOfLoadChat - 1; i >= 0; i--)
                         MainForm.ShowChatObject(Context.chatObjects.Values[i], true);
-                    Context.lastChatIndex = 0;
                     Context.lastChatLoad = Context.chatObjects.Values[0].CreateAt;
                 }
+                
                 IsLoading = false;
             }
         }

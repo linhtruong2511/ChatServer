@@ -1,1 +1,32 @@
-.vs
+# Build
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider/JetBrains (nếu có)
+.idea/
+
+# NuGet
+packages/
+*.nupkg
+
+# VS backup
+*.dbmdl
+*.bak
+*.old
+*.tmp
+
+# Others
+Thumbs.db
+.DS_Store

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,5 +40,9 @@ namespace chatapp.service
         {
             fileRepository.DeleteFile(Source, Destination, createAt);
         } 
+        public FileInfos GetAFile(int Source,int Destination,DateTime createAt)
+        {
+            return fileRepository.GetAFile(Source,Destination,createAt);
+        }
     }
 }

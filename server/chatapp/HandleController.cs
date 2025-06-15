@@ -39,7 +39,7 @@ namespace chatapp
         {
             foreach (User user in ManageUser.Users)
             {
-                if (loginRequest.username == user.username )
+                if (loginRequest.username == user.Username )
                 {
                     return new UserResponse(user);
                 }

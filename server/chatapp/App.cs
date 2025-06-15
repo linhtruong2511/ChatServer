@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using chatapp.context;
@@ -18,10 +20,13 @@ namespace chatapp
             Database db = new Database();
             db.OpenConnection();
 
+            SqlConnection conn = Database.GetConnection();
+
             // quản lý user connect tới là việc của toàn bộ app nên để context cho nó bao bọc app lại => ở nơi đâu cũng có thể sử dụng để danh sách các user connect này
             // như vậy sẽ đỡ mất công truyền xuống
             ManageSessionUser = new ManageUser();
-            TcpListener = new TcpListener(System.Net.IPAddress.Loopback, 5000);
+            IPEndPoint iPEndpoint = new IPEndPoint(IPAddress.Parse("192.168.177.78"), 5000);
+            TcpListener = new TcpListener(iPEndpoint);
             this.gui = gui;
         }
         ~App()

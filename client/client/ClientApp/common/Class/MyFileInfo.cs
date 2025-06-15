@@ -136,6 +136,7 @@ namespace ClientApp.common.Class
         }
         public void DeleteFileEffect(bool IsImage)
         {
+            this.IsDeleted = true;
             if (IsImage)
             {
                 ((PictureBox)this.Control).Image = Resources.xoaanh;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace chatapp.repository
 {
@@ -31,7 +32,7 @@ namespace chatapp.repository
         }
         public List<FileInfos> GetAllFile(int source,int destination,DateTime from,DateTime to)
         {
-            string query = "select * from files where ((Source=@Source and Destination=@Destination) or (Destination=@Source and Source=@Destination)) and (CreateAt < @from and CreateAt > @to) order by CreateAt desc";
+            string query = "select * from files where ((Source=@Source and Destination=@Destination) or (Destination=@Source and Source=@Destination)) and (CreateAt < @from and CreateAt > @to) order by createAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Source", source);
@@ -68,6 +69,27 @@ namespace chatapp.repository
                 cmd.Parameters.AddWithValue("@Destination", Destination);
                 cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
                 cmd.ExecuteNonQuery();
+            }
+        }
+        public FileInfos GetAFile(int Source,int Destination,DateTime createAt)
+        {
+            string query = "select top 1 * from files where ((Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source)) and createAt<@createAt order by createAt desc";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Source", Source);
+                cmd.Parameters.AddWithValue("@Destination", Destination);
+                cmd.Parameters.Add("@createAt",SqlDbType.DateTime2).Value = createAt;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return SqlUtils<FileInfos>.SqlReaderToEntity(reader);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
         }
     }

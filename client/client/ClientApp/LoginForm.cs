@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,14 +26,14 @@ namespace ClientApp
             this.MainForm = MainForm;
         }
 
-        private void login_Click(object sender, EventArgs e)
-        {
-            LoginRequest loginRequest = new LoginRequest(username.Text, password.Text);
-            string loginRequestJson = JsonConvert.SerializeObject(loginRequest);
-            Packet loginPacket = new Packet(PacketTypeEnum.LOGIN, Encoding.UTF8.GetBytes(loginRequestJson), 0, 0);
-            NetworkUtils.Write(Context.Writer, loginPacket);
-            Task loginHandle = Task.Run(()=>HandleLoginResponse());
-        }
+        //private void bt_Login_Click(object sender, EventArgs e)
+        //{
+        //    LoginRequest loginRequest = new LoginRequest(txt_UserName.Text, txt_Password.Text);
+        //    string loginRequestJson = JsonConvert.SerializeObject(loginRequest);
+        //    Packet loginPacket = new Packet(PacketTypeEnum.LOGIN, Encoding.UTF8.GetBytes(loginRequestJson), 0, 0);
+        //    NetworkUtils.Write(Context.Writer, loginPacket);
+        //    Task loginHandle = Task.Run(()=>HandleLoginResponse());
+        //}
         public void HandleLoginResponse()
         {
             Packet loginResponsePacket = NetworkUtils.Read(Context.Reader);
@@ -45,18 +46,38 @@ namespace ClientApp
                     UserInfo userInfo = JsonConvert.DeserializeObject<UserInfo>(Encoding.UTF8.GetString(loginResponsePacket.Data));
                     Context.MyId = userInfo.Id;
                     Context.Name = userInfo.Name;
-                    this.Hide();
-                    MainForm.Show();
-                    Packet userInfoPacket = NetworkUtils.Read(Context.Reader);
-                    Context.Users = JsonConvert.DeserializeObject<List<UserInfo>>(Encoding.UTF8.GetString(userInfoPacket.Data));
-                    MainForm.ShowUsers();
-                    MainForm.IsLoginSuccess = true;
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.Invoke(new MethodInvoker(() =>
+                        {
+                            this.Hide();
+                            MainForm.Show();
+                        }));
+                        Packet userInfoPacket = NetworkUtils.Read(Context.Reader);
+                        Context.Users = JsonConvert.DeserializeObject<List<UserInfo>>(Encoding.UTF8.GetString(userInfoPacket.Data));
+                        MainForm.ShowUsers();
+                        MainForm.IsLoginSuccess = true;
+                    }));
                     break;
             }
         }
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void bt_Login_Click_1(object sender, EventArgs e)
+        {
+            LoginRequest loginRequest = new LoginRequest(txt_UserName.Text, txt_Password.Text);
+            string loginRequestJson = JsonConvert.SerializeObject(loginRequest);
+            Packet loginPacket = new Packet(PacketTypeEnum.LOGIN, Encoding.UTF8.GetBytes(loginRequestJson), 0, 0);
+            NetworkUtils.Write(Context.Writer, loginPacket);
+            Task loginHandle = Task.Run(() => HandleLoginResponse());
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            NetworkUtils.Write(Context.Writer, new Packet(PacketTypeEnum.DISCONNECT, Encoding.UTF8.GetBytes("Client is disconnecting"), 0, 0));
         }
     }
 }
