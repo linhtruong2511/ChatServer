@@ -27,11 +27,7 @@ namespace ClientApp.common.Class
             try
             {
                 TcpClient = new TcpClient();
-<<<<<<< HEAD
                 TcpClient.Connect("192.168.177.78", 5000);
-=======
-                TcpClient.Connect(IPAddress.Loopback, 5000);
->>>>>>> de7bb19487c5a77fe225a69fe6744d5e58a6ba71
             }
             catch(Exception ex)
             {

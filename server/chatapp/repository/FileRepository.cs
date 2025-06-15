@@ -73,7 +73,7 @@ namespace chatapp.repository
         }
         public FileInfos GetAFile(int Source,int Destination,DateTime createAt)
         {
-            string query = "select top 1 * from files where (Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source) and createAt<@createAt";
+            string query = "select top 1 * from files where ((Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source)) and createAt<@createAt order by createAt desc";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Source", Source);

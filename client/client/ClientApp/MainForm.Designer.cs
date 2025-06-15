@@ -131,7 +131,7 @@ namespace ClientApp
             this.lb_UserChat.ForeColor = System.Drawing.Color.White;
             this.lb_UserChat.Location = new System.Drawing.Point(610, 30);
             this.lb_UserChat.Name = "lb_UserChat";
-            this.lb_UserChat.Size = new System.Drawing.Size(149, 24);
+            this.lb_UserChat.Size = new System.Drawing.Size(121, 19);
             this.lb_UserChat.TabIndex = 6;
             this.lb_UserChat.Text = "Chat with User";
             this.lb_UserChat.Visible = false;
@@ -177,16 +177,17 @@ namespace ClientApp
             this.txt_Search.ForeColor = System.Drawing.Color.White;
             this.txt_Search.Location = new System.Drawing.Point(59, 42);
             this.txt_Search.Name = "txt_Search";
-            this.txt_Search.Size = new System.Drawing.Size(342, 32);
+            this.txt_Search.Size = new System.Drawing.Size(342, 27);
             this.txt_Search.TabIndex = 2;
             // 
             // flow_UserList
             // 
+            this.flow_UserList.AutoScroll = true;
             this.flow_UserList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(47)))));
             this.flow_UserList.Dock = System.Windows.Forms.DockStyle.Left;
             this.flow_UserList.Location = new System.Drawing.Point(86, 92);
             this.flow_UserList.Name = "flow_UserList";
-            this.flow_UserList.Size = new System.Drawing.Size(425, 963);
+            this.flow_UserList.Size = new System.Drawing.Size(357, 963);
             this.flow_UserList.TabIndex = 3;
             // 
             // panel_Typing
@@ -195,9 +196,9 @@ namespace ClientApp
             this.panel_Typing.Controls.Add(this.bt_Send);
             this.panel_Typing.Controls.Add(this.txt_Message);
             this.panel_Typing.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Typing.Location = new System.Drawing.Point(511, 969);
+            this.panel_Typing.Location = new System.Drawing.Point(443, 969);
             this.panel_Typing.Name = "panel_Typing";
-            this.panel_Typing.Size = new System.Drawing.Size(718, 86);
+            this.panel_Typing.Size = new System.Drawing.Size(786, 86);
             this.panel_Typing.TabIndex = 4;
             // 
             // bt_Gift
@@ -225,7 +226,7 @@ namespace ClientApp
             this.bt_Send.IconColor = System.Drawing.Color.White;
             this.bt_Send.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.bt_Send.IconSize = 40;
-            this.bt_Send.Location = new System.Drawing.Point(637, 0);
+            this.bt_Send.Location = new System.Drawing.Point(705, 0);
             this.bt_Send.Name = "bt_Send";
             this.bt_Send.Size = new System.Drawing.Size(81, 86);
             this.bt_Send.TabIndex = 1;
@@ -242,7 +243,7 @@ namespace ClientApp
             this.txt_Message.Location = new System.Drawing.Point(93, 15);
             this.txt_Message.Multiline = true;
             this.txt_Message.Name = "txt_Message";
-            this.txt_Message.Size = new System.Drawing.Size(538, 57);
+            this.txt_Message.Size = new System.Drawing.Size(606, 57);
             this.txt_Message.TabIndex = 0;
             this.txt_Message.Tag = "";
             this.txt_Message.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Message_KeyDown);
@@ -252,9 +253,9 @@ namespace ClientApp
             this.flow_chat.AutoScroll = true;
             this.flow_chat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flow_chat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flow_chat.Location = new System.Drawing.Point(511, 92);
+            this.flow_chat.Location = new System.Drawing.Point(443, 92);
             this.flow_chat.Name = "flow_chat";
-            this.flow_chat.Size = new System.Drawing.Size(718, 877);
+            this.flow_chat.Size = new System.Drawing.Size(786, 877);
             this.flow_chat.TabIndex = 5;
             this.flow_chat.WrapContents = false;
             // 

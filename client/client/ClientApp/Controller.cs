@@ -152,10 +152,7 @@ namespace ClientApp
                         MainForm.ShowChatObject(Context.chatObjects.Values[i], true);
                     Context.lastChatLoad = Context.chatObjects.Values[0].CreateAt;
                 }
-                else
-                {
-                    Context.lastChatLoad = DateTime.Now;
-                }
+                
                 IsLoading = false;
             }
         }

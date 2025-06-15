@@ -48,14 +48,16 @@ namespace ClientApp
                     Context.Name = userInfo.Name;
                     this.Invoke(new MethodInvoker(() =>
                     {
-                        this.Invoke(new MethodInvoker(() =>{
-                        this.Hide();
-                        MainForm.Show();
+                        this.Invoke(new MethodInvoker(() =>
+                        {
+                            this.Hide();
+                            MainForm.Show();
+                        }));
+                        Packet userInfoPacket = NetworkUtils.Read(Context.Reader);
+                        Context.Users = JsonConvert.DeserializeObject<List<UserInfo>>(Encoding.UTF8.GetString(userInfoPacket.Data));
+                        MainForm.ShowUsers();
+                        MainForm.IsLoginSuccess = true;
                     }));
-                    Packet userInfoPacket = NetworkUtils.Read(Context.Reader);
-                    Context.Users = JsonConvert.DeserializeObject<List<UserInfo>>(Encoding.UTF8.GetString(userInfoPacket.Data));
-                    MainForm.ShowUsers();
-                    MainForm.IsLoginSuccess = true;
                     break;
             }
         }

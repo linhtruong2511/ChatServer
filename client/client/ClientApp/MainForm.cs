@@ -31,9 +31,7 @@ namespace ClientApp
             };
             flow_chat.MouseWheel += async (sender, e) =>
             {
-                if (flow_chat.VerticalScroll.Value == VerticalScroll.Minimum)
-
-                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.NUMBEROFCHATLOAD, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
+                handleMouseWheel();
             };
             loginForm.Show();
             Task reading = Task.Run(() =>
@@ -103,6 +101,7 @@ namespace ClientApp
                             Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)),
                             Context.MyId, Context.DestinationId));
                 }
+              
             };
             AddControlToPanel(flow_UserList, btn);
         }
