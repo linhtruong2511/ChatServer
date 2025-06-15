@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace chatapp.repository
 {
@@ -68,6 +69,27 @@ namespace chatapp.repository
                 cmd.Parameters.AddWithValue("@Destination", Destination);
                 cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
                 cmd.ExecuteNonQuery();
+            }
+        }
+        public FileInfos GetAFile(int Source,int Destination,DateTime createAt)
+        {
+            string query = "select top 1 * from where (Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source) and createAt<@createAt";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Source", Source);
+                cmd.Parameters.AddWithValue("@Destination", Destination);
+                cmd.Parameters.Add("@createAt",SqlDbType.DateTime2).Value = createAt;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return SqlUtils<FileInfos>.SqlReaderToEntity(reader);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
         }
     }

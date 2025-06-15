@@ -36,9 +36,8 @@ namespace chatapp.repository
             }
         }
 
-        public void SaveMessage (int source, int destination, string contents, int status = 1)
+        public void SaveMessage (int source, int destination, string contents,DateTime createAt, int status = 1)
         {
-            DateTime dateTime = DateTime.Now;
             string query = "insert into message (Source, Destination, contents, Status, CreateAt) values (@Source, @Destination, @contents, @Status, @CreateAt)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
@@ -46,7 +45,7 @@ namespace chatapp.repository
                 cmd.Parameters.AddWithValue("@Destination", destination);
                 cmd.Parameters.AddWithValue("@contents", contents);
                 cmd.Parameters.AddWithValue("@Status", status);
-                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = dateTime;
+                cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
                 cmd.ExecuteNonQuery();
             }
         }
@@ -63,13 +62,13 @@ namespace chatapp.repository
         } 
         public void DeleteMessage(int Source,int Destination,DateTime createAt)
         {
-            string query = "delete from message where (Source=@Source and Destination=@Destination) or (Source=@Destination and Destination=@Source) and CreateAt=@CreateAt";
+            string query = "delete from message where Source=@Source and Destination=@Destination and CreateAt=@CreateAt";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@Source", Source);
                 cmd.Parameters.AddWithValue("@Destination", Destination);
                 cmd.Parameters.Add("@CreateAt", SqlDbType.DateTime2).Value = createAt;
-                cmd.ExecuteNonQuery();
+                Console.WriteLine(cmd.ExecuteNonQuery());
             }
         }
     }

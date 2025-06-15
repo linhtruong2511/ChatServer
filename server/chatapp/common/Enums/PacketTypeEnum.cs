@@ -26,5 +26,6 @@
         CHANGEMESSAGE = 14,
         GROUPINFO = 15,
         ADDTOAGROUP = 16,
+        NUMBEROFCHATLOAD = 17,
     }
 }
