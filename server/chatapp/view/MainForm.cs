@@ -41,22 +41,17 @@ namespace chatapp
             UCDepartment.Dock = DockStyle.Fill;
             UCDashboard.Dock = DockStyle.Fill;
             UCProject.Dock = DockStyle.Fill;
-            
 
             Task.Run(() => app.Start());
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            panel1.Controls.Add(new UCDashboard());
-
-            Image image = Properties.Resources.dashboard;
-            Image resize = new Bitmap(image, new Size(20, 20)); 
-
-            button1.Image = resize;
+            panel1.Controls.Add(UCDashboard);
         }
 
         public void ShowAction(string Action)
         {
+            Console.WriteLine($"[MainForm.ShowAction] {Action} | ThreadId: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             UCDashboard.ShowAction(Action);
         }
 
