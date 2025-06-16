@@ -1,4 +1,5 @@
 ﻿using ClientApp.common.Class;
+using ClientApp.common.Enum;
 using ClientApp.utils;
 using FontAwesome.Sharp;
 using Newtonsoft.Json;
@@ -18,16 +19,17 @@ namespace ClientApp
         public Context Context { get; set; }
         public Controller Controller { get; set; }
         public bool IsLoginSuccess { get; set; }
+        public LoginForm loginForm { get; set; }
+        public FormChangePassword fcp { get; set; }
         public MainForm()
         {
             InitializeComponent();
             Context = new Context();
             Controller = new Controller(Context);
-            LoginForm loginForm = new LoginForm(Context, this);
+            this.loginForm = new LoginForm(Context, this);
             flow_chat.Scroll += async (sender, e) =>
             {
-                if (flow_chat.VerticalScroll.Value == VerticalScroll.Minimum)
-                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.NUMBEROFCHATLOAD, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)), Context.MyId, Context.DestinationId));
+                handleMouseWheel();
             };
             flow_chat.MouseWheel += async (sender, e) =>
             {
@@ -40,12 +42,13 @@ namespace ClientApp
                 try
                 {
                     Controller.HandleReadingTask(this);
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occurred while reading data from the server: " + ex.Message, "Error");
                     MessageBox.Show(ex.StackTrace);
-                    //NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.DISCONNECT,Encoding.UTF8.GetBytes(""), Context.MyId, 0));
+                    NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.DISCONNECT,Encoding.UTF8.GetBytes(""), Context.MyId, 0));
                 }
             });
 
@@ -70,6 +73,7 @@ namespace ClientApp
                 username = userInfo.Name,
                 //status = "Online"
             };
+
             //IconButton btn = new IconButton()
             //{
             //    Text = userInfo.Name,
@@ -89,20 +93,11 @@ namespace ClientApp
             {
                 if (userInfo.Id != Context.DestinationId)
                 {
-                    lb_UserChat.Text = userInfo.Name;
-                    lb_UserChat.Visible = true;
-                    pic_User.Show();
-                    flow_chat.Controls.Clear();
-                    Context.Reset(userInfo.Id);
-                    Console.WriteLine("/");
-                    NetworkUtils.Write(
-                        Context.Writer, new Packet(
-                            common.Enum.PacketTypeEnum.HISTORYCHAT,
-                            Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)),
-                            Context.MyId, Context.DestinationId));
+                    UserClickEvent(userInfo);
                 }
               
             };
+            Context.users.Add(new User(userInfo, btn));
             AddControlToPanel(flow_UserList, btn);
         }
         private void MainForm_Shown(object sender, EventArgs e)
@@ -281,7 +276,62 @@ namespace ClientApp
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
+        }
 
+        private void bt_ChangePassword_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void bt_ChangePassword_Click(object sender, EventArgs e)
+        {
+            fcp = new FormChangePassword();
+            
+            fcp.btn_changePassword.Click += (s, ev) =>
+            {
+                PasswordChangeRequest pcr = new PasswordChangeRequest(fcp.txt_oldPassword.Text,fcp.txt_newPassword.Text);
+                NetworkUtils.Write(Context.Writer, new Packet(common.Enum.PacketTypeEnum.PASSWORDCHANGE, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(pcr)), Context.MyId, 0));
+            };
+            this.Invoke(new Action(() => fcp.Show()));
+        }
+
+        private void bt_Search_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Search_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool firstUserFound = false;
+            if(e.KeyCode == Keys.Enter||txt_Search.Text != "")
+            {
+                for(int i = 0; i < Context.users.Count; i++)
+                {
+                    if (Context.users[i].userInfo.Name == txt_Search.Text)
+                    {
+                        this.Invoke(new MethodInvoker(() => flow_UserList.Controls.SetChildIndex(Context.users[i].uCcontacts,0)));
+                        if (!firstUserFound)
+                        {
+                            firstUserFound = true;
+                            UserClickEvent(Context.users[i].userInfo);
+                        }
+                    }
+                }
+            }
+        }
+        public void UserClickEvent(UserInfo userInfo)
+        {
+            lb_UserChat.Text = userInfo.Name;
+            lb_UserChat.Visible = true;
+            pic_User.Show();
+            flow_chat.Controls.Clear();
+            Context.Reset(userInfo.Id);
+            NetworkUtils.Write(
+                Context.Writer, new Packet(
+                    common.Enum.PacketTypeEnum.HISTORYCHAT,
+                    Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Context.lastChatLoad)),
+                    Context.MyId, Context.DestinationId));
         }
     }
 }

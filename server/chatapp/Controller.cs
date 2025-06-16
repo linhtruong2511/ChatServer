@@ -37,6 +37,7 @@ namespace chatapp
         public readonly object lock_writer = new object();
 
         public string username = "empty";
+        public string password = "empty";
         // giao diện chính của ứng dụng để có thể hiển thị thông báo
         public MainForm gui;
 
@@ -98,7 +99,7 @@ namespace chatapp
                         {
                             // lưu thông tin user đã kết nối cho controller
                             username = requestLogin.username;
-
+                            password = requestLogin.password;
                             // nếu đăng nhập thành công trả về id và name của user (không cần thông báo login success nữa để nó là 1 type của packet luôn) 
                             Packet successLogin = new Packet(PacketTypeEnum.SUCCESSLOGIN,
                                 Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(handleController.GetUserLoginInformation(requestLogin))),
@@ -253,6 +254,22 @@ namespace chatapp
                     break;
                 case PacketTypeEnum.CHANGEMESSAGE:
                     break;
+                case PacketTypeEnum.PASSWORDCHANGE:
+                    PasswordChangeRequest requestPassword = JsonConvert.DeserializeObject<PasswordChangeRequest>(Encoding.UTF8.GetString(packet.Data));
+                    if(requestPassword.OldPassword == password)
+                    {
+                        userService.ChangePassword(username, requestPassword.NewPassword);
+                        password = requestPassword.NewPassword;
+                        ManageUser.SetStatus(username, false);
+                        ManageUser.ChangePassword(username, password);
+                        userService.UpdateUserStatusInDB(username, false);
+                        NetworkUtils.Write(writer, new Packet(PacketTypeEnum.NOTIFICATION, Encoding.UTF8.GetBytes("Password change complete"), 0, packet.From),lock_writer);
+                    }
+                    else
+                    {
+                        NetworkUtils.Write(writer, new Packet(PacketTypeEnum.NOTIFICATION, Encoding.UTF8.GetBytes("Password change fail because old password is incorrect"), 0, packet.From), lock_writer);
+                    }
+                        break;
             }
             return 1;
         }

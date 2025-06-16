@@ -25,5 +25,6 @@ namespace ClientApp.common.Enum
         GROUPINFO = 15,
         ADDTOAGROUP = 16,
         NUMBEROFCHATLOAD = 17,
+        PASSWORDCHANGE = 18,
     }
 }

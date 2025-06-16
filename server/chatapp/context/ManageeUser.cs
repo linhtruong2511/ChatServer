@@ -128,5 +128,15 @@ namespace chatapp.context
                 }
             }
         }
+        public static void ChangePassword(string username, string newPassword)
+        {
+            foreach (UserSession us in UserSessions)
+            {
+                if (us.username == username)
+                {
+                    us.password = newPassword;
+                }
+            }
+        }
     }
 }

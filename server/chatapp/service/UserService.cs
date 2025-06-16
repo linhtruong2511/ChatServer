@@ -39,5 +39,9 @@ namespace chatapp.service
         {
             UserRepository.SetAllUserIPToEmpty();
         }
+        public void ChangePassword(string username, string newPassword)
+        {
+            UserRepository.ChangePassword(username, newPassword);
+        }
     }
 }

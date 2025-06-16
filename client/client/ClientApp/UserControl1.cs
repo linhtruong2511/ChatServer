@@ -19,6 +19,6 @@ namespace ClientApp
         }
         public IconChar avt { get => pic_Avt.IconChar; set => pic_Avt.IconChar = value; }
         public string username { get => lb_Username.Text; set => lb_Username.Text = value; }
-        public string status { get => lb_Status.Text; set => lb_Status.Text = value; }
+        //public string status { get => lb_Status.Text; set => lb_Status.Text = value; }
     }
 }

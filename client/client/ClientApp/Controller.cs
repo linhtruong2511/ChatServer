@@ -30,6 +30,10 @@ namespace ClientApp
                     case PacketTypeEnum.NOTIFICATION:
                         if (Encoding.UTF8.GetString(packet.Data) != "end")
                             MessageBox.Show($"{Encoding.UTF8.GetString(packet.Data)}", "Notifcation");
+                        if(Encoding.UTF8.GetString(packet.Data) == "Password change complete")
+                        {
+                            MainForm.Close();
+                        }
                         break;
                     case PacketTypeEnum.DISCONNECT:
                         Application.Exit();

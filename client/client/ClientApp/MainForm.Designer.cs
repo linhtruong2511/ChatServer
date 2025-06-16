@@ -33,6 +33,7 @@ namespace ClientApp
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bt_ChangePassword = new FontAwesome.Sharp.IconButton();
             this.bt_Setting = new FontAwesome.Sharp.IconButton();
             this.bt_Message = new FontAwesome.Sharp.IconButton();
             this.bt_User = new FontAwesome.Sharp.IconButton();
@@ -47,8 +48,8 @@ namespace ClientApp
             this.bt_Send = new FontAwesome.Sharp.IconButton();
             this.txt_Message = new System.Windows.Forms.TextBox();
             this.flow_chat = new System.Windows.Forms.FlowLayoutPanel();
-            this.bt_Exit = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.bt_Exit = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_User)).BeginInit();
@@ -59,6 +60,7 @@ namespace ClientApp
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
+            this.panel1.Controls.Add(this.bt_ChangePassword);
             this.panel1.Controls.Add(this.bt_Setting);
             this.panel1.Controls.Add(this.bt_Message);
             this.panel1.Controls.Add(this.bt_User);
@@ -67,6 +69,22 @@ namespace ClientApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(86, 1055);
             this.panel1.TabIndex = 0;
+            // 
+            // bt_ChangePassword
+            // 
+            this.bt_ChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_ChangePassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.bt_ChangePassword.IconChar = FontAwesome.Sharp.IconChar.Passport;
+            this.bt_ChangePassword.IconColor = System.Drawing.Color.Silver;
+            this.bt_ChangePassword.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.bt_ChangePassword.IconSize = 40;
+            this.bt_ChangePassword.Location = new System.Drawing.Point(3, 246);
+            this.bt_ChangePassword.Name = "bt_ChangePassword";
+            this.bt_ChangePassword.Size = new System.Drawing.Size(81, 68);
+            this.bt_ChangePassword.TabIndex = 3;
+            this.bt_ChangePassword.UseVisualStyleBackColor = true;
+            this.bt_ChangePassword.Click += new System.EventHandler(this.bt_ChangePassword_Click);
+            this.bt_ChangePassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bt_ChangePassword_MouseClick);
             // 
             // bt_Setting
             // 
@@ -131,7 +149,7 @@ namespace ClientApp
             this.lb_UserChat.ForeColor = System.Drawing.Color.White;
             this.lb_UserChat.Location = new System.Drawing.Point(610, 30);
             this.lb_UserChat.Name = "lb_UserChat";
-            this.lb_UserChat.Size = new System.Drawing.Size(121, 19);
+            this.lb_UserChat.Size = new System.Drawing.Size(149, 24);
             this.lb_UserChat.TabIndex = 6;
             this.lb_UserChat.Text = "Chat with User";
             this.lb_UserChat.Visible = false;
@@ -168,6 +186,7 @@ namespace ClientApp
             this.bt_Search.Size = new System.Drawing.Size(47, 37);
             this.bt_Search.TabIndex = 3;
             this.bt_Search.UseVisualStyleBackColor = false;
+            this.bt_Search.Click += new System.EventHandler(this.bt_Search_Click);
             // 
             // txt_Search
             // 
@@ -177,8 +196,9 @@ namespace ClientApp
             this.txt_Search.ForeColor = System.Drawing.Color.White;
             this.txt_Search.Location = new System.Drawing.Point(59, 42);
             this.txt_Search.Name = "txt_Search";
-            this.txt_Search.Size = new System.Drawing.Size(342, 27);
+            this.txt_Search.Size = new System.Drawing.Size(342, 32);
             this.txt_Search.TabIndex = 2;
+            this.txt_Search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Search_KeyDown);
             // 
             // flow_UserList
             // 
@@ -259,6 +279,17 @@ namespace ClientApp
             this.flow_chat.TabIndex = 5;
             this.flow_chat.WrapContents = false;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
+            this.panel2.Controls.Add(this.bt_Exit);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
+            this.panel2.Location = new System.Drawing.Point(1229, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(118, 1055);
+            this.panel2.TabIndex = 1;
+            // 
             // bt_Exit
             // 
             this.bt_Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
@@ -274,17 +305,6 @@ namespace ClientApp
             this.bt_Exit.TabIndex = 2;
             this.bt_Exit.UseVisualStyleBackColor = false;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
-            this.panel2.Controls.Add(this.bt_Exit);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
-            this.panel2.Location = new System.Drawing.Point(1229, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(118, 1055);
-            this.panel2.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
@@ -299,7 +319,6 @@ namespace ClientApp
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Zalo Chat - WinForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -329,6 +348,7 @@ namespace ClientApp
         private Label lb_UserChat;
         private IconButton bt_Exit;
         private Panel panel2;
+        private IconButton bt_ChangePassword;
     }
 }
 

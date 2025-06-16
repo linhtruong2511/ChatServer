@@ -21,13 +21,14 @@ namespace ClientApp.common.Class
         public static DateTime lastChatLoad = DateTime.Now;
         public static int count= 0;
         public static int numberOfLoadChat = 0;
+        public static List<User> users = new List<User>();
 
         public Context()
         {
             try
             {
                 TcpClient = new TcpClient();
-                TcpClient.Connect("192.168.177.78", 5000);
+                TcpClient.Connect(IPAddress.Loopback, 5000);
             }
             catch(Exception ex)
             {

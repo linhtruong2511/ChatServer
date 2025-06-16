@@ -4,7 +4,7 @@ namespace chatapp.context
 {
     internal class Database
     {
-        string connectionString = "Server=LINHTRUONG\\SQLEXPRESS;Database=ChatApp;Trusted_Connection=True;TrustServerCertificate=True;";
+        string connectionString = "Server=VUONGQUAN;Database=ChatApp;Trusted_Connection=True;TrustServerCertificate=True;";
         private static SqlConnection conn;
 
         public Database()

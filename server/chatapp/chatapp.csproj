@@ -96,6 +96,7 @@
     <Compile Include="Controller.cs" />
     <Compile Include="common\Class\Packet.cs" />
     <Compile Include="dto\request\LoginRequest.cs" />
+    <Compile Include="dto\request\PasswordChangeRequest.cs" />
     <Compile Include="dto\request\SendMessageRequest.cs" />
     <Compile Include="dto\response\HistoryMessage.cs" />
     <Compile Include="dto\response\UserResponse.cs" />

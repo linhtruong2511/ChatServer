@@ -15,7 +15,15 @@ namespace chatapp.repository
         {
             this.connection = Database.GetConnection();
         }
-
+        public void ChangePassword(string username, string newPassword)
+        {
+            using (SqlCommand cmd = new SqlCommand("update users set Password=@Password where Username=@Username", connection))
+            {
+                cmd.Parameters.AddWithValue("@Password", newPassword);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.ExecuteNonQuery();
+            }
+        }
         public List<User> GetAllUser()
         {
             // xử lý db lấy toàn bộ user làm gì gì đó
